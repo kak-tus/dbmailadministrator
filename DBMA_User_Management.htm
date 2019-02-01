@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="micheal j. o'brien" />
+<link rel="stylesheet" type="text/css" href="DBMA.css" />
+<meta name="Description" content="Managing DBMail Users With DBMA" />
+<title>Managing Mail Users With DBMA</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<style type="text/css">
+/*<![CDATA[*/
+body.c17 {text-align:center}div.c6 {text-align: center}div{text-align:center}
+b.gr {color:green}
+img{float:center;text-align:center}
+h1.c3 {font-weight: bold}img.c1 {float:right}img.c15 {border-style:none}img.c2 {float:right;background-color: #D6CFDE}
+input.c10 {background-color: #800000; color: #FFFFFF}input.c3 {background-color: #D6CFDE; color: #4A08A5}input.c4 {background-color: #D6CFDE; color: #5204A5}input.c7 {background-color: #D6CFDE; color: #4602A0}input.c9 {background-color: #FFFFFF; color: #000000}
+p.c10 {font-weight: bold}span.c11 {font-family:arial,sans-serif;font-size:9px}
+table.c13 {font-size: 10pt}table.c14 {border-style:none}table.c5 {font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif; font-size: 12pt; text-align: Center; margin-left: 5px}
+td.c1 {text-align: left; background-color: #D6CFDE}td.c11 {background-color: #F0EFF5}td.c12 {float: left}td.c12 {font-family: Arial, sans-serif; font-size: 8pt}td.c16 {text-align: left}td.c2 {text-align: left}td.c4 {text-align: left; background-color: #D6CFDE}
+td.c5 {text-align: right; line-height: 190%; font-size: 10pt}td.c6 {text-align:left; background-color: #D6CFDE; font-family: Arial; font-size: 10pt}td.c7 {font-size: 10pt; text-align: Right}td.c8 {font-size: 10pt; text-align: Left}td.c9 {background-color: #D6CFDE}
+pre {font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;font-size:90%}
+table.c26 {text-align:center}
+span.c25 {color: #000000}
+span.c24 {color: #008000}
+table.c23 {width:700px;border-style:solid;border-color:#d6cfde}
+td.c22 {font-family:sans-serif, arial, helvetica;font-size:11px;background-color:#d6cfde;color:#000090;text-align:right;}
+table.c21 {width:700px; font-family: sans-serif, arial, helvetica; font-size: 11px; background-color: #d6cfde; color: #000090}
+img.c20 {width:47px;height:22px;border-style:none;vertical-align:top}
+input.c19 {font-size:12px; background-color:#D6CFDE; color:#4602A0}
+td.c18 {text-align:right}
+td.c17 {text-align:center}
+hr.c16 {background-color:#BDB3CA; color:#BDB3CA;height:4px;width:95%}
+input.c15 {font-size:9px}
+td.c14 {color: #FFFF99; font-size: 10pt; font-weight: bold}
+input.c13 {background:#D6CFDE; color:#4602A0}
+td.c12 {text-align:left;width:31%}
+input.c11 {background:#D0F4D2; color:#4602A0}
+td.c10 {text-align:left;width:37%}
+input.c9 {background-color:#D6CFDE; color:#4602A0}
+div.c8 {text-align: center}
+table.c7 {font-family:arial,helvetica;font-size:80%}
+span.c6 {background-color:#FFFFFF;color:#008000}
+td.c5 {font-size: 12pt; color: #00599C; font-family: 'Trebuchet MS', sans-serif}
+td.c4 {text-align: left; background-color: #D6CFDE}
+h1.c3 {font-weight: bold}
+h2{background-color:#ffffc4;}
+td.c2 {float:right}
+select.c1 {border-style:none;color:blue;background:#f0edf3;font-size:10px;font-family:sans-serif}
+/*]]>*/
+</style>
+</head>
+<body class="c17"><div>
+<form name="menu" action="text/javascript"><table summary="Menu" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td class="c2"><select class="c1" name="menu" size="5" onchange="location.href=this.form.menu.options[this.form.menu.selectedIndex].value">
+<option value="DBMA.cgi">DBMA Administration Menu</option>
+<option value="DBMA_security.htm">DBMA Security</option>
+<option value="README">README</option>
+<option value="DBMA_installation_configuration.htm">DBMA Installation</option>
+<option value="http://www.dbmail.org">DBMail.org Site</option></select> [<a href="http://www.dbma.ca/">DBMA Online Help</a> | <a href="README">README</a> 
+    | <a href="FAQ">FAQ</a> ]</td></tr></table></form></div>
+<table class="c26" summary="Introduction to DBMA DBMailAdministrator" width="700px" border="0" cellspacing="0" cellpadding="0">
+<tr><td class="c4">
+<h1 class="c3" style="background:#ffffc4">Managing Users with DBMailAdministrator</h1></td></tr> 
+<tr><td >This document discusses the mechanics of managing e-mail users ranging from user 
+    naming conventions to password encryption  
+    choices.&nbsp;
+  </td></tr> 
+<tr><td class="c16"> 
+<h2>Double Check <a href="DBMA_security.htm">Security</a> and Versioning before 
+We Start</h2> 
+<p>DBMA V2.x (as opposed to V1.x) uses SQL commands and queries to work  
+exclusively on the database connected via TCP. That means that DBMA is LAN-deployable 
+and can run on any intranet web server with network  
+access to your DBMail RDBMS (PostgreSQL or MySQL).</p>  
+<h4>Do not allow unfettered access to this tool!</h4> 
+<p>Before getting into the topic of User Management it would be  
+wise to <a href="http://www.dbma.ca/">upgrade</a> to the latest version.  
+It's a reasonably painless process done with an upgrade script. You simply go to 
+your &quot;dbmailadministrator/&quot; directory as root or as the user:group of 
+your httpd and run &quot;perl update.pl&quot;. Obviously if you have just 
+downloaded and installed the programme you will not need to update at this time. 
+</p> 
+<h2>No Stone Tablets </h2> 
+<ol>
+  <li>DBMA provides multiple ways of doing things.</li>
+  <li>Every admin has their own  
+style.</li> 
+  <li> Each user of DBMA must set their own policies and style for their own environment.&nbsp;</li>
+  <li> What is written   
+here is for guiding purposes only without any warranty nor responsibility implied.</li>  
+</ol>  
+<h2>Privacy Warning</h2>   
+<p>In the event you observe the mail contents addressed to a real person's (not referring to 'webmaster', 'abuse', 'sales', etc.),   
+you may not disclose the content of that message to any person nor may you interrupt or tamper with that message in any manner.</p>  
+  
+<h2>My Mail System</h2> 
+<p>Once connected to your database, DBMA will tell you     
+all about it. In both PostgreSQL and MySQL configurations, the     
+first window&nbsp;is all business. It tells you if and to what SQL     
+server it is connected and then gives you the specifics about how     
+your SQL server is running and what is happening with your DBMail     
+database. As you make changes you will see these details change accordingly.</p>     
+<h2>   
+Searching and Reading Mail</h2>  
+<p>  
+DBMailAdministrator (DBMA) provides methods for searching mail headers and message blocks for administrative   
+troubleshooting only. DBMA's message block displays are not content-friendly but ASCII-forced with emphasis on routing and   
+embedded header-fields tracing the internet 'hops' the message travels.</p>   
+<h4>An example of appropriate use :</h4>  
+ <ul><li>finding and undeleting a critical message a user inadvertently deleted;</li><li> 
+troubleshooting headers when a delivery breaks; 
+</li><li>evaluating anti-spam/virus software deployments; 
+</li><li>providing help-phone assistance to users in the identification or removal of SPAM, 'message-jams', viruses; and so on.</li></ul> 
+ 
+<h2>Checking Mailbox Content</h2>    
+<p>Part of the job maintaining your DBMail system will be making certain that mail    
+marked for deletion is getting deleted when your crontab dbmail-utils run.    
+DBMA will help you do that as well as maintain a close eye on mail distribution.    
+In each user account window are listed the users mail boxes. Clicking the mailbox icon     
+brings up a technically detailed list of all mail in descending order     
+displaying physmessage_id, message_id, internal_date, unique_id,     
+rfcsize, blockSize etceteras.     
+Below is what you will see. You can also access messages making certain    
+they are being stored intact by clicking the email icon on the left side of each listing. This is a good method for checking headers as well. </p>    
+ <img src="images/mail_check.jpg" alt="click the mailbox icon in the user account window to list all mail in that box" width="698" height="174" />    
+<h2>    
+Group ID's</h2>    
+<p>The term GroupID is indigenous to DBMA and should not be    
+confused with Unix-Group or other IMAP daemons use of the term    
+"Mail Group"</p>    
+<p>The GroupID is a structural organization within the database.    
+Users are organized into client_idnr's. You can have as many    
+GroupID's as you wish. Thousands, if you like; whatever your    
+database setup can handle.</p>    
+<p>The DBMail structure in this regard is unique. You will see    
+that it offers excellent feature possibilities and is more    
+"future-proof" than most alternatives.</p>    
+<p>You might notice that several terms of reference in DBMA (GUI     
+names) differ slightly from the table and field names used in the     
+DBMail database.&nbsp;</p>     
+<p>The Mail Administrator is seldom a database engineer and     
+likely wants to work in his/her own terms of reference.</p>     
+<p>DBMA is a management tool as well as a customer support tool.     
+DBMA favours the use of 'friendly' terminology which fits the     
+most likely usage by front line Level One Support people as well     
+as the 'machine room' mail team.&nbsp;</p>     
+<p>&quot;GroupID&quot; refers to the 'dbmail_users' field 'client_idnr'.&nbsp;</p>     
+<p>In the case of an ISP, each user is a client. You might     
+consider organizing your clients/users into geographic groups or     
+net segment groups or whatever you like, to keep the total number     
+of users broken up into manageable lots of up to 1000-1500     
+accounts per group. With just 999 groups you can manage as many     
+email accounts as some countries have internet users. Both DBMail     
+and the DBMA GUI are highly scalable.&nbsp;<br /></p>     
+<p>DBMail does not in any way discriminate client_idnrs     
+(GroupID). This is for local use.&nbsp;There are things like a patch to enable group quotas with     
+PostgreSQL and other ideas will come along. You may have your own database     
+schema change ideas. That is beyond the scope of this article.</p>     
+<h2>Some Common Practice for GroupID's&nbsp;</h2>   
+<p>You will find that DBMail developers are have claimed Group &quot;0&quot; for  
+the system. That's that. In it will be internal use members like the "Delivery Agent     
+or&nbsp; Anybody for ACL "public" folders.&nbsp;</p>    
+<p>DBMA restricts (not denies) access to GroupID "0" just in case   
+a "newbie" accidentally deletes the delivery agent. That would   
+make a mess, wouldn't it? You can still list users in Group "0"   
+by selecting "List any and all" but there are limitations imposed   
+against open access to GroupID "0".</p>   
+<p>Let's consider some common practice guidelines for &quot;GroupID's'&nbsp;</p>   
+<p>Let's set aside groups 1 and 2 for local admin use? That    
+would include mandatory (abuse, privacy, postmaster etceteras) and useful network and systems    
+administration addresses (webmaster, noc, dns etceteras.)&nbsp; plus common, never accessed generic    
+business accounts (info, brochures, sales, etceteras). They could be accounts that never actually    
+receive mail (forwarding everything to real people) and which    
+have horrid passwords known to no one, encrypted with an MD5 hash    
+using a eight character random salt key.</p>    
+<h2>Example structure sorts 'client_idnr' numbers into Administrative and User  
+&quot;Groups&quot;.</h2>   
+<p>Your permanent pseudo accounts, organized by groups, can store mail in the accounts of real humans  
+and can be easily changed from time to time to point to different persons as they come and go.</p>    
+<p>Create the account with a wacky encrypted password say for "info"    
+WITHOUT an alias. If Harry Smith is responsible for answering queries to "info" open Harry's account and add an alias    
+"info@thedomain.tld". All mail for "info" will go to Harry. If Harry gets a  
+better job and is replaced by &quot;Peter&quot;, move the alias to  
+&quot;Peter&quot;.</p>   
+<p><b>Example GroupID structure:</b></p>   
+<blockquote>   
+<p><b class="gr">GroupID 0 is Reserved for The MAIL DELIVERY SYSTEM</b></p>   
+<ul>   
+<li>secret black magic users owned by the internal system</li></ul>   
+<p><b class="gr">GroupID 1 Systems and RFC-required access points</b></p>   
+<ul>   
+<li>user: <span class="c24">postmaster</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAutogen-unknown**</span><br />    
+alias: James_elected_postmaster@your_domain.tld  ==> user_idnr of James</li>     
+    
+<li>user: <span class="c24">abuse</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: mail_human_name@missioncontrol.your_domain.tld  ==> user_idnr of human_name</li>     
+<li>user: <span class="c24">dns</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: DNS_human_name@missioncontrol.your_domain.tld  ==> user_idnr of human_name</li>     
+    
+<li>user: <span class="c24">privacy</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: policy_human_name@missioncontrol.your_domain.tld  ==> user_idnr of human_name</li>     
+<li>webmaster, hostmaster, noc, spf, etceteras....</li>    
+</ul>    
+<p><b class="gr">GroupID 2 Business Generics</b></p>    
+<ul>    
+<li>user: <span class="c24">info</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: Sue_PR_Mgr@your_domain.tld  ==> user_idnr of human_name</li>     
+<li>&nbsp;user: <span class="c24">sales</span>,&nbsp; password: <span     
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: Bob_salesmanager@your_domain.tld  ==> user_idnr of human_name</li>     
+<li>user: <span class="c24">contracts</span> password: <span    
+class="c25">**encrypted-DBMAautogen-unknown**</span><br />    
+alias: Sam_the_Lawyer@your_domain.tld  ==> user_idnr of human_name</li>    
+<li>help, support, accounts, receivables, eteceteras....</li>    
+</ul>    
+<p><b class="gr">GroupID 3</b></p>    
+<ul>    
+<li>Real People eteceteras...</li></ul></blockquote>    
+<h2>Speed Up The Process of Adding Users and Aliases</h2>     
+<ol>    
+<li>A user name is the local part of webmaster@thedomain.part.</li>    
+<li>The whole address, local part at domain part, is entered as an alias.</li>    
+<li>Some very small systems use the entire address as a username.</li></ol>   
+<p>DBMA's options (select "configurations" and press "Go" button) configuration allows an automated method for cutting down the number of key presses when entering a large number of new users.&nbsp;</p>    
+<h4>With auto presets, you type the user's name and DBMA creates the entire account.&nbsp;</h4>    
+1 - You can set the default mailbox size&nbsp;     
+<br />2 - You can set the default domain&nbsp;     
+<br />3 - You can set your default Group ID (client_idnr). (Some Admins only ever use one main group.)     
+<br />4 - DBMA can automatically create the first alias using the username and the default domain&nbsp;     
+<br />5 - You can ask DBMA to generate the password&nbsp;     
+<br />6 - DBMA will notify the user of the password, mailbox quota and username.&nbsp;     
+<p>These options can make adding new users a snap.</p>     
+<p>If you complete all of the optional configs, creating a new user is a matter of typing the name. You can populate your database with a large number of users in very short order.&nbsp;</p>     
+<h2>Auto-Password</h2>    
+<p>DBMA will refuse to encrypt an auto-generated password until     
+you have told the user what is their password.&nbsp;Well, that's isn't quite     
+true. DBMA is not triggered to release a constraint once an email has been     
+sent. DBMA will instead refuse to encrypt an auto-generated password from the     
+initial create-new-user regime. Your next window will show the created password     
+and give you a button to press to notify the user of the password. Remember     
+that you may need to send this message to an alternate address like     
+&quot;the_Users_freebie_mail@yahoo.com&quot;. If you don't have such an account     
+from the user, and the user is local, use your browser's PRINT command, [Cntrl     
+P] maybe, and print the mail message, stick it into an envelope and mail it or     
+give it to the user. There isn't much point setting a new password and sending     
+the message about that to a locked mailbox.&nbsp;</p>     
+<p>(You can alter the encryption type and password of     
+auto-gens in the user modify form. By forcing plaintext initially, DBMA saves you some annoyance if you     
+forget to jot down the password because it's still visible. You can     
+always change it to an encrypted form once the user is notified and has logged     
+in at least once. You will know this from checking your recent logins with DBMA.)</p>     
+<h2>Password Encryption: md5, md5sum or crypt</h2>   
+<p>Yes. You really should, especially if yours is a corporate, ISP or enterprise system. DBMail uses "crypt", "md5" and "md5sum" in addition to clear text (plain). What follows is a set of encrypted passwords using the string example "encrypthelp"</p>   
+	<br /> &#149; <b>MD5</b> = <span style="color:#6a6a95;background:#ffffff">$1$s0yfoqOn\$i6Nr5nPSAhuqxbk.h.EJn/</span> In this MD5 password string, the characters between the 2nd and 3rd &quot;\$&quot; are the 8-chars (maximum) of 'Salt' used to create the RSA password which follows the 3rd &quot;\$&quot;.     
+	<br /> &#149; <b>md5sum</b> = <span style="color:#6a6a95;background:#ffffff">9cd234f150c500d196fbad63d2877bb2</span> or <b>md5 hash</b> is a one-way hash algorithm defined by RFC1321. On the command line type &quot;md5 -s encrypthelp&quot; for identical 128 bit digital signature of the password string.     
+	<br /> &#149; <b>crypt</b> = <span style="color:#6a6a95;background:#ffffff">MBQF2l2BTiTbM</span> or UNIX crypt is based on a DES algorithm with a standard 2-char &quot;salt&quot;. The first two chars define the salt which perturbs the algorithm in one of 4096 different ways.<p>DBMail uses "crypt", "md5" and "md5sum" in addition to clear text (plain).     
+<p>&nbsp;Encryption in the     
+database makes no difference to the user's email client as it will be passing     
+the 'secret' in plaintext. There is something ironic about that, but best     
+practices say don't allow access points to your database through unencrypted     
+user (data) accounts. Under most circumstances you are only putting at risk the     
+user's mail, but don't be too sure that some messed-up-brained attacker couldn't     
+plague your database server with a little bit of access. The choice is yours to     
+encrypt or not to encrypt. You will find wide ranging views on the subject.</p>     
+    
+<p>Keep in mind that this discussion of encryption applies only to the password communication between DBMail    
+and its database and how the password is actually stored in the database. The user's handling of their    
+password is in plain text.</p>    
+<h2>Plain Passwords in the Open can Cause at Least Embarrassment</h2>   
+<p>Let's put this in perspective with a hypothetical anecdote.</p><p>    
+You are sitting at your workstation as a Level One Support person in a corporate environment.    
+Open on your workstation screen is DBMA displaying the Corporate Management group of users:    
+rows of executive mail accounts all with plain text passwords in full view.    
+The CEO walks by and sees his name and 'secret' password (<em>fifi~loves^me2</em>) on your giant flat screen along with those of the VP Finance, VP Legal, VP Human Resources, Payroll  
+etc. Like Donald Trump says, "You're fired!".     
+</p>    
+<p>Storing encrypted passwords is the right choice unless you are using the  
+database as a source of data for user authentication. An example would be <font SIZE="2">cyrus-sasl2</font>  
+with an sql plugin and authentication queries to the dbmail_users table. In that  
+case plain text is usuallly a must.</p>   
+<p>Using Transport Layer Security is another good idea. That means that  
+transmission between the user and the server is encrypted on secure ports as  
+follows: SMTPS port 465, POP3S port&nbsp; 995 and IMAPS port&nbsp; 995. The  
+favoured approach with DBMail to accomplish this is with &quot;<a href="http://www.stunnel.org/">Stunnel</a>&quot;.</p><p>   
+Unless you are using one of the many options available for authenticating encrypted user passwords across the internet; on 143 and 110, plain text login passwords are passed across the internet. So also are email messages passed in plain text across the internet. If someone wants to read your emails they certainly don't need your POP3/IMAP login password. But any level of unauthorized access to your database management system's passwords is a potentially serious failure of your system's security.  
+Consider the number of users who might be connecting to the internet on a WiFi  
+(wireless) connection, many of which offer no security at all.   
+</p>   
+<h2>   
+Autogenerating Unique Passwords   
+</h2>   
+<p>DBMA will generate gibberish passwords. It's a good way of doing    
+plain text passwords if 'clear text' is your preference because the passwords which look like mush to a    
+sniffer as compared to typical user passwords using phone numbers, birthdays,  
+middle names and so on. The administrator is able to see plain text passwords in  
+DBMA at all times and can easily make changes as desired by the user. This is  
+similar to the way Hotmail, Yahoo mail and others work.</p>   
+<h2>Sending Mail with DBMA</h2>   
+<p>It is a nice touch to send a quick note to a user who has     
+requested a Mailbox quota increase or password change. PERL's NET::SMTP module is what DBMA uses to send mail to your users.&nbsp;</p>     
+<p> Their contact     
+address can be outside your operation (necessary in the case of a     
+password change).&nbsp;&nbsp;</p>     
+<p>The NET::SMTP module is part of Graham Barr's libnet.&nbsp;The configurable SMTP_ServerName in DBMA should point to your DBMail  
+MTA and that is what NET::SMTP will use. You can send mail within the same  
+system to a bare username &quot;i.e.: mike&quot; if your MTA is configured to pass it to DBMail.</p>     
+</td></tr></table>    
+</body></html>    

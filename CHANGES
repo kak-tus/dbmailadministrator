@@ -1,0 +1,498 @@
+CHANGES - DbMailAdministrator (DBMA) V2.5.x Copyright 2004-2008 **
+      Trouble? Contact: mike@dbma.ca
+################################################################# 
+V3.0.2    
+          August 30, 2016
+          Converted to HTML5/CSS3 and removed some javascript speeding
+          up the GUI. Minor tweeks.Install guide at http://dbma.ca
+V3.0.1 (stable)
+          October 1, 2015
+          New Version for DBMail V 3.2.x plus -> Numerous minor fixes are
+          needed but basic function is available. 
+          TIP: Suggest once you are configured, change the option in the
+          top of DBMA.cgi $RESTRICTGroupID = 'any' to 'your-main-group #';
+v2.5.4    
+          November 13, 2008
+          * minor changes to give DBMA it's own main site dbma.ca
+v2.5.3  
+          October 18 2008
+          * PGSQL bug fix
+V2.5.2
+          June 4, 2008
+          * further changes made to PostgreSQL functionality to
+            allow DBMail users to exploit the significant new 
+            functionality and performance enhancements of 
+            PostgreSQL 8.3.1 and beyond.
+V2.5.1    May 12, 2008
+          * substantial changes made to PostgreSQL functionality.
+V2.5.0
+          January 25, 2008
+          * a few minor bug fixes including syntax management for 
+            'SQL-illegal' characters in Auto reply Messages
+          * reminders for configuring dbmail.conf to use AutoNotify
+            and AutoReply
+          * speed increase
+V2.4.9    June 15 2006
+          * This release contains substantial code modifications
+            throughout.
+          * DBMA is now more "Group-aware" as in groups 
+            of mail users delineated by dbmail_users.client_idnr.
+          * In the "My Groups" section of the Main window, the
+            number of users in each group is set out when this 
+            Configuration option has been turned on. Note that this
+            is resource expensive and on large systems with many
+            groups of users it can slow DBMA Main window considerably.
+            (Working on that.)
+          * A configuration setting is now provided to limit the
+            number of users per mail group. In the RestrictGroup regime
+            this would mean that the maximum number of users would
+            be fixed and only a "root" administrator could reset
+            the maximum once arrangements were made (i.e.: payment).
+          * In the global configuration (full configuration authority)
+            the maximum number of users per group is a healthy reminder
+            that keeping unique client_idnr numbers to a manageable level
+            is good practise. The default is set at 1000 per group.
+            There is no limit to the number of groups.
+          * Setting the Default Mailbox size now sets the maximum
+            mailbox size for the RestrictGroup Admin mode
+            This can only be overridden in the
+            configuration window by a root administrator.
+          * A bug which applied to later versions of Mysql has been
+            fixed where in the case of a plain password being used,
+            a space was injected into the encryption type field
+V2.4.8    May 21 2006
+          * Changes have been made to the allow_read_mail regime
+            such that turning off the ability to read mail does not
+            prevent the display of mailboxes in the user account window
+            and searches can be done to locate messages even based on 
+            message block content but selecting the message will
+            return headers only and maintain the privacy of the message.
+            This applies to DBMail Version 2.2 (Pending) and its
+            precursor SVN Trunk and recent DBMail 2.1.x unstable.
+          * Minor changes and updates to documentation
+V2.4.7    April 18 2006
+          * Further changes for the pending DBMail V2.2 release
+            including incorporation of new table structure for
+            dbmail_users: a step toward DBMA managing sieve scripts.
+          * cursieve and maxsieve displayed in User Account Window
+          * DBMA MTA Admin upgrades.
+            MTA Domain Transport GUI has been completely overhauled
+            and now more feature-rich for the management of 
+            MTA virtual domains and transports.
+          * If you use DBMail SVN/Trunk or if you use MTA Domain
+            with Transport features, V2.4.7 is a must have. Upgrade is 
+            simplified by typing perl update.pl in dbmailadministrator/
+V2.4.6    April 6 2006
+          * a mem problem with DBD-mysql-3.0002_4 required a workaround.
+            Now that DBD-mysql-3.0002 is fixed, the workaround is
+            dropped and LONGBLOBs are reinstated for DBMAIL 2.0.8/9
+            dbmail_messageblks.messageblk to allow read and search mail
+          * numerous minor changes prevent illegal search
+            terms to cause a fatals_to_browser error message when the
+            not-so-learned administrator searches for illegal control
+            characters and such things (RFC2822 and RFC2821)
+          * the Allow_Read_Mail function is now available for newer
+            databases (even with older DBMail binary versions) where 
+            LONGTEXT has been replaced with LONGBLOB
+            binaries for dbmail_messageblks.messageblk 
+          * a collection of little changes/improvements makes 2.4.6
+            a "must have" if you are using recent versions of DBMail 
+V2.4.5    March 26 2006
+          * Further modifications and expanded mail read for
+            DBMail Version 2.2 (current SVN Trunk)
+          * Added back button to return to mail list for all versions
+          * only minor change for STABLE versions of DBMail
+V2.4.4    March 17 2006
+          * User Mapping tool added. Applies to DBMail version 2.2
+            currently at 2.1.x unstable and SVN Trunk
+V2.4.3    March 14 2006
+          * Update script update.pl preserves existing configs
+          * New Installation defaults to "none" database type to make
+            installation easier on systems with *only* pgsql and 
+            no mysql client nor perl DBD module. 
+          * "Database Cleanup" now defrags InnoDB tables/indexes
+            for most of the main tables having many indices.
+          * More data. InnoDB Free and RDBMS server time now displayed in 
+            the "My Mail System" column while other two columns are
+            lengthened to show more of the DBMail 2.2 data.
+          * Continued doc changes as "Help" is overhauled/updated.
+          * Fixed a missing tables Bug for DBMail old version 1.2.x
+            where if database did not have the pbsp or other option
+            tables an error message appeared instead of the desired data. 
+V2.4.1    March 8 2006
+          * This is the incipient DBMail 2.2 version.
+          * Numerous small tech changes/improvements for Mod_Perl
+          * Expanded DBMail versioning
+          * Dropped config options for DBMail 2.1 SVN Trunk
+            (DBMA Interimly treats SVN 2.1 as if it were 2.2.rel)
+          * Dropped "use strict" for production releases
+          * Added configs for pending release of DBMail 2.2
+            (You can test on 2.1.x)
+          * Added read mail option for DBMail 2.2
+          * Updated Auto Replies for DBMail 2.2
+          * Added start/stop dates for auto replies
+          * Created groundwork for new DBMail Sieve config ++
+            (Not implemented .. too early.)
+         ** I like this. I don't know why the 'h' I didn't do it long ago:
+            User Search feature now also searches aliases and
+            serves an Account Window for the user having that
+            email address (alias) if so found.
+            This particularly favours systems where
+            user account names are first_part (first_part@last_part)
+            but applies to either or a combined environment of 
+            "first_part" and or "first_part@last_part" user naming.
+          * DBMA MTA Admin :: Domains and Transports is now able to
+            take over and automate virtual hosting. After add
+            an alias on a new domain, the MTA config is automatically
+            updated and the new MTA domain is added as a destination.
+            This relies on the extensibility of DBMail and Postfix
+            compiled with xxsql.
+          * A few enhanced installation aids workaround some
+            typical (from feedback) Apache config mistakes and get
+            DBMA diagnostics running enough to serve a diag window for
+            those just starting out and who need to understand permissions
+            a little better.
+          * Help files updated.
+V2.4.0    December 16, 2005 Minor Updates
+          * HTML Form close error fixed on 'add alias' GUI for
+            Group Admin. This obscure bug caused a 'missing data'
+            error no matter how careful the typist.
+          * Minor Java bug fixed which could have caused a script
+            warning in some custom-configured versions of MSIE6
+V2.3.9    November 25, 2005
+          * a simple but annoying bug was fixed wherein, owing to 
+            a recent ModPerl revision, a nested persistant value 
+            for $transport was frustrating an MTA Transport edit.
+            Where an admin wanted a non-standard value for the MTA
+            Transport, the default could not be changed
+            using the provided DBMA editor function.
+            This bug only crept up lately and would not have
+            impacted existing data but would have prevented
+            changing the default "dbmail-lmtp:127.0.0.1:24" value 
+            under most modern PERL environments (since 5.6.3).
+            This MTA Transport feature is only functional if enabled
+            in your MTA config. Please see Help to understand DBMA's
+            MTA Admin features; drop me a line or visit http://dbma.ca
+            to ask questions.
+V2.3.8    November 16, 2005
+          * Fixed a bug which applies to PostgreSQL in the edit
+            mail forward routine. (Blank integer sometimes occurred
+            [bad SQL] where GroupID was unknown.) This bug was
+            ignored by MySQL but PgSQL rejected the command.
+          * A few minor code improvements to xhtml.
+          * Enhanced auto create alias function. This allows for
+            amazingly fast creation of multiple users in same domain.
+          * More intuitive user experience in some window jumps.
+V2.3.7    October 21, 2005
+          * Improved MTA Access
+          * minor look and feel improvements
+          * ModPerl 2 enhancements (dev)
+V2.3.6   July 25, 2005
+ 	  * Maintenance and minor bug fix release
+V2.3.5   July 2, 2005
+          * MTA_Access feature added for PostgreSQL
+          * Substantial enhancement of installation troubleshooting
+            and sufficient function even with broken configs and
+            file permissions to allow diagnostics to run.
+          * Updated RESTRICTGroup Mode for new features and
+            greater security, particularly on "forwards"
+          * some minor bug fixes where httpd children retained
+            nested values beyond a config change
+V2.3.4   June 27, 2005
+          * improvements to ACL functions, more intuitive window 
+            jumps, updates to suit recent and retro PostgreSQL\
+            versions etc
+          * Access Control permissions can only be seen from 
+            a global Administrator's login with ACList
+          * allow deletion of __public__ and 'anyone' accounts
+            in Group "0" to allow a 'start-over' of botched ACLs
+          * minor GUI changes, more diagnostics in 'ConnectStatus' 
+V2.3.3   June 18, 2005
+          * added function for giving a domain alias to all users
+            in a group (client_idnr)
+          * enhanced system stats reporting and Connect Status
+            Diagnostics added to Connect Status Error Handling
+          * improved PostgreSQL interface
+          * additional tweaks to DBMA MTA Admin
+          * Cosmetic tweaks
+          * bug fix where delete group alias was not returning
+            to list
+V2.3.2   June 14, 2005
+          * Added tool for importing text-based mail access files
+            like access, sender_access, client_access etc.
+          * minor tweaks to DBMA MTA Admin
+V2.3.1   June 11, 2005.
+          * Konqueror 'textarea' bug workaround
+          * More user config checks including permissions test
+          * Upgraded Group / domain analysis
+V2.3.0   June 9, 2005.
+         * Significant release.   
+         * BETA: Added Compatibility with HEAD and unstable 2.1.x versions. 
+         * New features include more extensive MTA management.
+         * Blacklist / Whitelist MTA Access capability to allow
+           admin to add, change or delete 'REJECT', 'OK', 
+           'reject_unverified' sender access in SQL table.
+         * Table creation and management is fully automated.
+         * Transports implemented with Destination Domains for
+           per-domain transport functionality.
+	 * Help Files updated and expanded
+         * Increased number of user input checks including case
+           checking.
+	 * More 'user intuitive' links and jumps.
+         * More options included in the User Account Window 
+         * Look and feel improvements
+         * a few minor bugs ironed out
+V2.2.5   June 3, 2005
+         * update to remove some test code left in minor .4
+         * please make certain you 'chown' all DBMA files and 
+           dir to the user and group of your HTTPD
+V2.2.4   May 31, 2005
+         * Some Old Browser Compat. issues resolved.
+         * small enhancements to various GUIs
+         * updated for mod_perl/1.999.23(RC6) Apache 2.1.4
+           (also runs as CGI of course pr ModPerl 1)
+         * better enabling of 'email address as user name'
+           with more features
+         * fixed forwards editing which broke in recent minor release
+V2.2.3   May 5, 2005 
+         * Fixed Clear function where DBMA disconnects from database 
+V2.2.2   April 16, 2005
+        * Forwards routine has been adjusted to alter a row instead
+          of adding a row where the Admin has entered an existing
+          mail address and a forwarding address. Mail from the "From"
+          address will be redirected to the "To:" address specified
+          instead of the Mailbox it is currently stored in.
+        * A number of minor internal housekeeping changes including
+          some connection management devices have been added or altered.
+        * DBMA_help.htm has been updated.
+        * If this is an update to an older version, please make 
+          certain you 'chown' all DBMA files to the user and group
+          of your HTTPD as a number of flat DB files have been 
+          introduced since V2.1.9.
+
+V2.2.1   April 9 2005.
+        * Database Cleanup tool has been expanded to track down
+          and delete orphaned messages existing in 
+          dbmail_messageblks and dbmail_physmessage tables
+          only and not referenced in dbmail_messages, 
+          nor have a user in dbmail_users, nor mailbox in 
+          dbmail_mailboxes.
+        * A commit error has been fixed which prevented the manual
+          addition of MTA domains with PostgreSQL Version 8 plus
+
+v2.2.0   March 29 2005. Significant release.
+        * NEW Feature: An extensive integration of Shared folders
+          and Access Control Lists. DBMA automates the process of
+          getting you started and then providing a fully
+          integrated array of tools for flexible management of ACLs.
+          You likely had no idea DbMail was so good at doing this.
+        * NEW Feature: A 1st step in integrating MTA Administration.
+          For MySQL and PostgeSQL, DBMA will generate
+          an MTA database using heuristic learning to maintain in 
+          real time an MTA-useable domains table which is auto updated
+          whenever a domain is added to the system.
+          Examples are provided for configuring postfix and other MTAs
+          to point to the database & obtain the list of domains your 
+          server is the final destination for. Sample configs
+          are provided. Please read DBMA_help.htm from the Main Screen.
+        * Autonotification management and Editing of Forwards are presented
+          in a more intuitive fashion with a greater range of
+          function including user input checking.
+        * An experimental Auto-Reply management tool is available for
+          LAN testing which may help in the further development
+          of the function, or not. This is turned off by default
+          and can only be configured in the Senior Admin role.
+          (Pay heed to the nag warnings.)
+        * User Account Window Expanded extensively.
+        * Stronger error checking of user input. More data presented.
+	* Allow Administrator to Access/Search/Read Mail now 
+          configurable OFF/ON, hard-fast for Group Admin.
+        * A few performance evaluators like Timed Mail Searches
+        * And more fine grained improvements... 
+          PLEASE REPORT BUGS
+v2.1.9	 March 18, 2005 **PREVIEW RELEASE of V2.2**
+	* Many New Features and improvements
+	* Admin Data now includes listing of Groups as well as a 
+	  listing of domains within each Group (client_idnr)
+	* Alias and Forwards listings allow fast delete
+	* Add forwards form now runs an error checking routine
+          against input
+	* Admin Data removed from Restricted Group GUI
+	* Minor "intuitive-use" improvements
+ 	* New Menu Help and simplified instructions
+v2.1.8   March 8, 2005
+	* Number of required modules reduced
+	* Faster, simpler, smaller-db-footprint,
+	  backward-compatable crypt routine.
+	* Module tarballs dropped from package as most are now
+	  part of modern PERL install (i.e.: Perl 5.8.6)
+	* Search for another user added to account modify GUI
+	* Increased protection of system accounts for all
+	  Administrative levels.
+  	* Extended searches can be now done on header fields
+	  only (user option).
+  	* Expanded HELP for managing users
+v2.1.7.1 March 1, 2005
+	* Increased protection of system accounts for all
+ 	  Administrative levels.
+  	* Extended searches can be now done on header fields only
+	  (user option).
+v2.1.7  Feb  25, 2005
+	* Extended Mail Search feature added to search mail in
+	  all mailboxes within an account.
+	* Improved filtering for viruses, links and popup
+	  protection for mail search and reading.
+ 	* Mail search now returns list of all matches as
+	  well as "I Feel Lucky" mode.
+	* Mail management and search options are now available in
+	  more windows including mail reader.
+ 	* Improved parsing of mail headers for easier reading and analysis.
+ 	* Improved features and security for Resticted Group Mode
+ 	* Significant user experience improvements overall (Enhanced look
+	  and feel plus admin actions.)
+	* Minor cross-browser display bug fixes.
+v2.1.6 Feb  8, 2005
+	* Speed up on some functions.
+	* Substantial style changes
+	* Dozens of minor feature additions
+	* Powerful 'delete all users in a group' function
+	* More security for RESTRICTGroupID class plus new
+	  feature allows you to customize the GUI Titles for
+	  specific groups and clients.
+	* Enhanced help. (More yet to be done :o)
+v2.1.5 Feb  4, 2005
+	* Substantial re-write incorporates new features for 
+          large systems. Added sorting options and enhanced
+	  display limit options. 
+	  Main focus of changes is on DbMail 2.x release although
+	  most work in 1.x.x.
+v2.1.4 Jan 26, 2005
+	* Enhanced message search routine and message reading
+	  - convert html to text avoiding security issues with
+	  malicious or annoying embedded links and inline frames
+	* updated handling of dbmail_messageblks.is_header flags
+	  consistent with changes since DbMail V 2.0.3
+	* numerous minor changes
+V2.1.3.1 January 15, 2005
+	* Minor Style changes and improved message search.
+V2.1.3  Jan 08, 2005
+	* Updated some functions for PERL 5.8.6
+	* Fixed problem with Perl 5.8.3 and backward compat with 
+          DbMail 1.xx on listing curmail_size
+V2.1.2  Jan 06 2005
+	* Fixed duplicate return on list of mail forwards.
+V2.1.2  Dec 19, 2004
+	* Added crontab script to deal with delete_flag/status
+	  maintenance
+	* minor addjustments to sort order
+V2.1.2  Nov 9 2004
+        * fix_deleted function expanded to change deletes marked 
+          001 by POP3 client to 003 for immediate delete
+        * corrected Options to write new default mailbox size to
+          options config file
+V2.1.2  Oct 29 2004 Backward compat. enhanced 
+        Oct 27 2004
+        * Update Delete Status expanded to set for delete orphaned 
+	  messages where the owner has been deleted. 
+          (See DBMA_installation_configuration.htm)
+        Oct 25 2004
+	* New global feature sets dbmail_messages.status to 003
+	  where delete_flag has been already set to '1' by user.
+	* the "fix_delete" function applies to all messages in the
+	  database
+V2.1.1  Oct 1 2004
+	* Added mail search feature for user mailboxes plus mark 
+	  delete / undelete function for individual or all mail
+	  in any mail box. Delete sets the status flag to 003;
+	  deletion occurs on the next maintenance run
+	  (dbmail-utils). Mail deleted accidentaly by client can
+	  be quickly found and restored.
+V2.1.0  Sept 26 2004
+	* New Mode Added 
+        * Admin can restrict DBMA for limited database access.
+	* "RESTRICTGroupID" mode is configured in DBMA.cgi
+	* This restrictive mode of operation has been added to DBMA
+	  to limit Database access to a single Group.
+	* RESTRICTGroupID mode 
+	  - denies access to all Global Functions
+          - denies access to DBMA Configuration GUI
+          - limits access to a single group
+          - prevents duplicate user accounts across mail Groups
+          - returns a notice and denies access if a search yields
+          - a user outside the restricted group
+V2.0.5 Sept 11 2004:
+	* Fixed redundancy error in Inbox Mail Report
+V2.0.5 Sept 7 2004:
+	* DBMA will now read mail contained within the database
+	* All data for all mail is available from the user account
+	  window.
+	* Recent installations can be tested by sending mail to
+	  a system account. Open the account in DBMA and click the
+	  INBOX. A list of messages and relevant data will appear.
+	  The new message can then be opened from this window.
+V2.0.4 Sept 5 2004:
+	* New configuration features reduce 'stats' queries to db.
+	* Browser CSS quirks in older Firefox version accomodated
+V2.0.4 Sept 1 2004:
+	* Config now includes capability of turning stats off
+	* Config now includes listing of domains
+V2.0.4 Aug 30 2004:
+	* File names changed. Two flat file databases added.
+	* All configuration done from GUI. Open in your browser.
+	* Configuration stored in flat file database
+	* Power User features added
+	* Automated process of adding users. Admin only types name
+	* Added 8-char random alphanumeric password generator
+	* Added auto-generated email notification to user
+	* Increased admin user flexibility through more configs
+	* Improved (speed) search routine
+	* Error message explains why Group "0" won't display
+	  (intended for internal use (i.e. delivery agent etc.)
+V2.0.3 Aug 26 2004:
+	* Built in some RFC2822 alias checking features.
+	* enhanced search function to better handle
+          user names with unusual characters
+	* expanded mailbox size translations
+          to k=000 m=000000, and g=000000000
+	* more info forwards and aliases in user modify window
+V2.0.3 Aug 25 2004:
+	* corrected error in encryption selection order.
+	  md5sum would be confused with md5
+V2.0.3 Aug 24 2004:
+	* added features to user modification tools
+	* further enhancements for Postgres users
+	* numerous refinements
+V2.0.2 Aug 21 2004:
+	* md5sum added for PostgreSQL using PERL Digest::MD5
+	* Altered error handling for Postgres when a search fails
+	* Added some rapidfire add user capabilities
+V2.0.2 Aug 20 2004:
+	* Improvements user friendliness user-modify interface
+	* Fixed 3 error messages which obviated backward compat
+V2.0.2 Aug 18 2004:
+	* Fixed PgSQL broken 'recent login data report'
+	* switched DBI from autocommit to manual
+	* expanded error reporting
+	* minor, extended some features including encryption
+V2.0.1 Aug 16 2004:
+	* Added md5-digest password encryption for MySQL
+	* Error handling more convenient error screen
+	* Improved capability for email addresses as user names.
+	* Improved user account management screens
+V2.0.1 Aug 15 2004:
+	* Improved search function for Usernames with numerics
+	* Resized some components to fit 800x600 virtual screen
+	* Obviated some CSSv2 issues with KDE Konqeror
+	* Moved CSS1/2 features to include
+	* Added enhanced features in User Account GUI
+V2.0.1 Aug 12 2004:
+ 	* Added mailbox data to the user info screen
+	* Added Recent Login fetch and display
+	* Fixed minor errors in XHTML
+	* removed some dev debugging features no longer needed
+	* adjusted a few lines to run better on PERL 5.8
+	* changed user list query and stats to better suit pgsql
+	* expanded troubleshooting
+V2.0	First release for DbMail CVS/RC8 (V2.0) August 9, 2004
+
+#################################################################

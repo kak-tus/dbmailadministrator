@@ -1,0 +1,82 @@
+# Extra README DbMailAdministrator (DBMA) V3.2.x Copyright 2004-2016 **
+#      Trouble? Contact: micheal@dbma.ca
+#################################################################
+
+
+=====================
+DBMA_maketestuser.cgi
+=====================
+/dbmailadministrator/extra/DBMA_maketestuser.cgi
+
+This is intended for early use in your installation and 
+configuration process and very rapidly populates a new database
+with randomly generated alpha-numeric users speeding up the
+effort of creating a dozen or so users in a hurry. 
+
+In DBMA, most of the create user data must be typed.
+
+This tool invents test users in a hurry. 
+
+You don't need to type anthing although you have the option 
+of setting persistant variables like Group, Mail Quotas,
+password etcetera.
+
+The tool uses the 
+/usr/local/sbin/dbmail-users utility and consequently
+must be run on the DbMail host (upon which you installed DbMail).
+
+You may need to adjust permissions for dbmail.conf and dbmail-users
+while you use this tool. 
+
+If you are unsure of what you are doing, please use the SQL tools
+of DbMailAdministrator (DBMA). 
+You can change the inserted values to what you like. 
+
+All but the username and the domain will persist. 
+This tool is primarily for testing purposes. 
+A log of all users created is stored at 
+/dbmailadministrator/extra/DBMA.test.user.txt
+
+
+
+===================
+cron_fix_deletes.pl
+===================
+/dbmailadministrator/extra/cron_fix_deletes.pl
+
+Please open this script in your favorite text editor and
+configure for Postgres or MySQL as shown below
+###############################################
+my $DBMA_dbname     = "dbmail";
+my $DBMA_port       = "3306";
+my $DBMA_host       = "localhost";
+my $DBMA_user       = "dbmail";
+my $DBMA_password   = "dbmail";
+my $sqltype         = "mysql"; # or pgsql
+###############################################
+
+This is similar to DBMA's 'Update Delete Status function' 
+which runs a scan of the database looking for three basic problems.
+1. messages marked delete by the client but status is still 000;
+2. messages having no 'owner mailbox' and
+3. messages unattached to a user.
+
+
+This tool scans the entire database and where a message's
+deleted_flag=1 will reset the status flag to 003 and in the case
+of orphaned messages it finds it resets the  
+message's status to status=002.
+
+You then have until the next dbmail-util run to review the changes.
+(Look at the "Number of deletes pending:" column of the DBMA
+statistics (Main menu) to observe any changes after doing
+"Update Delete Status".)
+
+
+# EXAMPLE CRONTAB ENTRY
+
+# 1       3       *       *       *       root   \
+/usr/bin/perl \
+/usr/local/www/dbmailadministrator/extra/cron_fix_deletes.pl >> \
+/dev/null 2>&1
+

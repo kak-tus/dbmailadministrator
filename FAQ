@@ -1,0 +1,470 @@
+        <html><body><pre>
+# DbMailAdministrator (DBMA) V3.2.x Copyright 2004-2016 **
+#      Trouble? Contact: micheal@dbma.ca
+#################################################################
+GENERAL
+Q> How do I limit the Mailbox Size for groups of users.
+
+A> First configure DBMA in the configuration window setting the Max Mailbox size
+   at what you want the limit to be.
+   Once DBMA is configured to your liking, open DBMA.cgi in a text editor and 
+   change the 'any' in [$RESTRICTGroupID = 'any';] to the group number you want 
+   to restrict access to. The mailboxsize for users will always be forced back to
+   the value you set if the admin exceeds that amount.
+
+Q> I am getting an out-of-memory error when selecting a mail message to read.
+
+A> PERL module:DBD-mysql-3.0002_4 has a memory bug. Upgrade 3.0002_4 with *force* by invoking
+CPAN with the following console commands:
+     > perl -MCPAN -e shell 
+CPAN > force install DBD::mysql
+CPAN > exit
+
+
+Q> The date and time at the top DBMA Main Menu is different from the time
+shown in the "My Mail System" panel.
+
+A> Two different hosts.
+The time shown at the top is the time on the Web server
+delivering DBMA to your browser. The time in My Mail System:
+is that of the SQL server you are connected to. Time sync on your
+network may be off. DBMA uses the RDBMS server's time to set dates
+in the database.
+
+
+Q> I am trying to find a user but I don't know the name, only that
+'webmaster' is aliased to that user.
+
+A> Type the full FGDN email address and DBMA will find the user and
+immediately open the 'User Account Window'
+
+
+Q> Should my user names be the full email address or just the first part.
+
+A> Your choice.
+There are many styles of username. It can be "first_part@last_part";
+it can be "first_part" only; just a number; a first and last name;
+a first and last name seperated by a dot or an understroke;
+and many other permutations.
+
+
+Q> Oops. I have a Windows workstation. Can I use DBMA?
+
+A> DBMA was built on Unix servers and tested and tuned on several Windows
+variants. You can fully administer your DbMail IMAP / POP3 system using
+DBMA on a Win32 host (NT4Server, W2kServer, WinServer-2003). On either
+Unix or Windows, DBMA will start up instantly and fly up a configuration
+window or just login to the database if the default configurations match yours.
+If you are running Windows Server 2003 with IIS6, make sure that your CGI
+is turned on for the dbmailadministrator directory. It is best to use PerlIS.dll
+instead of the executeable (Perl.exe) and you won't even need to alter the
+shebang line. Make certain that the *.DB files are writeable by the account
+the server runs as (IUSR_hostname).
+Be certain your PERL is up to speed by installing the needed modules.
+Configure everything correctly and there's nothing you can't do from a
+Windows box that can be done from a Unix host.
+
+
+ABOUT Installation
+
+Q> I just untarred DBMA into my web docs, what do I do next?
+
+A> Point your browser to http://localhost/dbmailadministrator/
+and a configuration window will open unless you do not have the required 
+PERL modules or unless your permissions have not been set correctly.
+
+For missing modules (i.e.: PERL DBI): run this command
+(perl -MCPAN -e shell) and then (install DBI). Do the same with
+(install DBD::mysql) or (install DBD::Pg) if you are using PostgreSQL.
+(i DBD::Pg). For the best help available on the subject of installing
+PERL modules, visit http://www.cpan.org.
+ NOTE: This package requires the following PERL modules.
+   DBI and DBD for your database (i.e.: DBD::mysql or DBD::Pg)
+   CGI::Carp        (Lincoln D. Stein's ubiquitous CGI.)
+  *NET::SMTP        (part of Graham Barr's libnet.)
+  *Digest::MD5      (RFC 1321 MD5 implementation.)
+  *Crypt::PasswdMD5 (Poul-Henning Kamp's Unix Crypt.)
+  *included in this tarball.
+
+ HOWTO use the included module tarballs.
+   > cd dbmailadministrator/ready_to_install_modules
+   > gunzip module_name.tar.gz
+   > tar xvf module_name.tar
+   > cd module_name
+   > perl Makefile.PL
+   > make
+   > make test
+   > make install
+
+ HOWTO use CPAN to install/update modules.
+   > perl -MCPAN -e shell
+   > install Digest::MD5
+   > install Bundle::libnet
+   > install DBI
+   > install DBD::Pg
+   > install DBD::mysql
+   > install Crypt::PasswdMD5
+
+
+ABOUT Scalability
+
+Q> Is DBMA applicable to enterprise operations?
+
+A> Scalability. Like DbMail, DBMA is vastly scalable.
+Millions of users can be accomodated depending on the scope of your
+database servers (or cluster). You might notice some terms of
+reference in DBMA (GUI names) differ slightly from the table and
+field names used in the DbMail database. DBMA is
+a management tool as well as a customer support
+tool. DBMA favours the use of 'friendly' terminology
+which fits the most likely usage by front line
+Level One Support people and by the 'machine room'
+mail team. "Group" refers to the 'dbmail_users'
+field 'clientid', for example.
+
+Q>Is DBMA for ISP's too?
+
+A> In the case of an ISP, each user is a client.
+You might consider organizing your clients/users into geographic groups
+or net segment groups or whatever you like, to keep the total number
+of users broken up into manageable lots of up to 1000-1500
+accounts per group.  With just 999 groups you can
+manage as many email accounts as some countries have internet users. 
+Both DbMail and the DBMA GUI are highly scalable.
+
+
+ABOUT Useage
+
+Q> What type of menus does the GUI use?
+
+A> By using simple "radio check buttons" and pressing "SQL Tool" DBMA lets 
+you add or delete users, aliases, forwards, notifications, check mail 
+limits, monitor IMAP mailboxes, and more as well as show and modify 
+single users or display a list of all existing users in any group or all 
+groups displaying all information including current mail stats.
+
+Q> Will DBMA delete user accounts?
+
+A> Deleting the user removes the account as well as all aliases and auto 
+notifications for that user. Heed the 'Alert' popup asking "Are you sure 
+you want to do this?" Once deleted, all aliases, forwards, mailboxes and 
+mail associated with the deleted user are GONE for good.
+
+Q> How do I delete aliases?
+
+A> Remove separate aliases by User ID (even if the user no longer exists) 
+or by complete alias. Some orphaned rows may exist in your database 
+between dbmail-utils / dbmail-maintenance crontab runs. More often than 
+not this is an admin-user error. Hush. DBMA can help you monitor and 
+oust straggler aliases. Just type the full alias and press "Delete 
+Alias" and presto it's gone. In the alternative you can type the UserID 
+and press "Delete All Aliases" and zap, they are all gone.
+
+Q> How do I manage "forwards"
+
+A> Forwards including external address forwards like myname@thisdomain.tld 
+==> hername@thatdomain.tld are accomplished by checking 'Add Forwards' 
+and pressing the "SQL Tool" button from the Admin page. You will get 
+another GUI window which is self-explanatory on adding email internal 
+and external forwards. You can also list all the forwards and delete any 
+which need to go.
+
+
+Q> I keep finding deleted_flag "1" and status "000" no matter how many
+times I run dbmail-util/maintenance. Can DBMA help?
+
+A> Yes. In the global functions (right-hand-side of menu)in the full
+administrative configuration(i.e.: not RESTRICTGroupID) since v2.1.2 
+there is a "Update Delete Status" check box. 
+Select it and press "Go". DBMA will set 'dbmail_'messages.status
+to '003' where the deleted_flag has been set to '1' by the user client.
+This setting will mean that the next crontab run of "dbmail-util -d" will
+remove all "003" status messages from the system's database.
+
+
+Q> I have "orphaned messageblks" what can I do?
+A> Select "Update Delete Status" check box and press "Go"
+DBMA is a good fixer. When you select "Update Delete Status" the function
+"fix_deletes" searches for:
+   1. messages marked delete by the client;
+   2. messages having no 'owned mailbox' (whatever the reason, it happens); and
+   3. messages having no owner (somehow owner got deleted but not their messages)
+If DBMA finds some orphaned messages DBMA will, with nicely executed grace,
+set their dbmail_messages.status to just a 001 and their deleted_flag to a
+certain "1" preparing them for the ultimacy of the utilities firing squad.
+Why 001? In case you learn that you accidentally deleted a good user account
+and need to reinstate them (keeping their messages) in the next few hours or
+seconds as the case may be in terms of dbmail utility crontab runs;
+you are covered somewhat in the extremely unlikely case of your user-delete
+booboo. (In that case use the DBMA create User" function, create the user,
+open their account; open their mailboxes and presse the "Undelete all mail.." button.
+If you again hit "Go" on the "DBMA::Update Delete Status" checkbox
+any orphaned messages that DbMailAdministrator (DBMA) found here will be
+escalated to 003 (the biblical "kiss on the cheek") in a FLASH and deleted
+from the database on the next Utility/Maintenance run. You will perhaps
+someday appreciate this two-step flexibility.
+NOTE1: The Update delete status function is not available to 
+"Group Administrators" under the RESTRICTGroupID constrict.
+NOTE2: Look for changes in the MAIN MENU statistics column:
+"Number of deletes pending"
+
+Q> What is the best way to structure my user regime?
+
+A> Please visit 
+http://library.mobrien.com/dbmailadministrator/managing_users_with_dbma.htm
+for a detailed discussion which may help you establish your user architecture
+and some policies to boot.
+
+
+Q> How do I handle duplicate users?
+
+A> Let's face it, public email addresses uniquely identify each person
+on planet earth. As a mail administrator or postmaster you already realize
+that folks take their email address and their email seriously and personally.
+Very much so. Keeping the mail running and folks happy is your aim but you
+will encounter many heretofore inconceivable complaints or requests from users. 
+It's nice to know you are ready for most anything.
+So, the new user wants the name "bob" in his email address, empatically. 
+You already have a "bob" (or whatever the request may be) at another 
+virtual domain and this new user who wants to be "bob" won't take no for 
+an answer. No problem. Use DBMA with "Add User" checked to open an 
+"(Add) User" window. Type a uniqe name like "boblastname" for the "User 
+Name", enter the new Bob's password and "Client (Group) ID" then enter 
+the email address as "bob@thenewusersdomain.tld". Bob must login with 
+account name "boblastname" but his email address is 
+"bob@thenewusersdomain.tld". All mail for "bob@thenewusersdomain.tld" 
+will go to the mailbox of "boblastname" and the other "Bob" is unscathed 
+by all this.. You can have as many "bob's @ different_domains.tld" as 
+you like.
+
+Q> Will DBMA encrypt user passwords for me?
+
+A> Yes. Many people will find that plain text passwords are 
+sufficient for email user accounts. If that is not true for you, DBMA 
+will encrypt your passwords. Choose from md5-hash, md5sum or crypt.
+Auto Notify is accomplished by knowing the UserID number of the user you
+want to cause a notification. Enter the UserID number and the full email 
+address of the mail box you want a notification sent to. It will work 
+like a charm.
+
+
+Q> Must I encrypt user passwords?
+
+A> Not if you are using SASL. Use plaintext for SASL authentication.
+
+When you are creating or modifying a user account in DBMA you are given
+the option of encrypting passwords. Keep in mind that this applies only
+to the password communication between DbMail and its database and how the
+password is actually stored in the database. Unless you are using one of
+the many options available for authenticating encrypted user passwords
+across the internet; on ports 143 and 110, plain text login passwords are
+passed across the internet. So also are the emails passed in plain text.
+If someone wants to read your emails they certainly don't need your
+POP3/IMAP login password. Best practices suggest however that you do
+encrypt the password. DBMA developers sugest you encrypt your user
+passwords but it is entirely up to you.
+
+
+Q> Some accounts have many aliases. How do I do that, fast?
+
+A> A simple way to add an alias is to call up the user in a manner of your 
+choosing and then use the "Modify..." button. In the window which 
+appears, without changing any of the main entries, add an alias to the 
+"alias" text window at the bottom and press "Update". A similar window 
+will popup again showing the change. You can repeat the above over again 
+to add more aliases very quickly.
+Search for  users can be accomplished using the email address, the user 
+name or the user ID number. Your most unequivocal method uses the ID 
+number.
+
+
+Q> Will DBMA give me a cross section of users, say in a single group?
+
+A> You can view all users in all groups by selecting "List all users all 
+group" and pressing the "Go!" button, but if you have 100 groups each 
+with a thousand users, you won't be seeing the list for quite some time. 
+To be more selective, in  the top row of functions, enter the group 
+(ClientID) number and press either the "Users" or "Aliases" buttons. An 
+alphabetical list will appear. Click the name of the user or alias you 
+wish to modify and a data page for that user will open. If it proves 
+true that this is the user you seek, press the "Modify User" button and 
+make your changes, updates or whatever.
+
+
+Q> How do I find accounts where I only know the alias?
+
+A> List Aliases GUI helps you manage scores of information and functions; 
+forwards or aliased accounts and more. You can list every alias but if 
+the numbers are high you should limit the display to under 1500 users. 
+The ideal method is to list aliases by groups. Mail forwarders can also 
+be listed separately. Each alias listing has a link to a data window or 
+a search function. In the case of an external forward you obviously will 
+not find the alias as a user account but in the case where you have 
+abuse@yourdomain.tld forwarded to adminorwhatever@yourdomain.tld, the 
+two links will take you to the User Data Window for the two 
+corresponding user accounts. Did you follow that? Each line has two 
+links. The mail for x@x goes to xx@xx. It is possible that the link on 
+the right is an external address. Clicking it will fetch an "account 
+doesn't exist" message. On the other hand, accounts like "noc", "dns", 
+"abuse", "privacy" etc are likely aliased to the addresses of persons or 
+titles. The DBMA Alias List GUI allows you to quickly select which 
+Account window you wish to open, the account with mail forwarded (left 
+link), or the account where the mail goes to (right link).
+
+Q> We have a little newsletter. How do I make sure everyone in my group gets it?
+
+A> Distribute your NewsLetter with forwarding is one good option.
+ If you are creating forward aliases like 
+"newsletterfromtheprez@ourdomain.tld" to be forwarded to each and every
+user at "@ourdomain.tld" you might forget to actually create the account
+"newsletterfromtheprez", but if you thought "Flubber" had bouncing problems,
+watch what happens with this scenario  when things go wrong. In other words,
+if you are going to create a "newsletter" alias for mail distribution to 
+various mail account groups, for each "newsletter" forwarder, create a 
+full user account for your "newsletter".
+
+
+Q> I know the user's name. How do I fetch that user's account?
+
+A> To view the data for a single user, type the user's name or ID number 
+beside the "Get User" button and press that button. From there you can 
+modify or even delete the user.
+
+
+Q> I have an older version of DbMail. I get blank rows in some DBMA columns?
+
+A> Earlier versions of DbMail do not have a "curmail_size" column in
+the "dbmail_users" (users) table. The 'listall' sub-routine of DBMA runs
+a sequenced query across the "dbmail_users" (users) table and will stop
+at Current Mail if the field does not exist. The information is available
+by clicking the user link and opening the User Data Window. "Last Logins"
+will not be displayed, however, in the user listings where curmail_size
+does not exist. There are two ways to correct this situation.  Add the
+field (`curmail_size` bigint(21) NOT NULL default '0';) to the 'users'
+table, or upgrade to the current version of DbMail. We reccommend the
+InnoDB database for MySQL if you are going the upgrade route.
+
+ABOUT RESTRICTGroupID
+Q> I have five different groups I want managed by different people, each having access 
+only to the group they are administering and no other. How do I do that?
+
+A> After DBMA has been configured from the GUI, "root"; can enable or
+disable a very restrictive "RESTRICTGroupID" mode.
+
+You must configure DBMA in your web browser FIRST before setting
+DBMA to this "RESTRICTGroupID" mode.
+
+Pay special attention to "Pre-Set Options" 
+You can pre-configure the default domain, disable statistics
+(Recommended), auto-create alias, Default mailbox size
+and so on. You have a lot of control over how the restricted Group Administrator
+will use DBMA.
+
+This option DRAMATICALLY REDUCES DBMA FUNCTION to a single group.
+This feature also denies access to the "Configuration GUI" and to
+all "Global Functions". The only way in which full function can be
+returned is to (with root access) edit DBMA.cgi and comment out
+the configuration setting which turns the mode on.
+
+RESTRICTGroupID mode
+          - hard codes the "Group" you specify
+          - removes access to all Global Functions
+          - removes access to DBMA Configuration GUI
+          - restricts access to a single group
+          - prevents duplicate user accounts across mail Groups
+          - returns a notice and denies access if a search yields
+            a user outside the restricted group
+
+To enable RESTRICTGroupID mode you will need to open DBMA.cgi
+in a text editor and uncomment the "$RESTRICTGroupID" configuration
+setting. 
+
+ONLY IF YOU WISH TO RESTRICT ACCESS would you uncomment this
+line and set the $RESTRICTGroupID to the Group you wish to allow.
+When you open DBMA.cgi in vi or whatever text editor you choose,
+you will see what is set out below. 
+
+# $RESTRICTGroupID = '3'; Uncomment and set ...
+
+This mode requires that a unique implementation of DBMA 
+be assigned to each Group Administrator,
+each having their own (.htaccess) password.
+
+This configuration has a very wide range of applications.
+Here's your example. 
+
+If you were to have 5 groups and 5 Group Administrators
+(you may call them "field offices" or "customers" or whatever),
+you would need to do something like the following with
+your DBMA installations. (This assumes you are on the console, telnet,
+XTerm or whatever as "root". In Win32 Windows or X Windows
+(Gnome/KDE/etc.), drag, drop and rename to your heart's content.)
+
+> tar xvf DBMA_SQL_V2.tar
+
+Point your browser to /dbmailadministrator/ and change the 
+configuration to suit your system. (This presumes you have your
+DBI/DBD/MD5::Digest etc. PERL modules installed.)
+DBMA will store the config data in a flat-file database.
+
+Chown everything to the correct system user and group
+(i.e.: chown www:www) and chmod 755 *.cgi,
+just as you would do for a normal installation.
+
+Now make unique copies of the works for each Group Administrator
+
+> cp -r dbmailadministrator dbmailadministrator3
+> cp -r dbmailadministrator dbmailadministrator4
+> cp -r dbmailadministrator dbmailadministrator5
+> cp -r dbmailadministrator dbmailadministrator6
+> mv dbmailadministrator dbmailadministrator7
+
+You would then have something like this:
+
+/usr/local/www/dbmailadministrator3
+/usr/local/www/dbmailadministrator4
+/usr/local/www/dbmailadministrator5
+/usr/local/www/dbmailadministrator6
+/usr/local/www/dbmailadministrator7
+
+... each package configured for your database. Nice. :o)
+
+Next open DBMI.cgi in each directory and point $RESTRICTGroupID 
+correspondingly to the correct Group number.
+
+(For some recommended conventions on assigning Group ID's,
+you might like to take a look at "DBMA_User_Management.htm"
+contained within the DBMA tarball or visit http://dbma.mobrien.com/.)
+
+The link for the Group 3 Administrator would then be something
+like: https://thehost.thedomain.int/dbmailadministrator3/
+
+The link for the Group 4 Administrator would then be something
+like:  https://thehost.thedomain.int/dbmailadministrator4/
+And so on.
+
+( You could also build DBMA (in RESTRICTGroupID mode) into an
+end-to-end secure and authenticated Web resource (authenticated SSL)
+by which your external customers' Admin or internal/remote departments' Admin could
+administer their own DbMail accounts. In the case where there are only
+single known users of the resource you could easily use a self-issued
+High Grade Encryption (AES-256 256-bit) server certificate if you don't have
+nor want the cost of a 'store-bought' Server Cert (i.e. Thawte, VeriSign, SSL,
+etc.). (http://www.ssl.com/ now offers an SSL128SCG2.5 single-domain
+Cert for under $100. USD) )
+
+Don't forget yourself. You should perhaps also install a
+global (unrestricted) DBMA implementation for yourself or for
+whomever you will designate as Senior Mail Administrator etc.
+
+Remember to set unique passwords
+( /usr/local/bin/htpasswd -cb .htpasswd user secret) and usernames
+on your Inranet host  for each of your mail Group Administrators either
+with .htaccess or (preferred method) in your Intranet HTTP Daemon's
+configuration.
+
+
+
+
+
+</pre></body></html>

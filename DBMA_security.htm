@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="DBMA.ico" />
+<link rel="stylesheet" type="text/css" href="DBMA.css" />
+<title>Security Discussion: DBMA Mail Storage and Retrieval User Administration</title>
+<meta name="Description" content="Security considerations for running DBMA (DbMailAdministrator]on a secured LAN workstation" />
+<style type="text/css">
+/*<![CDATA[*/
+td.c12 {float: left}
+table{width:700px}
+span.c11 {font-family:arial,sans-serif;font-size:9px} 
+input.c10 {background-color: #800000; color: #FFFFFF}
+input.c9 {background-color: #FFFFFF; color: #000000}
+td.c8 {text-align: left; background-color: #D6CFE7}
+input.c7 {background-color: #D6CFDE; color: #4602A0}
+div.c6 {text-align: center}
+pre.c1 {font-family: Trebuchet MS, verdana,arial,helvetica,sans-serif; font-size: 11pt; text-align: left; margin-left: 5px}
+input.c4 {background-color: #D6CFDE; color: #5204A5}
+input.c3 {background-color: #D6CFDE; color: #4A08A5}
+td.c2 {text-align: left}
+td.c1 {text-align: left; background-color: #D6CFDE}
+/*]]>*/
+</style>
+</head>
+<body>
+<div><form name="menu" action="text/javascript">
+<table width="700px" summary="DBMA Menu" border="0" cellspacing="0" cellpadding="0">
+<tr><td style="float:right">
+<select style="border-style:none;color:blue;background:#f0edf3;font-size:10px;font-family:sans-serif" name="menu" size="5" onchange="location.href=this.form.menu.options[this.form.menu.selectedIndex].value">
+<option value="DBMA.cgi">DBMA Administration Menu</option>
+<option value="DBMA_installation_configuration.htm">DBMA Installation</option>
+<option value="README">README File</option>
+<option value="DBMA_User_Management.htm">DBMA User Management</option>
+<option value="http://www.dbmail.org">DbMail.org Site</option>
+</select> [<a href="http://www.dbma.ca/">DBMA Online Help</a> | <a href="README">README</a>]</td>
+</tr></table></form></div>
+<div align="center">
+<center>
+<table width="700px"><tr>
+<td style="width:700px" style="color:#000090;background-color: #d6cfde" align="left">
+<h1><b>DbMailAdministrator (DBMA) Security Notes </b></h1></td></tr>
+<tr><td style="width:700px" align="left"><h3>
+DO NOT ALLOW PUBLIC ACCESS TO THIS PROGRAMME<br /></h3> 
+<h4>BACKGROUND</h4>
+<pre class="c1">
+DBMA writes its own, small, flat-file databases into its namespace as a method of minimizing
+database hits and also for configuration. DBMA does not require any special permissions other than owner
+write access to its own namespace (/dbmailadministrator/) and should run with the HTTP server's
+user and group credentials. (i.e.: www:www or nobody:www or whatever you are using
+ -- see your httpd.conf file or ask your Senior Sys Admin or team lead as your case may be.).
+</pre>
+<h4>Who says, 'We're secured.'?</h4>
+<pre class="c1">Perfect intranet admin system security is a worthy but an unattainable goal.
+Every circumstance has its own unique advantages and deficiencies
+including public physical plant access, ex-or-disgruntled employees, pranksters and 
+penetration from outside. 
+Securing any system is a living, dynamic process -- checking for and applying operating
+system updates, program fixes and patches, scanning programme revisions for desirable
+feature additions, reviewing user security and permissions, and generally applying common sense.
+Whatever secure environment you use for your enterprise or network management,
+using your own privileged user and permission sets, would be a good place to
+use DbMail Administrator (DBMA).
+If you do not yet have such resources and are installing DBMA into a new or
+existing Apache Server on your workstation, the following notes might be helpful.
+</pre>
+<h4>Think about your database security.</h4>
+<pre class="c1">Security of your MySQL or PostgreSQL database is outside the
+scope of this article but it should be noted that DBMA's database-connect username and password
+are set in a small flat-file database which is NOT world readable.
+Make sure there is no unauthorized access to the namespace in which DBMA resides.
+Also, the credentials you use should only have access to the dbmail database
+and should not have GRANT permissions, in fact should only have minimal
+read/write permissions for the DbMail Db. That's all that is needed.</pre>
+<h4>
+Some simple &quot;How To's&quot;
+</h4>
+<pre class="c1">1) Configure your HTTP server to listen on localhost or its
+non-routable LAN IP address, preferrably on a non-standard port. If you run
+your system administration and enterprise management on a VPN, see
+your Enterprise Manager and get the needed approvals and configuration details
+before installing this product.</pre>
+<pre class="c1">example: </pre>
+<pre class="c1">Listen 192.168.1.10:2000</pre>
+<h4>Bare Essentials
+</h4>
+<pre class="c1">2) This discussion will assume that:
+   i.   LAN is secure; firewalled; your admin workstation in a controlled environment.
+   ii.  The operating system has been secured and unnecessary services disabled.
+   iii. The Apache user and group directives are correctly set, appropriate permissions assigned.
+   iv.  The ServerRoot and log directories are protected.
+   v.   User overrides are disabled.
+   vi.  You are using the latest applicable release of your HTTP daemon software (i.e.:Apache]
+</pre>
+<h4>To Alias or Not To Alias? That is the question.
+</h4>
+<pre class="c1">3) CGI access is a somewhat contentious security topic.
+Arguably, the isolated (ScriptAlias directive) cgi-bin in Apache is deprecated because of the
+demand for dynamic content throughout the modern site.
+Many public sites offer dynamic content these days and most admin intranet sites are
+entirely dynamic. You can run CGIs from the web root or any directory you may wish to use, with care.
+Ideally you would assign the ExecCGI Option to subdirectories of your document tree on an as-needed basis.
+This offers a strong measure of security inasmuch as no one but the creator has knowledge of where
+scripts will run and where they won't.
+Why not &quot;cgi-bin&quot;? There is little reason why, for one thing.
+For another, the ubiquitous script directory is easily found.
+The default location of Apache server's CGI scripts is an aliased  '/cgi-bin/'.
+There is no valid reason to use cgi-bin as a script location and many reasons to remove this
+and the &quot;/script&quot;&nbsp;directory from your web space so that html
+GETS and POSTS from automated web script malware are issued a &quot;Not Found&quot;
+error message and thus are stopped dead in their tracks.
+Surely this is not going to be an issue on your LAN IP workstation server, you might think.
+It could be in the event of an inadvertency whereby someone makes a mistake on a
+firewall IP forward NAT. OK, so that is improbable but lets just say that it is good practice
+to make as secure as possible any information or information technology  you are entrusted
+with. That includes people's emails and email access credentials.
+To accomplish this, delete or comment out (with #)the CGI-BIN ScriptAlias in httpd.conf.
+example:
+#ScriptAlias /cgi-bin/ &quot;C:/apache2/Apache2/cgi-bin/&quot;
+#&lt;Directory &quot;C:/apache2/Apache2/cgi-bin&gt;
+#    AllowOverride None
+#    Options None
+#    Order allow,deny
+#    Allow from 192.168.100.1
+#&lt;/Directory&gt;
+Add ExecCGI on an as-needed basis.
+Sample DBMA Directory Config in httpd.conf file
+===============================================
+&lt;Directory &quot;/usr/local/www/dbmailadministrator&quot;&gt;
+   Options MultiViews ExecCGI
+    AllowOverride None
+    Order allow,deny
+    Allow from 192.168.1.1 10.10.10.10 localhost
+&lt;/Directory&gt;</pre>
+<h4><br />
+Don't be hum drum. Get creative with your CGI file extensions
+</h4>
+<pre class="c1">4) Extensions are dead giveaways.
+Although this is an unlikely concern on your LAN workstation, you might
+enjoy knowing you have taken one, extra, clever step toward providing
+enhanced security for your administrative GUIs.
+I could easily argue that .cgi is a deprecated extension by using
+widespread common practise as a case in point.
+Public site webmasters avoid it like the plague. And why not? Every
+'script-kiddie-wannabe-thug' on the planet has tried to exploit
+something.cgi at one time or another and there are now a gazillion
+computers infected with any one or more of a gazillion malware types
+scanning net blocks for something dot pl or dot cgi.
+CGI files are most often PERL or C.  The more information you give up about your server,
+the more vulnerable it becomes.
+You don't need to use .cgi as an extension. You can use any non-standard
+extension your heart desires as long as you tell your HTTPD daemon how to
+handle the file when a request is received. You can also use as many different
+extensions as you like. Just tell the server what they are with AddHandler instructs.
+Once the HTTP Daemon reads its correctly configured AddHandler instructions,
+it will handle files with your non-standard extension accordingly.
+The Common Gateway Interface (CGI) was a Noah's Arc standard for communication
+between a program or script, written in any one of several languages, and a
+Web server. The CGI specification is very simple: input from a client is passed to
+the program or script on STDIN (standard input). The program then takes that information,
+processes it, and returns the result on STDOUT (standard output) to the Web server.
+The Web server combines this output with the requested page and returns it to the
+client as HTML. CGI applications do not force the server to parse every requested page;
+only pages containing CGI-recognized arguments involve further processing. As long
+as your server knows which files to process as CGI, it will.
+You are not going to be exposed to atackers inside your LAN, you may think.
+And you most certainly are not allowing DBMA or any Admin application to be
+run on a public-access server. So it's a best practises thing if you can find
+no other reason. Well, you know your situation best and will take the security
+measures commensurate with your circumstance.
+This is certainly not a &quot;must do&quot; scenario.
+To change the file extension of your DBMA CGI executeable scripts , use the following or
+something like it in your httpd.conf file
+  AddHandler cgi-script .dbma   #or whatever extension you wish to use.
+Next rename all cgi scripts in your package to have a dbma
+(or whatever you choose) extension.
+&gt;mv *.cgi *.dbma
+</pre>
+<h4>Password Protection Is Important; A &quot;Must Do&quot;
+</h4>
+<pre class="c1">5) Password protection has considerable value.
+I suggest that you do password protect DBMA.  The inconvenience is inconsequential
+and the professionalism of doing so is good for your image among your
+peers, and more importantly, the boss. You can password protect your entire
+intranet web space or selectively
+protect different name spaces with different authentication levels.
+Sample htaccess config in Apache's httpd.conf file
+===============================================
+&lt;Directory &quot;/usr/local/www/dbmailadministrator&quot;&gt; # change for your system
+&nbsp;&nbsp;AllowOverride None
+&nbsp; Options ExecCGI MultiViews
+&nbsp; Order allow,deny
+&nbsp; Allow from 192.168.100.1
+&nbsp; AuthUserFile /usr/local/www/dbmailadministrator/.htpasswd # change for your system
+  AuthGroupFile &quot;www&quot;
+&nbsp; AuthType Basic
+&nbsp; AuthName &quot;Administration Only.&nbsp; Enter username and password.&quot;
+&nbsp; require valid-user
+&nbsp; order allow,deny
+&lt;/Directory&gt;
+Change the namespaces to the correct location on your system.
+TO CREATE A PASSWORD FILE
+===============================================
+&gt;cd /usr/local/www/dbmailadministrator
+&gt;/usr/local/bin/htpasswd -cb .htpasswd user secret
+
+Produces .htaccess containing something like this:
+ dbmail:xW52d90QZt5ig
+ (password is dbmail)</pre>
+<h4>SUMMARY:</h4>
+<pre class="c1">You may have some additional thoughts.
+There certainly are additional dimensions.
+For example, Apache comes bundled with its own security CGI wrapper
+application called suEXEC.  suEXEC allows users to run CGI and SSI
+programs as the owner of the site as opposed to the owner of the httpd process.
+This is not needed for DBMA V2.3 or > as it can run as the site's user:group with owner write permissions in its own namespace.
+Scripts need executeable access.
+Feel free to ask for help or make your comments.</pre>
+<pre class="c1">M. J. [Mike] O'Brien ~ <a href="e-me.html">Email</a>
+</pre></td></tr></table></center></div></body></html>

@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="micheal j. o'brien" />
+<link rel="shortcut icon" href="images/DBMA.ico" />
+<link rel="stylesheet" type="text/css" href="DBMA.css" />
+<title>DbMail Administrator (DBMA) Administrator's Help</title>
+<meta name="Description" content="User Help and installation Guides for DBMA - DBmail Administrator">
+<title>Installation, Configuration and Useage Pointers (DBMA) and MTA GUI for Postfix</title>
+<style type="text/css">
+/*<![CDATA[*/
+span.c2 {font-size: 80%}
+h4.c1 {font-weight: bold}
+table { text-align:left;border-style:none;width:700px; font-family:sans-serif;font-size:103%;background-color:#FFFFFF; color:#000090 }
+pre {font-family: Trebuchet MS, verdana,arial,helvetica,sans-serif; font-size: 11pt; text-align: left; margin-left: 5px}
+pre.nostyle {font-family:courier, system, serif;font-size:100%}
+/*]]>*/</style></head>
+<body>
+<div class="c3">
+<form action="text/javascript">
+<table summary="Menu" border="0" cellspacing="0" cellpadding="0"
+width="100%">
+<tr><td style="float:right"><select style=
+"border-style:none;color:blue;background:#f0edf3;font-size:10px;font-family:sans-serif"
+name="menu" size="1" onchange=
+"location.href=this.form.menu.options[this.form.menu.selectedIndex].value">
+<option>Local links</option>
+<option value="DBMA.cgi">DBMA Man Menu</option>
+<option value="README">README File</option>
+<option value="DBMA_help.htm">Main Menu Help</option>
+<option value="DBMA_security.htm">DBMA Security</option>
+<option value="DBMA_User_Management.htm">DBMA User
+Management</option>
+<option value="http://www.dbmail.org">DbMail.org Site</option></select> [<a href=
+"http://www.dbma.ca/">DBMA Online
+Help</a> | <a href="README">README</a> | <a href=
+"DBMA_SCRIPT_MAP.html">DBMA Code Map</a> | <a href=
+"DBMA_help.htm" rel="external">Main Menu Help</a> ]</td></tr></table></form>
+<table>
+<tr><td style="width:100%" align="left">
+<table>
+<tr><td style="width:100%"></td></tr>
+<tr><td style="width:100%;background-color: #D6CFDE" align="left">
+<h1 style="background:#ffffc4"><b>DBMA - Installation and Configuration</b></h1>
+<p><b>For all DbMail versions</b></p></td></tr>
+<tr><td align="left" style=
+"width:100%;font-family: Arial, sans-serif; font-size: 8pt">This
+program is distributed in the hope it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. This package
+and updates are available at <a href=
+"http://www.dbma.ca/">http://www.dbma.ca/</a></td></tr>
+<tr><td>
+<hr style="background-color:#D6CFDE; color:#D6CFDE;height:20px"></td></tr>
+<tr><td style="width:100%" align="left">
+<table>
+<tr><td style="width:100%">
+<h1 style="background:#ffffc4">FastTrack Installation and Configuration Help for Unix</h1>
+<h2>Three Quick Steps for the Experienced</h2>
+<pre>
+(FreeBSD model, change namespaces to suit your OS)
+</pre>
+<h2>1) Apply Package</h2>
+<pre>
+Unpack and install DBMA
+# cd /usr/local/www
+# tar xvf DBMA_SQL_V2.tar
+# chown -R www:www /usr/local/www/dbmailadministrator
+# chmod 777 /usr/local/www/dbmailadministrator
+# chmod 755 /usr/local/www/dbmailadministrator/*.cgi
+</pre>
+<h2>2) Update your Perl Modules</h2>
+<pre>
+# perl -MCPAN -e shell
+CPAN&gt; install Digest::MD5
+CPAN&gt; install Bundle::libnet
+CPAN&gt; install DBI
+CPAN&gt; install DBD::Pg or DBD::mysql # whichever you are using, MySQL or PostGreSQL
+</pre>
+<h2>3) Configure your Apache Server</h2>
+<pre>
+&lt;Directory "/usr/local/www/dbmailadministrator"&gt; # change for your system
+ AllowOverride None
+ Options ExecCGI MultiViews
+ Order allow,deny
+ Allow from all
+ AuthUserFile /usr/local/www/dbmailadministrator/.htpasswd # change for your system
+ AuthGroupFile "www"
+ AuthType Basic
+ AuthName "Administration Only.  Enter username and password."
+ require valid-user
+ order allow,deny
+&lt;/Directory&gt;
+# apachectl graceful
+</pre>
+<h5>http://localhost/dbmailadministrator/DBMA.cgi<br />
+Configure to your database setup<br />
+Set options to your liking</h5>
+DONE</td></tr></table>
+
+<table><tr><td width:100%"><h1 style="background:#ffffc4">UpGrading to a more Recent Version of DBMA?</h1>
+<h2>Update Script Preserves all Configs</h2>
+<b>The "update.pl" script included in the tarball</b> will fetch and install
+an upgrade of DBMA while preserving all existing configurations.
+This script uses "wget" so you must have <a href="http://www.gnu.org/software/wget/">"wget"</a> installed.
+simply type perl update.pl in the dbmailadministrator/ directory.<br />
+<h2>Manual Updates</h2>
+<b>Untar the tarball</b> (tar -xvf) from one level above your dbmailadministrator folder, overwriting everything; or to
+preserve your configuration:<br />
+from inside "../dbmailadministrator" do this:<br />
+&gt; cp *.DB ../<br />
+&gt; cd ../<br />
+&gt; tar -xvf DBMA_SQL_V2.tar<br />
+&gt; mv *.DB dbmailadministrator/<br />
+&gt; chown -R HTTPD_user:HTTPD_Group ~/dbmailadministrator/*</td></tr></table></td></tr>
+<tr><td style="width:100%">
+<h1 style="background:#ffffc4">New at this? Just Starting?</h1>
+<h2>Installation </h2>
+<b>Platform notes.</b> DBMA was built on Unix servers and tested
+and tuned on several Windows variants. You can fully administer
+your DbMail IMAP / POP3 system using DBMA on a Win32 host
+(NT4Server, W2kServer, WinServer-2003).
+<p>On either Unix or Windows, DBMA will start up instantly and
+fly up a configuration window or just login into the database if
+the default configurations match yours.</p>
+<p>If you are running Windows Server 2003 with IIS6, make sure
+that your CGI is turned on for the dbmailadministrator directory.
+Use PerlIS.dll instead of the executeable (Perl.exe) and you
+won't even need to alter the shebang line.</p>
+<p>Make certain that the *.DB files are writeable by the account
+the server runs as (IUSR_hostname). The same applies to Unix
+systems and their corresponding HTTPD user and group.</p>
+<p>Be certain your PERL is up to speed by installing the needed
+modules. Configure everything correctly and there's nothing you
+can't do from a Windows box that can be done from a Unix host.
+DBMA has been tested on Solaris 8/9, Linux, FreeBSD,
+NT4-IIS4/Apache, NT5-Apache, NT5.2-IIS6/Apache and then some.</p>
+<br />
+
+<h2>Web Server and Perl Modules</h2>
+<b>You need a Web Server</b> (i.e.: <a href=
+"http://www.apache.org" rel="external">Apache</a>) and <a href=
+"http://www.perl.com/" rel="external">PERL</a> installed with the DBI and appropriate DBD modules. (See below how to use
+<b>"perl dbi-test.pl"</b> to learn what DBI capabilities are installed on your system. Also some tutorial is available on how to modify your Apache configuration to run a secure DBMailAdministrator at <a href="DBMA_security.htm">DBMA Security</a><br />
+<b>The required PERL modules are:</b><br />
+&bull; DBI and the DBD module for your database (i.e.:
+DBD::mysql or DBD::Pg)<br />
+&bull; NET::SMTP (part of CPAN's Bundle::libnet)<br />
+<br />
+For the best help available on the subject of installing PERL
+modules, visit <a href="http://www.cpan.org/" rel=
+"external">CPAN</a><br />
+<h2>Installing PERL Modules</h2>
+Install modules with CPAN like this:<br />
+&gt; perl -MCPAN -e shell<br />
+&gt; install Bundle::libnet<br />
+&gt; install DBI<br />
+&gt; install DBD::Pg or DBD::mysql<br />
+<br />
+<br />
+<h2>Mechanics of Installing DBMailAdministrator (DBMA)</h2>
+ 1) Untar (tar xvf DBMA_SQL_V2.tar) the tarball<br />
+ from HTTPD document root or from your cgi-bin, as you
+wish.<br />
+ example: /usr/local/www/dbmailadministrator<br />
+ /usr/local/www/cgi-bin/dbmailadministrator<br />
+<br />
+ download tarball to /usr/local/www/<br />
+ cd /usr/local/www/<br />
+ tar -xvf DBMA_SQL_V2.tar<br />
+<br />
+ 2) chown files to your HTTPD user:group and chmod 755
+*.cgi<br />
+ i.e.: chown -R www:www ~/dbmailadministrator/*<br />
+<br />
+ 3) With the sole exception of 'hard-coding' a
+"RESTRICTGroupID"<br />
+ mode (see below), all configuration is done from the
+GUI.<br />
+<br />
+ 4) Point your browser to /dbmailadministrator/<br />
+<br />
+ 5) i) If the programme fails to start, check that the
+shebang<br />
+ line (#!/usr/bin/perl) in DBMA.cgi points to your PERL and
+that<br />
+ you have the necesary modules installed. (See top of
+README.)<br />
+<br />
+ ii) chown files to your HTTPD user:group and chmod 755
+*.cgi<br />
+ (if you are very lucky the tarball's defaults may be
+fine.)<br />
+<br />
+ 6) make certain all files and directories are readable and
+writeable<br />
+ by the httpd user:group<br />
+<br />
+ 8) This package includes a maillog search feature for
+trouble<br />
+ shooting. dbma_logsearch.cgi doesn't need configuration<br />
+ as it will look for your logs or you can simply enter
+the<br />
+ location from the user interface. Make certain your
+maillog<br />
+ is readable by the HTTPD's user:group. Remember that
+Logs<br />
+ are rotated by crontab so permissions may need
+updating.<br />
+<br />
+ 9) DO NOT make this tool available to Public web access!<br />
+<br />
+
+<h2>Performance:</h2>
+<ol>
+<li>DBMA v2.5.x + is built within the rigid standards of Mod_Perl 2.02+
+and runs fastest in ModPerl (any), but is entirely suited to run as a
+Common Gateway Interface (CGI) on any platform.</li>
+
+<li>Cache your SQL queries for improved performance of your mail
+system. The example below assumes you have only a modest amount
+of memory available. Please read your SQL RDBMS manual for
+complete details.</li>
+<li>MySQL my.cnf (my.ini on win32) example for query cache.<br />
+../<br />
+query_cache_limit=2M<br />
+query_cache_size=64M<br />
+query_cache_type=1<br />
+/..</li></ol>
+<h2>DBMA MTA Administration</h2>
+<p>DBMA provides a number of tools for configuring and managing
+your Mail Transfer Agent from the GUI. This is accomplished using
+special tables added to your mail database which, once your MTA
+is correctly configured, replaces flat text files and provides a
+range of advantages nonetheleast of which is speed and
+convenience.</p>
+<ol>
+<li>Destination Domains: are the domains for which your MTA will
+receive mail</li>
+<li>Mail Transports, per-domain: configures unique routings to
+spamD, AV, DbMail SMTP or other filtering and policy
+daemons.</li>
+<li>Access control provides a method of rapidly creating primary
+white and black lists or for fine-tuning what specialized
+configuration you may already have.</li>
+<li>Read <a href="DBMA_help.htm#DBMA_MTA_Access" target="_blank"
+rel="external">MTA HELP</a> for more information.</li></ol></td></tr>
+<tr><td style="background-color: #EEEBF1"><b>Consider with care the
+location of your DBMA installation.</b> It must have only
+authenticated use by only the assigned administrators. Read the
+<a href="DBMA_security.htm">security notes</a> for some
+ideas.<br /></td></tr>
+<tr><td style="background-color: #EEEBF1"><b>DBMA configuration is
+now done from the Configuration Window</b> which should open the
+first time you point your browser to
+/dbmailadministrator/DBMA.cgi<br /></td></tr></table></td></tr>
+<tr><td style="width:100%" align="left"><img style=
+"border-style:none" src="images/config.jpg" width="740" height=
+"804">
+<h1 style="background:#ffffc4">Troubleshooting?</h1>
+When something doesn't work right off the bat, we know it can be
+frustrating. Feel better now. Your problem is not serious,
+particularly if you already have DbMail.org's IMAP and POP3
+daemons up and running well. If you follow the installation
+procedure in the DBMA README which came with your DBMA package,
+DBMA will work instantly unless:
+<ul>
+<li><b>You are locked out.</b> (Please see <a href=
+"DBMA_security.htm">security notes</a> for Help with Passwords.
+Meanwhile the default username is dbmail and the password is
+dbmail. Generate your own new password NOW. Use the following
+command adjusted to the location of htpasswd on your system:<br />
+&gt; /usr/local/bin/htpasswd -cb .htpasswd user secret)</li>
+<li><b>You made an error in your typing</b> of config
+information. (Proof read again please and check that your config
+is correct.)</li>
+<li><b>Your host cannot resolve the SQL server name you
+specified.</b> (Change to an IP number or fix your hosts and/or
+DNS zone files)</li>
+<li><b>SQL User Name rejected.</b> Perhaps the limited
+priviledges user name and password you are using for your
+database has only localhost authority on the database server.
+(Change the user privs on the database to include the host you
+are running DBMA from or try a different user.)</li></ul>
+<h4>Check your PERL</h4>
+If you do not know which PERL modules are installed on your
+system, this package contains a console tool to answer that
+question for you if you are unable to start DBMA:<br />
+Open a shell to your DBMA installation and enter the command
+<b>"perl dbi-test.pl"</b><br />
+This tool will list in the console display all the database
+types which DBI can connect to. Look for yours which will be
+either "MySQL" or "Pg". If you don't have the one you are looking
+for open "perl -MCPAN -e shell" and install DBD::mysql or install
+DBD::Pg. If you do not have the CPAN module installed or if you
+need more help using it, visit <a href=
+"http://www.cpan.org/modules/INSTALL.html" rel=
+"external">http://www.cpan.org/modules/INSTALL.html</a><br />
+<br />
+If DBMA starts but cannot connect, it will tell you most
+everything you need to know to get you connected and working on
+Administration of your DbMail database.
+<h1 style="background:#ffffc4">DBMA Troubleshooting Summary</h1>
+<p>1) Are you using PERL 5.6 or better with DBI and DBD installed
+for your database?<br />
+&bull; CGI::Carp (should be in your PERL already)<br />
+&bull; NET::SMTP (part of libnet which should be in your
+PERL)<br />
+&bull; Digest::MD5 (should be in your PERL already)<br />
+2) Is your web space script-enabled (i.e.: ExecCGI) (read <a
+href="DBMA_security.htm">DBMA_security.htm</a>)?<br />
+3) Have you correctly configured DBMA with your Database
+details?<br />
+4) Have you correctly set the correct database type?<br />
+5) Have you correctly set the versioning for DbMail?<br />
+6) Do you have a database client installed?</p></td></tr>
+<tr><td style="width:100%" align="left">
+<h1 style="background:#ffffc4">Privacy Considerations</h1>
+In the event you observe the mail contents addressed to a real
+person's (not referring to 'webmaster', 'abuse', 'sales', etc.),
+you may not dislose the content of that message to any person.
+Period. Throughout the world it is most often a criminal offence
+to do the contrary. DbMailAdministrator (DBMA) provides methods
+for searching mail headers and message blocks for administrative
+troubleshooting only. DBMA's message block displays are not
+content-friendly but ASCII-forced with emphasis on routing and
+embedded header-fields tracing the internet 'hops' the message
+travels. An example of appropriate use would be finding and
+UNdeleting a critical message a user inadvertantly deleted;
+troubleshooting headers when a delivery breaks; evaluating
+anti-spam/virus software deployments; providing help-phone
+assistance to users in the identification or removal of SPAM,
+'message-jams', viruses; and so on. Use the search headers option
+wherever possible for speed, eficiency and privacy. Anything you
+read, keep it to yourself. If something you feel is alarming
+comes into view, refer the message ID to an immediate supervisor
+or consult with your employer's privacy/security authority.
+<h1 style="background:#ffffc4">Some Pointers for Using DBMA</h1>
+<p><b>Please change your default password</b> (dbmail:dbmail and
+dbma:dbma for Win32) as soon as possible. See <a href=
+"DBMA_security.htm">security</a> for more details. Password
+protection should be enabled in your HTTP Daemon configuration
+file (i.e.: httpd.conf).</p>
+<b>DbMail Administrator (DBMA) GUI interface</b> tunes into the
+amazing flexibility of the DbMail.org mail system concept. You'll
+love this, as managing large mail account groups becomes a treat.
+DbMail is so flexible it might be possible to write a book about
+all the permeatations one can create. The DBMA administrative GUI
+opens the door. What follows is no book. If you have any
+questions about what is or is not covered below, <a href=
+"../e-me.html" rel="external">please ask them</a>.
+<p><b>DBMA enables an Administrator to 'hard-code' DBMA to
+restrict administrative access</b> to a single DbMail "Group"
+(client_idnr).</p>
+<p>This is ideal for Help Desk or Level One Support situations
+where you want personnel to perform mail user management on a
+select group of DbMail accounts without providing full DbMail
+database view or access.</p>
+<p>You can also use DBMA (RESTRICTGroupID mode) on a end-to-end
+secure and authenticated Web resource (authenticated SSL) with
+which your external customers' Administrator or internal/remote
+departments' Administrator could manage their own DbMail
+accounts. In the case where there are only single known users of
+the resource you could easily use a self-issued High Grade
+Encryption (AES-256 256-bit) server certificate if you don't have
+nor want the cost of a 'store-bought' Server Cert (i.e. Thawte,
+VeriSign, SSL, etc.). (http://www.ssl.com/ now offers an
+SSL128SCG2.5 single-domain Cert for under $100. USD).</p>
+<p>Multiple instances of DBMA can be used to Administer multiple
+"DbMail Groups/Clients" by designated personnel without any
+overlap and with only a restricted view or access to a single
+group (client_idnr) of mail accounts for each designated
+"Group/Client" Administrator.</p>
+<p>To implement this mode, DBMA is first configured like normal
+in the configurations GUI. Then "root" opens the main script
+(DBMA.cgi) in a text editor; a comment hash mark is removed; and
+the client_idnr number for the group to which DBMA will be
+restricted is entered. (Detailed instructions are in the top of
+the script.) At this point no further GUI access is available to
+the configurations window nor global list/add/delete/etc.
+functions. Administration rights exist only for the single group
+you enable. The README in the tarball has further info.</p>
+<ul>
+<li>RESTRICTGroupID mode (see
+http://www.dbma.ca/DBMA-FAQ.htm for full details)</li>
+<li>- removes access to all Global Functions</li>
+<li>- removes access to DBMA Configuration GUI</li>
+<li>- limits administration access to a single group</li>
+<li>- prevents duplicate user accounts across mail Groups</li>
+<li>- returns a notice and denies access when the group</li>
+<li>administrator's search returns a user outside his/her
+assigned group</li></ul>
+<p><b>In the (default) unrestricted configuration</b>, DBMA
+enables full access to your entire DbMail system database for
+managing users, finding mail, etc. and is relatively
+unchanged.</p>
+<ol>
+<li><b>Scalability.</b> Like <a href="http://www.dbmail.org" rel=
+"external">DbMail</a>, DBMA is vastly scalable. Millions of users
+can be accomodated depending on the scope of your database
+servers (or cluster). You might notice some terms of reference in
+DBMA (GUI names) differ slightly from the table and field names
+used in the DbMail database. DBMA is a management tool as well as
+a customer support tool. DBMA favours the use of 'friendly'
+terminology which fits the most likely usage by front line Level
+One Support people and by the 'machine room' mail team. "Group"
+refers to the 'dbmail_users' field 'clientid', for example. In
+the case of an ISP, each user is a client. You might consider
+organizing your clients/users into geographic groups or net
+segment groups or whatever you like, to keep the total number of
+users broken up into manageable lots of up to 1000-1500 accounts
+per group. With just 999 groups you can manage as many email
+accounts as some countries have internet users. Both DbMail and
+the DBMA GUI are highly scalable.</li>
+<li><b>By using simple "radio check buttons"</b> and pressing
+"Go" DBMA lets you add or delete users, aliases, forwards,
+notifications, check mail limits, monitor IMAP mailboxes, and
+more as well as show and modify single users or display a list of
+all existing users in any group or all groups displaying all
+information including current mail stats.</li>
+<li><b>Deleting the user removes the account as well as all
+aliases and auto notifications</b> for that user.Heed the
+'Alert' popup asking "Are you sure you want to do this?" Once
+deleted, all aliases, forwards, mailboxes and mail associated
+with the deleted user are GONE for good.</li>
+<li><b>Message Management</b> Problems with undeleted messages in
+DbMail? With the preponderance of email clients and perhaps after
+numerous rejigging of the DbMail database through various
+upgrades, you may find that messages marked by a user for
+deletion are not having their status reset. Look for changes in
+the MAIN MENU statistics column: "Number of deletes pending" DBMA
+(since V2.1.2) will accomplish this with a single check "Update
+delete status" box and "Go".</li>
+<li><b>Find the orphaned messages</b> DBMA is a good fixer.
+<p>This 'Update Delete Status function' runs a scan of the
+database looking for three basic problems.<br />
+1. messages marked delete by the client but status is still
+000;<br />
+2. messages having no 'owner mailbox' and<br />
+3. messages unattached to a user.<br />
+<br />
+These are three issues which DBMA users have emailed me about.
+From DBMA user feedback I deduce this is sometimes caused by
+mucking around in the datatbase with an editor like MySQLCC,
+PHPMyAdmin or phpPgAdmin. There may also be issues with some
+patched/migrated database schemas; and surely there's the
+gremlins and quirks.<br />
+<br />
+If DBMA finds some orphaned messages DBMA will, with gentle
+grace, set their dbmail_messages.status to a mere 001 and their
+deleted_flag to a certain "1" preparing them for the ultimacy of
+the maintenance cleanup.<br />
+<br />
+Look at the "Number of deletes pending:" column of the DBMA
+statistics (Main menu) to observe any changes after doing "Update
+Delete Status".<br />
+<br />
+Why status 001?<br />
+You are the real 'administrator' and must be afforded a chance
+to review what you have done.<br />
+<br />
+If you don't like '001', go nuts, repeat the action and they
+will all be set to '003', the final bell. The next crontab
+'dbmail-util -d' removes them from the database. (You may someday
+benefit from this two-step flexibility.)<br />
+<br />
+NOTE: The Update delete status function is not available to
+"Group Administrators" under the RESTRICTGroupID constrict.<br /></p></li>
+<li><b>Mail search, delete or undelete</b>. Mail search is
+available from any users mail box and the search will be
+conducted within that Mailbox. Delete sets the status flag to 003
+so it is wiped out on the next maintenance pass. All flags are
+visible in any mail box so an erroneously marked (for delete) can
+be spotted quickly. Individual mail can be undeleted or deleted,
+all mail in any mail box can be deleted or undeleted.</li>
+<li><b>Remove separate aliases</b> by User ID (even if the user
+no longer exists) or by complete alias. Some orphaned rows may
+exist in your database between dbmail-utils / dbmail-maintenance
+crontab runs. More often than not this is an admin-user error.
+Hush. DBMA can help you monitor and oust straggler aliases. Just
+type the full alias and press "Delete Alias" and presto it's
+gone. In the alternative you can type the UserID and press
+"Delete All Aliases" and zap, they are all gone.</li>
+<li><b>Forwards</b> including external address forwards like
+myname@thisdomain.tld ==&gt; hername@thatdomain.tld are
+accomplished by checking 'Add Forwards' and pressing the "SQL
+Tool" button from the Admin page. You will get another GUI window
+which is self-explanatory on adding email internal and external
+forwards. You can also list all the forwards and delete any which
+need to go.</li>
+<li><b>I already have a "Bob" as user.</b> Let's face it, public
+email addresses uniquely identify each person on planet earth. As
+a mail administrator or postmaster you already realize that folks
+take their email address and their email seriously and
+personally. Very much so. Keeping the mail running and folks
+happy is your aim but you will encounter many heretofore
+inconceivable complaints or requests from users. It's nice to
+know you are ready for most anything.<br />
+So, the new user wants the name "bob" in his email address,
+empatically. You already have a "bob" (or whatever the request
+may be) at another virtual domain and this new user who wants to
+be "bob" won't take no for an answer. No problem. Use DBMA with
+"Add User" checked to open an "(Add) User" window. Type a uniqe
+name like "boblastname" for the "User Name", enter the new Bob's
+password and "Client (Group) ID" then enter the email address as
+"bob@thenewusersdomain.tld". Bob must login with account name
+"boblastname" but his email address is
+"bob@thenewusersdomain.tld". All mail for
+"bob@thenewusersdomain.tld" will go to the mailbox of
+"boblastname" and the other "Bob" is unscathed by all this.. You
+can have as many "bob's @ different_domains.tld" as you
+like.</li>
+<li><b>Encryption</b>. Many people will find that plain text
+passwords are sufficient for email user accounts. If that is not
+true for you, DBMA will encrypt your passwords compatible with
+dbmail. Choose from md5-hash, md5sum or crypt.</li>
+<li><b>Auto Notify</b> is accomplished by knowing the UserID
+number of the user you want to cause a notification. Enter the
+UserID number and the full email address of the mail box you want
+a notification sent to. It will work like a charm.</li>
+<li><b>A simple way to add an alias</b> is to call up the user in
+a manner of your choosing and then use the "Modify..." button. In
+the window which appears, without changing any of the main
+entries, add an alias to the "alias" text window at the bottom
+and press "Update". A similar window will popup again showing the
+change. You can repeat the above over again to add more aliases
+very quickly.</li>
+<li><b>Search for users can be accomplished</b> using the email
+address, the user name or the user ID number. Your most
+unequivocal method uses the ID number.</li>
+<li><b>You can view all users</b> in all groups by selecting
+"List all users all group" and pressing the "Go!" button, but if
+you have 100 groups each with a thousand users, you won't be
+seeing the list for quite some time. To be more selective, in
+the top row of functions, enter the group (ClientID) number and
+press either the "Users" or "Aliases" buttons. An alphabetical
+list will appear. Click the name of the user or alias you wish to
+modify and a data page for that user will open. If it proves true
+that this is the user you seek, press the "Modify User" button
+and make your changes, updates or whatever.</li>
+<li><b>List Aliases GUI helps you manage scores of
+information</b> and functions; forwards or aliased accounts and
+more. You can list every alias but if the numbers are high you
+should limit the display to under 1500 users. The ideal method is
+to list aliases by groups. Mail forwarders can also be listed
+separately. Each alias listing has a link to a data window or a
+search function. In the case of an external forward you obviously
+will not find the alias as a user account but in the case where
+you have abuse@yourdomain.tld forwarded to
+adminorwhatever@yourdomain.tld, the two links will take you to
+the User Data Window for the two corresponding user accounts. Did
+you follow that? Each line has two links. The mail for x@x goes
+to xx@xx. It is possible that the link on the right is an
+external address. Clicking it will fetch an "account doesn't
+exist" message. On the other hand, accounts like "noc", "dns",
+"abuse", "privacy" etc are likely aliased to the addresses of
+persons or titles. The DBMA Alias List GUI allows you to quickly
+select which Account window you wish to open, the account with
+mail forwarded (left link), or the account where the mail goes to
+(right link).</li>
+<li><b>Distributing your NewsLetter with forwarding.</b> If you
+are creating forward aliases like
+"newsletterfromtheprez@ourdomain.tld" to be forwarded to each and
+every user at "@ourdomain.tld" you might forget to actually
+create the account "newsletterfromtheprez", but if you thought
+"Flubber" had bouncing problems, watch what happens with this
+scenario when things go wrong. In other words, if you are going
+to create a "newsletter" alias for mail distribution to various
+mail account groups, for each "newsletter" forwarder, create a
+full user account for your "newsletter".</li>
+<li><b>To view the data for a single user</b>, type the user's
+name or ID number beside the "User Search " button and press that
+button. From there you can modify or even delete the user.</li></ol>
+<h4>Don't Allow Public Access To This Tool</h4>
+DbMail is a very good package of programmes for storing and
+retrieving mail in a MySQL or PostgreSQL database. DbMail
+Administrator (DBMA) can help you administer your DbMail user
+accounts with an HTML GUI you can work with from across the LAN
+or around the globe (you should VPN or similarly secure connect
+for the latter). Whatever secure environment you choose to do
+your enterprise or network management within, using your own
+privileged user and permission sets, would be a good place to try
+DbMail Administrator (DBMA).</td></tr>
+<tr><td style="width:100%;background-color: #F0EFF5">
+<h4>Listing Users</h4>
+<p>Each user listing is a link to the user's data page.</p></td></tr>
+<tr><td style="width:100%"><img src="images/SQL2.jpg" alt=
+"List Al users in group or list all users in any group by typing &quot;any&quot;"></td></tr>
+<tr><td style="width:100%">
+<ul>
+<li>In the above User List Window screenshot you would click the
+user link on the left side to open a user data window.</li>
+<li>Select "Configurations" for a data page setting out
+configration and technical specifics about your DBMA installation
+and your system's, PERL as well as your database.</li>
+<li>Restrict the number of listings by using the radio check
+buttons in addition to your function selection.</li></ul></td></tr>
+<tr><td>
+<h1 style="background:#ffffc4">More About Password Encryption</h1>
+<br />
+<b>Please read this.</b><br />
+(Note: Passwords must not be encrypted if you are using SASL/SQL for SMTP authentication.
+With SASL/RIMAP, encrypted passwords are fine because they are decrypted for DBMail IMAP LOGIN.  )
+<br /><br />When you are creating or modifying a user account in DBMA you are
+given the option of encrypting passwords. For obvious security
+reasons, DBMA will not decrypt them. If a user forgets their
+password and if you have elected to encrypt passwords in your
+database, your only option is to issue a new password. This is a
+'best practice' in enterprise, corporate or ISP scenarios.<br />
+<br />
+Keep in mind that this discussion of encryption applies only to
+the password communication between DbMail and its database and
+how the password is actually stored in the database. The user's
+handling of their password is in plain text.<br />
+Let's put this in perspective with a hypothetical anecdote.<br />
+You are sitting at your workstation as a Level One Support
+person in a corporate environment. Open on your workstation
+screen is DBMA displaying the Corporate Management group of
+users: rows of executive mail accounts all with plain text
+passwords in full view. The CEO walks by and sees his name and
+password on your screen along with those of the VP Finance, VP
+Legal, VP Human Resources, Payroll etc.<br />
+Like Donald Trump says, "You're fired!".<br />
+Storing passwords with encryption is the right choice for most
+commercial and corporate environments.<br />
+Unless you are using one of the many options available for
+authenticating encrypted user passwords across the internet; on
+143 and 110, plain text login passwords are passed across the
+internet. So also are email messages passed in plain text across
+the internet. If someone wants to read your emails they certainly
+don't need your POP3/IMAP login password. But any level of
+unauthorized access to your database management system's
+passwords is a potentially serious failure of your system's
+security.<br />
+<br />
+<br />
+All of this is fairly common practice. I understand that an SSL
+version of DbMail is contemplated by some developers for later
+consideration and possible release. Meanwhile, with great
+success, many DbMail Admins are using "stunnel" (<a href=
+"http://www.stunnel.org/">http://www.stunnel.org</a>/) as an SSL
+wrapper for DbMail..<br /><br /><br />
+The table which follows defines the four options you have in
+DbMail for storing passwords: cleartext, an 'md5' (hash),
+'md5sum', and the Unix 'crypt'. Remember these defining terms
+should be entered in lower case. DBMA will encrypt your passwords
+for you. Select from crypt, md5-hash or md5sum in DBMA. These are
+stored in a manner understood by dbmail's various programmes and
+the effect is seamless.
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+style= "font-family: sans-serif; border-style: solid; border-color: #B5B6CE">
+<tr><td style="font-weight: bold; border: 1 solid #BDB6CE">
+dbmail-users syntax</td>
+<td style="font-weight: bold; border: 1 solid #BDB6CE">
+encryption_type</td>
+<td style="font-weight: bold; border: 1 solid #BDB6CE">Actual
+Password</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">cleartext</td>
+<td style="border: 1 solid #BDB6CE">""</td>
+<td style="border: 1 solid #BDB6CE">yourtest</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">crypt</td>
+<td style="border: 1 solid #BDB6CE">"crypt"</td>
+<td style="border: 1 solid #BDB6CE">sixG/7CU2FOtg</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">md5-hash</td>
+<td style="border: 1 solid #BDB6CE">"md5"</td>
+<td style="border: 1 solid #BDB6CE">
+$1$rjN6/GVE$6rPnLX388iJ1Dt7J/LRPf.</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">md5-digest</td>
+<td style="border: 1 solid #BDB6CE">"md5sum"</td>
+<td style="border: 1 solid #BDB6CE">
+b22766fada4a17d0f1a67c258a1d93d7</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">crypt-raw</td>
+<td style="border: 1 solid #BDB6CE">"crypt"</td>
+<td style="border: 1 solid #BDB6CE">whatever hash you enter</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">md5-hash-raw</td>
+<td style="border: 1 solid #BDB6CE">"md5"</td>
+<td style="border: 1 solid #BDB6CE">whatever hash you enter</td></tr>
+<tr><td style="border: 1 solid #BDB6CE">md5-digest-raw</td>
+<td style="border: 1 solid #BDB6CE">"md5sum"</td>
+<td style="border: 1 solid #BDB6CE">whatever hash you enter</td></tr></table>
+<br /><pre>
+plaintext
+----------
+dbmail_users.encryption_type = ''
+dbmail_users.passwd = 'yourtest'
+
+crypt
+----------
+dbmail_users.encryption_type = 'crypt'
+dbmail_users.passwd = 'sixG/7CU2FOtg'
+
+md5-hash
+----------
+dbmail_users.encryption_type = 'md5'
+dbmail_users.passwd = '$1$rjN6/GVE$6rPnLX388iJ1Dt7J/LRPf.'
+
+md5-digest
+----------
+dbmail_users.encryption_type = 'md5sum'
+dbmail_users.passwd = 'b22766fada4a17d0f1a67c258a1d93d7'
+
+crypt-raw
+----------
+dbmail_users.encryption_type = 'crypt'
+dbmail_users.passwd = 'whatever hash you enter'
+
+md5-hash-raw
+----------
+dbmail_users.encryption_type = 'md5'
+dbmail_users.passwd = 'whatever hash you enter'
+
+md5-digest-raw
+----------
+dbmail_users.encryption_type = 'md5sum'
+dbmail_users.passwd = 'whatever hash you enter.</pre>
+
+
+</td></tr>
+<tr><td style="width:100%">
+<h1 style="background:#ffffc4"><a href="README">Readme</a></h1></td></tr></table></td></tr></table></div></body></html>

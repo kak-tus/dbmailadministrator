@@ -1,0 +1,1321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="micheal j. o'brien" />
+<link rel="shortcut icon" href="images/DBMA.ico" />
+<link rel="stylesheet" type="text/css" href="DBMA.css" />
+<title>DbMail Administrator (DBMA) Administrator's Help</title>
+<style type="text/css">
+/*<![CDATA[*/
+<!--
+p{margin-left:40px;text-align:left}
+pre{margin-left:80px;text-align:left}
+b{text-align:left}
+// -->
+/*]]>*/
+</style></head>
+<body>
+<center><table border="1" style="font-size: 13px; background-image: url('images/help.bg.jpg'); border-style: solid; border-color: #FFFFC4" width="730">
+<tr><td style="text-align: Right"><a href="DBMA.cgi">Back to
+DBMA</a> | <a href="DBMA_installation_configuration.htm">Installation Help</a>
+| <a href="FAQ">FAQ</a></td>
+<td></td></tr>
+<tr><td style="font-size: 160%; color: #6D5AA7">DbMail Administrator
+(DBMA) <u>Main Menu Help</u><br />Global Mail System Administration</td>
+<td></td></tr>
+<tr><td colspan="2">
+<hr style="background-color:#D6CFDE; color:#D6CFDE;height:20px" /></td></tr>
+<tr><td colspan="2">Are you having trouble? Send an <a
+href="http://www.dbma.ca/DBMA_contact.htm">
+email message for help.</a><br /></td></tr>
+<tr><td style="text-align: right; float: right" colspan="2" width="685">
+<form name="search" method="post"
+action="http://dbma.ca/search/index.cgi">Search Online
+Help <input title="Online search for help" type="text"
+onmouseover="this.className='front';"
+onmouseout="this.className='back';" tabindex="1" maxlength="100"
+size="30" name="Terms" value="" /> <input
+title="Specialized Search for help" type="submit"
+onmouseover="this.className='clear';"
+onmouseout="this.className='letsgo';" class="c7"
+value="Mail Administrator's Search" /></form></td></tr>
+<tr><td colspan="2">
+<hr style="background-color:#D6CFDE; color:#D6CFDE;height:20px" /></td></tr>
+<tr><td style="width:737;font-size:130%" bgcolor="#FFFFC4"
+colspan="2">
+<h4>The best place to perform most functions is from the <a
+href="#uaw">User Account Window</a></h4>
+<h3>Index</h3>
+<ol><li><b>There are seven Help Resources accompanying this software,
+including search (above).</b></li>
+<li style="list-style: none">
+<ul><li>This Document</li>
+<li><a href="DBMA_installation_configuration.htm">Installation,
+Upgrading and General Help for the Senior Admin</a></li>
+<li><a href="DBMA_User_Management.htm">A Guide to Managing
+Users</a></li>
+<li><a href="README">Programme README</a></li>
+<li><a href="FAQ">Frequently Asked Questions</a></li>
+<li><a href="DBMA_security.htm">Apache Configuration and Security
+Help</a></li></ul></li>
+<li><b>DBMA functions in three primary regimes</b>: 
+<ul><li><a href="DBMA_help.htm#user_account_window"
+title="User Account Window">User Administration;</a></li>
+<li><a href="DBMA_help.htm#group_users"
+title="Listing Group Users">Group Administration;</a> and</li>
+<li><a href="DBMA_help.htm#list_all_usrs_all_groups"
+title="List Global Users">Global (System-Wide)
+Administration</a></li></ul></li>
+<li><a href="DBMA_help.htm#add_user" title="Adding Users">Adding
+Users</a> 
+<ul><li>See also "Configuration" or "Speedups to accelerate the
+process of adding users."</li></ul></li>
+<li><a href="DBMA_help.htm#add_aliases"
+title="Adding Aliases">Adding Aliases</a> 
+<ul><li>See also User Account Window</li></ul></li>
+<li><a href="DBMA_help.htm#auto_replies"
+title="Auto Replies">Auto Replies</a> 
+<ul><li>Vacation</li>
+<li>Please heed warnings about mail loops.</li></ul></li>
+<li><a href="DBMA_help.htm#bcc" title="Creating BCCs">Blind
+Copies</a> 
+<ul><li>Using the "Forward" or "Edit" forwards function to create
+BCCs</li></ul></li>
+<li><a href="DBMA_help.htm#configurations"
+title="Configuring DBMA">Configuring DBMA</a> 
+<ul><li>All configuration is done from the GUI</li>
+<li>DBMA can be 'Hard-Coded' by root to restrict access to a
+single Group Admin.</li></ul></li>
+<li><a href="DBMA_help.htm#database_cleanup"
+title="Database Cleanup">Database Cleanup</a> 
+<ul><li>Fix or accelerate delete status</li>
+<li>Remove 'orphans'</li>
+<li>Delete unattached old mail</li>
+<li>Correct error's in Group Assignments of Aliases</li></ul></li>
+<li><a href="DBMA_help.htm#use_DBMA_MTA_Domains"
+title="DBMA MTA Admin">DBMA MTA Admin</a> 
+<ul><li>Administer Postfix, Sendmail, Exim etc. from DBMA</li></ul></li>
+<li><a href="DBMA_help.htm#DBMA_MTA_ACCESS"
+title="DBMA MTA Access">DBMA MTA Access</a> 
+<ul><li>Whitelist / Blacklist in real time without restarting your
+MTA nor remapping hashes.</li></ul></li>
+<li><a href="DBMA_help.htm#delete_aliases"
+title="Deleting Aliases">Deleting Aliases</a> 
+<ul><li>Deleting all of a user's aliases in one action.</li>
+<li>Editing, or single deletions.</li></ul></li>
+<li><a href="DBMA_help.htm#delete_user"
+title="Deleting Users">Deleting Users</a> 
+<ul><li>Removing users completely from the system</li>
+<li>Removing entire Groups of Users</li></ul></li>
+<li><a href="DBMA_help.htm#find_users"
+title="Finding Users">Finding Users</a> 
+<ul><li>Smart search finds the user and opens a User Account
+Window</li>
+<li>Works with user name or full address as account name</li></ul></li>
+<li><a href="DBMA_help.htm#add_forward"
+title="Mail Forwards">Forwards</a> 
+<ul><li>Creating BCCs</li>
+<li>Converting a forward to an alias.</li>
+<li>Move an alias from one account to another</li></ul></li>
+<li><a href="DBMA_help.htm#delete_forward"
+title="Deleting Forwards">Forwards - Deleting or Editing</a></li>
+<li><a href="DBMA_help.htm#list_forwards"
+title="Listing Forwards">Forwards - Listing</a> 
+<ul><li>List global mail forwards</li></ul></li>
+<li><a href="DBMA_help.htm#show" title="Display Limits">Limiting
+List Displays</a> 
+<ul><li>For larger enterprises</li></ul></li>
+<li><a href="DBMA_help.htm#group_aliases"
+title="Viewing Group Aliases">Listing Group Aliases</a> 
+<ul><li>Focussing on single groups of users</li></ul></li>
+<li><a href="DBMA_help.htm#list_all_aliases"
+title="Viewing All System Aliases">Listing Global Aliases</a> 
+<ul><li>Find: Orphans</li>
+<li>Forwards</li>
+<li>Display every entry in the alias table</li></ul></li>
+<li><a href="DBMA_help.htm#group_users"
+title="Listing Group Users">Listing Group Users</a> 
+<ul><li>Open a full featured administration window accessing all user
+accounts in a given group</li></ul></li>
+<li><a href="DBMA_help.htm#list_all_usrs_all_groups"
+title="List Global Users">Listing Global Users</a> 
+<ul><li>Open a full-featured adminstration window listing all users
+on the system.</li>
+<li>Limit list size for larger enterprises</li></ul></li>
+<li><a href="DBMA_help.htm#list_auto_notifications"
+title="List Global Notifications">Listing Global
+Notifications</a> 
+<ul><li>Notify someone when new mail arrives.</li></ul></li>
+<li><a href="DBMA_help.htm#redirecting_aliases"
+title="Redirecting Aliases">Redirecting Aliases</a> 
+<ul><li>Recycle existing aliases</li>
+<li>Redirect mail to internal or external destinations</li></ul></li>
+<li><a href="DBMA_help.htm#add_auto_notify"
+title="Auto Notify">Sending Mail Notifications</a> 
+<ul><li>Notify external or internal recipient when mail arrives on
+any selected account</li></ul></li>
+<li><a href="DBMA_help.htm#email_a_user"
+title="Messaging users.">Messaging users.</a> 
+<ul><li>DBMA both sends and receives mail</li>
+<li>Notify users of quota increases, password changes
+etceteras.</li>
+<li>Send mail anywhere on the planet from DBMA</li></ul></li>
+<li><a href="DBMA_help.htm#encrypt"
+title="Encryption Tools">Password Encryption</a> 
+<ul><li>Several tools both explain and automate password encryption
+in the database</li>
+<li>Note: SASL Users must turn encryption off and use plaintext
+passwords in DbMail</li></ul></li>
+<li><a href="DBMA_help.htm#delete_auto_notify"
+title="Delete Notify">Removing Notifcations</a> 
+<ul><li>Remove mail notifications from the User Account Window or
+from Global Admin (Main) Window</li></ul></li>
+<li><a href="DBMA_help.htm#logins" title="Recent Logins">Recent
+Logins</a> 
+<ul><li>Track recent logins</li>
+<li>Check for and monitor abandoned accounts</li>
+<li>Monitor User IPs and POP/IMAP before SMTP security
+issues</li></ul></li>
+<li><a href="DBMA_help.htm#email_a_user"
+title="Sending Mail">Sending Mail</a> 
+<ul><li>Send Mail GUI available from "Modify (User) Account Window or
+Global Admin (Main)"</li></ul></li>
+<li><a href="DBMA_help.htm#acl"
+title="Access Control Limits - ACLs">Sharing Mail Folders
+(ACLs)</a> 
+<ul><li>Full featured IMAP Shared Folders</li>
+<li>Complete control and management of user access rights</li>
+<li>#User and #Public shared mail folders</li></ul></li>
+<li><a href="DBMA_help.htm#auto_create_user"
+title="Auto Create User from alias">Speed-Up Tools</a> 
+<ul><li>See also "Configuration" for a number of one-time-use
+automated processes for speeding up system building and
+migration</li></ul></li>
+<li><a href="DBMA_help.htm#user_account_window"
+title="User Account Window">User Account Window</a> 
+<ul><li>Most administration will be done from the <b>User Account
+Window</b><br />and the "Modify User Account" window</li>
+<li>Creating mail notifications</li>
+<li>Sharing #User Folders</li>
+<li>Adding or Removing Access to #Public Shared Folders</li>
+<li>Creating or Editing Aliases</li>
+<li>Adding forwards</li>
+<li>Adding BCCs</li>
+<li>Changing Encryption Types</li>
+<li>Changing Mail Quotas</li>
+<li>Changing User Passwords</li>
+<li>Changing User Group ID</li>
+<li>Modifying or Deleting User Account</li>
+<li>Monitoring qutas</li>
+<li>Mail header and body search and access:</li>
+<li>for finding and UNdeleting a critical message a user
+inadvertantly deleted;</li>
+<li>troubleshooting mail headers when a delivery breaks;</li>
+<li>evaluating anti-spam/virus software deployments;</li>
+<li>reading your administrative mail;</li>
+<li>running 'echo' mail tests....</li>
+<li>providing help-phone assistance to users in the
+identification or removal of SPAM, 'message-jams', viruses; and
+so on....</li></ul></li>
+<li><a href="DBMA_help.htm#user_map" title="User Mapping">User
+Mapping</a> 
+<ul><li>User mapping allows a wide range of user management. Block a
+user's access altogether as in turning off an account. Specified
+users can be allowed IMAP only or POP only. Login format can be
+re-mapped. This is where you do that.</li></ul></li></ol></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2">General
+Functions</td></tr>
+<tr><td width="479"><a id="find_users" name="find_users"><b>Find
+Users and Open User Account Window</b></a></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">
+<table>
+<tr><td>
+<form action="DBMA.cgi" method="post"><input type="hidden"
+value="2" name="RQT" /><input class="back"
+onmouseover="this.className='front';"
+title="Enter another user ID or name."
+onmouseout="this.className='back';" size="19"
+name="userID" /><input class="letsgo"
+onmouseover="this.className='clear';"
+title="Search for another user"
+onmouseout="this.className='letsgo';" type="submit"
+value="User Search" /></form></td></tr></table>
+<h1 style="font-weight:600">DBMA User Search</h1>
+There are many styles of username. It can be
+"first_part@last_part"; it can be "first_part" only; just a
+number; a first and last name; a first and last name seperated by
+a dot or an understroke; and many other permutations.<br /><br /><b>DBMA User Search</b> seeks a specific user -- the one whose
+account you wish to administer. Nothing else. The result will be
+a User Account Window or a "cannot find it" message.<br /><br /><b>DBMA User Search</b> will seek a user using any specific
+information input that is tied to the user directly. That
+includes the user's name, the user's number or one of any number
+of the users email aliases. You can enter a user number
+(user_idnr) or a name (userid) or an alias (as in full email
+address) to fetch an Account Window for that user. If you enter
+an email address that is not in fact a username but is in fact an
+alias of a user (i.e.: user john has alias webmaster@domain.tld)
+DBMA will server the User Account Window to which that alias is
+currently attached.<br /><br /><b>This search function</b> appears throughout the various GUI
+windows. It will open a User Account Window if it finds the user
+you seek. From that account window you can manage the user's
+account, deal with message issues, email the user, search mail,
+manage aliases, ACLs, passwords, mail quotas, encryption, and
+more.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"
+style="background-color: #FFFFC4"><img border="0"
+src="images/help_map1.jpg" width="737" height="30"
+alt="General Functions from a User Account Window" /></td></tr>
+<tr><td width="479"><a id="group_users" name="group_users"><b>List
+Group Users)</b></a></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">This is the primary tool for listing
+users in the RestrictGroup configuration. Enter the group number
+to list all users in that group. This function appears throughout
+the various GUI windows in all versions. In the Main Menu window
+a drop down list of all the groups stored in the database will
+default to the default group and allow you to select any other
+group stored in the database.</td></tr>
+<tr><td width="479"><a id="group_aliases"
+name="group_aliases"><b>List Group Aliases</b></a></td>
+<td width="254"></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"
+style="background-color: #FFFFC4"><img border="0"
+src="images/help_map1a.jpg" width="737" height="30"
+alt="General Functions from a User Account Window" /></td></tr>
+<tr><td colspan="2" width="737">Select the group number on the Main
+menu from the drop menu to list all aliases in that group
+(hard-coded in the Restrict Group configuration. This function
+appears throughout the various GUI windows.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><b><a id="add_user"
+name="add_user"></a></b>Users</td></tr>
+<tr><td width="479"><b>Add User</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Open a user interface for adding
+users. <img style="float:right" src="images/help_map2.jpg"
+width="160" height="80" alt="Users" /> This function has a number
+of preset default options which can be set from "Configuration".
+Default presets include auto-generate password, auto-generate
+alias, group, and password encryption method. FEATURE NOTE: When
+auto-create alias has been set to "1" in the 'Configuration
+Options', the 'Add User' interface recycles after typing the user
+name and pressing "Add New User". In this manner even a large
+group of users can be populated into the database in minutes.
+Otherwise, if the auto-create processes have not been configured,
+the Add User function causes a proof-reading and modification
+window to open with the new data set out.<br /><br />When adding a user and alias, DBMA will check the RFC compliance
+of the email address. (Note: You do not have to set an alias at
+this time.) If for some reason, like a fallback alias for a LAN
+(i.e.: @LANdomain.int), you can bypass the alias checking "on"
+Force Bypass RFC-Compliant Alias Check. This is generally not a
+good practise for production systems.<br /><br /></td></tr>
+<tr><td width="479"><b><a id="delete_user"
+name="delete_user"></a>Delete User / Group</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Open an interface to delete a single
+user or an entire group of users. You need to know the name or ID
+number of the user. Deleting users can also be done from Group
+Lists or from the User Account Window.</td></tr>
+<tr><td width="479"><b><a id="email_a_user"
+name="email_a_user"></a>Email A User</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Send an email to any user. Be careful
+not to send the user an encrypted password. It won't do them any
+good. This feature allows a notice to be sent to the user when a
+mail quota has been reset, a password changed, or any
+administrative function you may wish to advise the user
+about.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><b><a
+id="add_aliases" name="add_aliases"></a></b>Aliases</td></tr>
+<tr><td width="733" colspan="2"><b>Add Aliases</b><img
+style="float:right" src="images/help_map3.jpg" width="160"
+height="80" alt="Aliases" /><b><br /></b> Opens a user interface to add an alias for a user. This is
+most rapidly performed from the "Modify User Account Window" or
+from the Group List.<br />Global Administrators can also add a domain alias for an entire
+group from this window. This will work in either case where the
+user name is stored as a single name or a full email
+address.<br /><b><a id="delete_aliases" name="delete_aliases"></a>Delete
+Aliases<br /></b> Opens a user interface to allow deletion of specific
+aliases.<br /><b><a id="list_all_aliases" name="list_all_aliases"></a>List All
+Aliases<br /></b> List all aliases and forwards in the database. DBMA will
+seek out and if found display at the top of the list any 'Orphan'
+aliases it might find with options to edit or delete them.
+Aliases and forwards are also listed, limited in number to
+(default 200) what is set in the "Show X Lines" block.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><b><a
+id="add_forward" name="add_forward"></a></b>Forwards</td></tr>
+<tr><td width="733" colspan="2"><b>Add Forward</b><img
+style="float:right" src="images/help_map4.jpg" width="160"
+height="80" alt="Forwards" /><b><br /></b>Select Add Forward.<br /><br />Like everything else, the best place to perform user
+administration in DBMA is from the User Account Window. Ideally
+you would type the user name into the Search Box and go to the
+User Account Window. Select "Modify.." to adminster the key
+elements displayed before you. Alternatively, you can use the
+global "Add Forward" function. By selecting the "Add Forward"
+option from the Main screen, you will open a panel in which you
+must type all entries somewhat blind. If you are sure of the
+'from' and 'to' address you wish to use, that will work fine.
+DBMA will only recycle existing email addresses. This current
+DBMA functionality and methodology is derived from DBMA-users
+experience where a forward is most often a decision to shift
+delivery from one place to another, hence, recycle the working
+alias--add more if needed. It is also a great way to to do BCC's.
+DBMA will check that the email address in the "From" box is valid
+and located on the system. For the "Foward to:" parameter you can
+enter a user name, a user number or an email address. DBMA will
+verify both user ID numbers and user names.<br /><br />Some people confuse Aliases with Forwards. If for example, you
+have an account named "Webmaster" and you want user
+"billy.bishop" to receive the mail for webmaster, this is better
+achieved as an Alias. There is less room for error in this
+management method. To create that alias, open the User Account
+Window for billy.bishop, select "Modify billy.bishop's Account"
+and create the "webmaster" Alias there.<br /><p><b><a id="redirecting_aliases" name="redirecting_aliases">Here
+is an important note about editing forwards.</b> This is the real
+pay-off for reading the help files. Any place you see "edit" or
+"forward" beside an email address, you have the opportunity to
+send mail for that address anywhere you like. You can even
+convert the forward back to an alias for any account. Make sure
+that you have the "From" address correctly entered -- DBMA
+validates on the basis of the alias ID number and will send you
+back to the start if there is no match on the system. Next, you
+can enter a username, a user ID number or an email address as the
+recipient ("Forward to:"). DBMA will check if the user number or
+name exists on the system and give you a final option to edit
+your entry before commiting. Lets say you have a mail forward for
+"webmaster" delivering mail to bobby@yourdomain.com. Bobby is
+heading out for vacation and you now want to redirect mail back
+to the webmaster's account. You simply type "webmaster" in the
+"Forward to:" text box and DBMA will convert the forward back to
+an email alias for 'Webmaster'.<br /><br /> Beside every alias listing in the Modify User Account Window, is
+a button labelled "Forward". That also means EDIT. If you want to
+move an alias over to another account, select "Forward" and
+instead of typing an email address in the deliver to box, enter
+the user name of the account you wish re-assign that alias
+to.</a></b></p>
+<br /><b><a id="bcc" name="bcc">Creating BCCs (Blind Carbon
+Copies)</b><br />Go to the User's Account Window in DBMA (DbMail Administrator),
+press 'Modify' and create two identical aliases (click click)
+then scroll to one of the duplicates, selecting "forward" and
+type the mail address, user name or user ID number you want the
+BCC to be sent to. Done.<br /><br /></a><a id="delete_forward" name="delete_forward"></a>Delete
+Forward<br /></b> Open user interface to delete a mail forward.<br /><b><a id="list_forwards" name="list_forwards"></a>List All
+Forwards<br /></b> Open user interface to list all mail forwards. From you can
+either edit or delete items.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><b><a
+id="add_auto_notify" name="add_auto_notify"></a></b>Mail
+Notifications</td></tr>
+<tr><td width="733" colspan="2"><b>Add Auto Notify</b><img
+style="float:right" src="images/help_map5.jpg" width="160"
+height="80" alt="Mail Notifications" /><b><br /></b> This also is best done from the User Account Window. By
+selecting "Add Auto Notify" from the main window in the Global
+Admin mode, open a user interface to add a mail notification for
+any user. If you know the name or ID of the user, you can
+proceed. If not, open the User Account Window. When the user
+(established by the User ID number stored in the database, the
+"Notify Address" stored in the database is sent a "NEW MAIL"
+received notice.<br />From each User Account Window you can create auto notifications
+for that user.<br /><b><a id="delete_auto_notify"
+name="delete_auto_notify"></a>Delete Auto Notify<br /></b> Open user interface to delete a mail notification for a
+user.<br /><b><a id="list_auto_notifications"
+name="list_auto_notifications"></a>List Auto Notifications<br /></b> List all auto notifications.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2">Global
+Function</td></tr>
+<tr><td width="479"><b><a id="list_all_usrs_all_groups"
+name="list_all_usrs_all_groups"></a>List All Users All
+Groups</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">List every user in the database. Be
+sure to set the number you want to display in the "Show x Lines
+block". Once your list is opened you<img style="float:right"
+src="images/help_map6.jpg" width="160" height="80"
+alt="Global Function" /> can re-order the list (i.e.: Current
+Mail Size, Last Login etc.) in a manner of your choosing to
+locate the users you seek, or increase the number of lines to be
+displayed. If you have 10,000 users or more in your system, the
+"Show x Lines block" will be handy feature. In the alternative
+you can set "Show x Lines block" to a number larger than your
+user list and use that for all operations.</td></tr>
+<tr><td width="479"><b><a id="database_cleanup"
+name="database_cleanup"></a>Database Cleanup</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Look for all changes made by this
+tool in the statistics column (bottom left) as: "Number of
+deletes pending". 
+<p>1) First DBMA will match aliases to users and fix client_idnr
+(GroupID) where the alias has the wrong client_idnr
+(GroupID).</p>
+<p>2) Through a serious of SQL queries and commands, DBMA sets
+message status 003 for all mail marked for deletion. That will
+escalate the deletion process. Status for messages flagged for
+deletion in some cases could be 000, 001,or 002 depending on the
+DbMail version you are using. As well as clearing up some
+previous issues with older DbMail versions this tool accelerates
+the cleanup process nicely.</p>
+<p>3) DBMA also marks for deletion any completely orphaned
+messages having no mailbox nor owner. These orphans can occur due
+to vagaries in the database or the DBMS and the type of database
+you are using. Broken or incomplete indexes or cascading routines
+can cause this to happen as well as administrative errors. This
+tool allows you to manually perform the function of a schedules
+crontab utilities run. Note: If DBMA finds some orphaned messages
+it will first set their status to 001. Your command line
+(crontab) utility will then escalate them to 002 then 003 then
+delete them. You can speed that up by selecting 'Database
+Cleanup' a second time, and any orphaned messages marked 001 will
+be escalated to 003 and deleted from the database on the next
+Utility/Maintenance run. This two staged approach takes into
+consideration that this is a very rare occurrence; is likely
+caused by manually 'messing with the database'; and the fact that
+you may have by other means deleted a user, giving you time to
+manually recreate that user at the proper user_idnr. In future
+versions, DBMA will fully delete these immediately after
+reporting what if any exist .</p>
+<p>4) DBMA deletes all unattached (orphaned) mailboxes.</p>
+<p>5) For MySQL only, DBMA runs a defragmentation on the following tables by performing a 'null' alter table operation:</p><pre>
+            dbmail_aliases
+            dbmail_users
+            dbmail_mailboxes
+            dbmail_messages
+            dbmail_messageblks
+            dbmail_physmessage
+            dbmail_subscription</pre>
+
+
+
+</td></tr>
+<tr><td width="479"><b><a id="logins" name="logins"></a>Logins Last X
+Hours</b>
+
+</td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Check recent logins. Selectable by
+hours. Shows POP/IMAP4-before-SMTP data as well as users' last
+logins (most recent by hours). All user logins can be tracked and
+sorted in the Global or Group User lists.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><b><a
+id="configurations" name="configurations"></a></b>Global
+Functions - Configuration</td></tr>
+<tr><td width="733" colspan="2" style="background-color: #D6D0DE">
+<img border="0" src="images/help_map7.jpg" alt="Configuration "
+width="737" height="28" /></td></tr>
+<tr><td width="479"><b>Configurations</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Open a "Configuration Window" to set
+all configurations and options. Do "Primary Configuration" first
+and then do your "Preset Options" to your liking, after you are
+connected to the database.<br /><br />When you first link to /dbmailadministrator/DBMA.cgi, DBMA
+immediately and automatically checks permissions on several key
+flat-file databases installed with the programme. If DBMA is not
+able to read or write to its own DB files, you will be so
+informed. Corrective action should be taken immediately. Firstly:
+The directory hosting this programme ( /dbmailadministrator/ )
+must be writeable by the user:group of the HTTP Daemon (www:www,
+nobody:nobody etcetera.) DBMA will actually tell you the user the
+HTTPD is running as. Secondly: the files within this directory
+must be owned by the HTTPD user. Thirdly, all executeables must
+be executeable (chmod 755 *.cgi).<br /><br /><u>Configuration</u>: This is a first step in setting up DBMA.
+There is no code to open and edit. DBMA should fly up a
+'Configuration Window' immediately after correct installation.
+Please use care entering your database configuration information.
+It will save you time. Read each item before committing.<br /><br /><u>Options</u>: include a number of automated functions including
+but not limited to auto-create password for new users;
+auto-create alias for new users; what statistics to display and
+their refresh rate; the default domain; what features you would
+like turned on, and more. Configurations has its own help notes
+in the Configuration Window. Come back to this resource for more
+detailed help on the features.</td></tr>
+<tr><td width="479"><b><a id="encrypt" name="encrypt"></a>Encrypt
+Help</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Opens a help window and encryption
+tool to explain and demonstrate the encryption methods used in
+DBMA. This is an interactive Help Tool which makes no changes to
+your system.</td></tr>
+<tr><td width="479"><b><a id="show" name="show"></a>Show x00
+Lines</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Sets a maximum number of lines to
+display in lists. Important for very large mail systems.</td></tr>
+<tr><td width="479"><b>Go!</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Execute the 'checked' selection you
+have made.</td></tr>
+<tr><td width="479"><b>Clear</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Clear all 'selects' and
+statistics.</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><a id="acl"
+name="acl"></a>Global Functions - Access Control Lists</td></tr>
+<tr><td width="479"><b>ACL / ACL List</b></td>
+<td width="254"></td></tr>
+<tr><td>IMAP4 Access Control Lists (ACL's) (RFC 2086) provide the
+option to share IMAP4 folders. If you do not have any shared
+folders, this is your tool to create them. DBMA first checks your
+system to make certain that the critical system accounts exist
+within Group 0. Since DBMA version 2.3.4 it is possible to delete
+the __public__ and 'anyone' account in order to create a
+'start-over' scenario where ACLs have become somewhat botched by
+admin users 'hacking-in' with their ACL-aware MUA (Mail User
+Agents). It happens. 
+<p>It should also be noted that within DBMA, the only person able
+to actually see full ACL permissions is the the global
+administrator with the ACList function.</p>
+<p><b>Remember</b> that once you have created the infrastructure
+and assigned some administrative rights (SETACL) to key trusted
+users, your Shared Folder Forest under #Users is likely to grow
+fast. #Public folders can be controlled exclusively by you, the
+Mail System Administrator, or you can give Administrative Access
+Rights to #Public/folders to trusted users or Group Admins.</p>
+<p><b>How to Start Sharing Folders</b><br />Select "ACL" from the main screen. Type the name of the folder
+you wish to create and press "Create Shared Folder." DBMA will do
+the rest. DBMA will assign limited user access rights to "<font
+color="#008000"><b>anyone</b></font>". If "<b><font
+color="#008000">anyone</font></b> or <b>__public__</b> does not
+exist on your system, DBMA will create them for you.</p>
+<p><b>The Global function screen for ACLs</b> also has an Access
+Rights tool for manually adding a folder to a users ACL or
+updating any user for any shared folder. Be careful how you use
+this as it is a powerful and highly flexible tool.</p>
+<p>Any <b>User Account Window</b> provides a means to manage
+specific user access rights to shared folders. You can permit
+users to have higher privileged access rights or even
+administration rights. To understand these rights, hold your
+cursor over the text block at the bottom which corresponds to the
+item for which you seek help. Or click help.</p>
+<p><b>Once you have your shared folders set up</b> and
+appropriate user rights assigned (for <font
+color="#008000"><b>anyone</b></font>), you will want to get your
+email client configured to subscribe to these folders. The
+internet is abound with opinions on what is the best email MUA
+(Mail User Agent - Email Client). If you are using Thunderbird or
+a fairly new Mozilla Mail, you are in luck. These MUAs will
+"subscribe" to the shared folders in a flash. You can drag and
+drop or copy to, move to or whatever you like in these
+folders.</p>
+<p><b>Here is a usage example of IMAP4 Shared Folders.</b> Let's
+say you have some pictures you want to show many people on your
+mail server. Create a folder or use what you have and create a
+message containing your pictures and save it in your drafts
+folder with a subject line "Pictures of me Winning The Lottery"
+or whatever. Next, select the email in your drafts folder and
+copy it to your "Common Shared Folder". Now '<font
+color="#008000"><b>anyone</b></font>' has access. Hopefully your
+target audience is not using one of the ACL Shared Folders
+'unfriendly' MUAs. You perhaps can share the following
+advice.</p>
+<p><b>With Microsoft's Outlook Express</b> and Outlook you will
+need to do a little coaxing. Select the account and click on
+"IMAP4 Folders". Don't try to first subscribe to #Public after
+you "Reset List". Instead, select just the sub folders of #Public
+and subscribe to them. Close the "Folders" window. Reset the list
+of folders. Next open "IMAP4 Folders" again and select #Public.
+Close. This two-step process of subscribing to the subfolders
+first and then later subscribing to the root #Public seems to
+work. You should be in business.</p>
+<p><b>Sharing a Users' Folders<br /></b> This is normally done with an ACL-friendly MUA but DBMA can
+help you create much of what the user can do from their MUA if it
+is easier to do it for them than explain how; or in the event
+that your user has made a mistake and you are on a repair
+mission.<br />I<b>n the drop-down display of available ACL-eligible folders in
+the User Account Window</b> you will see all of the "#Public"
+folders plus all of the users folders. They are all eligible for
+sharing. Example for User Account Window for: Bob</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p><font color="#000000">#Public/common<br />bob/INBOX<br />bob/Trash<br />bob/Sent<br />bob/shared</font></p></blockquote></blockquote></blockquote>
+<p><b>If you select and add a set of Access Rights to
+"bob/shared",</b> it will be available across the system under
+#Users but no one will be able to share it unless you assign
+Access Rights to additional users; or allow bob SETACL (Admin)
+rights for that folder and he can do it all for you.</p>
+<p><b>You manage individual user rights from the User Account
+Window</b> and manage #Public and #User rights from the global
+Access Control List Tools (select ACL on the Main Screen).<br /><b>Assigning rights to #Users/folder</b> can be done with the
+DBMA Access Control List Tools after the #User/folder has been
+shared from the User Account Window. The first step is to go to
+the User Account Window, create the shared folder by assigning
+the owner full Access Rights. Next you return to the DBMA ACL
+Tools and select the new shared #User/folder you created and one
+after another add the users needing access rights on this
+folder.</p>
+<p><b>ACL Permissions set to 1-On or 0-Off</b><br /><b>lookup</b>: mailbox is visible to LIST/LSUB commands<br /><b>read</b>: SELECT the mailbox, perform CHECK, FETCH, PARTIAL
+SEARCH, COPY from mailbox<br /><b>seen</b>: keep seen/unseen information across session<br /><b>write</b>: STORE flags other than SEEN and DELETED<br /><b>insert</b>: perform APPEND, COPY into mailbox<br /><b>post</b>: send mail to submission address for mailbox<br /><b>create</b>: CREATE new sub-mailboxes in any implementation
+defined hierarchy<br /><b>delete</b>: STORE DELETED flag perform EXPUNGE<br /><b>administer</b>: perform SETACL</p>
+<p><b>This Compares to the RFC 2086 - IMAP4 ACL extension
+definition</b><br />The ACL extension is present in any IMAP4 implementation which
+returns "ACL" as one of the supported capabilities to the
+CAPABILITY command. This is something DbMail does very well. It
+may be one of the best. An access control list is a set of
+identifier,rights pairs. Identifier is a US-ASCII string. The
+identifier <font color="#008000"><b>anyone</b></font> is reserved
+to refer to the universal identity (all authentications,
+including anonymous). All user name strings accepted by the LOGIN
+or AUTHENTICATE commands to authenticate to the IMAP4 server are
+reserved as identifiers for the corresponding user. Identifiers
+starting with a dash ("-") are reserved for "negative rights",
+described below. All other identifier strings are interpreted in
+an implementation- defined manner.<br />Rights is a string listing a (possibly empty) set of alphanumeric
+characters, each character listing a set of operations which is
+being controlled. Letters are reserved for ``standard'' rights,
+listed below. The set of standard rights may only be extended by
+a standards-track document. Digits are reserved for
+implementation or site defined rights. The currently defined
+standard rights are:<br /><b>l - lookup</b> (mailbox is visible to LIST/LSUB
+commands)<br /><b>r - read</b> (SELECT the mailbox, perform CHECK, FETCH,
+PARTIAL, SEARCH, COPY from mailbox)<br /><b>s - keep seen/unseen</b> information across sessions (STORE
+SEEN flag)<br /><b>w - write</b> (STORE flags other than SEEN and DELETED)<br /><b>i - insert</b> (perform APPEND, COPY into mailbox)<br /><b>p - post</b> (send mail to submission address for mailbox, not
+enforced by IMAP4 itself)<br /><b>c - create</b> (CREATE new sub-mailboxes in any
+implementation-defined hierarchy)<br /><b>d - delete</b> (STORE DELETED flag, perform EXPUNGE)<br /><b>a - administer</b> (perform SETACL)<br /><img border="0" src="images/acl_help.jpg" alt="acl help"
+width="737" height="329" /></p></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2">Statistics and
+other Important Data</td></tr>
+<tr><td width="479"><b>My Mail System</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Provides a detailed account of your
+database including the number of: aliases, auto notifications,
+auto replies, deletes pending, mailboxes, message blocks,
+messages, physical messages, recent logins, users, and the
+database type.</td></tr>
+<tr><td width="479"><b>My Domains</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">A listing of all domains used in
+aliases. You may see an additional listing here if you have "Use
+DBMA MTA Domains 1=YES, 0=NO" turned on. The second list is
+exactly what is stored on the DBMS for the use of your MTA. If
+the lists differ, it may be time to edit the your list on the
+database and remove the stale entries. If you are not using the
+"mydestination" option, if these are to be local accounts, make
+certain they are configured in your MTA. Here too is an
+opportunity to check against any spelling errors as they will
+show up prominently. If you spot a spelling error, select and
+copy the miss-spulled :o) domain and then select "List All
+Aliases" and do a browser search with the copied text. Then fix
+that alias and the user will starting getting mail again.
+(Checking spelling, though tedious, can be good thing.)</td></tr>
+<tr><td width="479"><b>My Groups</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">1:) Shows every "group" of users (client_idnr)
+stored in your database.<br />2:) Which domains are in each group.
+<br />3:) How many users are in each group (if "Count Users Per Group" is turned on in Configuration)
+<br />4:) Total number of Groups and Users.<br /><br /> It
+is a wise idea to set aside Group 1 for pseudo accounts like
+abuse, postmaster, webmaster, privacy and so on. In that case,
+every domain on your system should appear in Group 1 as an alias
+to these pseudo-accounts. Here is where you can check this out.
+If you have seven domains then all seven should show up in your
+pseudo-account group. If not, fix it. Every domain must have a
+postmaster and abuse account to name just a couple.<br /><i>Open Aliases</i><br />If DBMA finds an open alias (i.e.: @LANdomain.int) it will show
+WARN: fallback alias: *@domain.tld followed by what group it is
+in (i.e.: [3] ). This might need your attention if it is an
+error.</td></tr>
+<tr><td width="479"><b>My DBMS</b></td>
+<td width="254"></td></tr>
+<tr><td colspan="2" width="737">Status and process list for your
+DBMS. To appreciate this data requires a fairly good
+understanding of how your database management system (DBMS)
+works. Some or all of this information will be useful to you.
+Scroll to the bottom of the list to see the process list which
+will include information about all replication slaves and masters
+connected to this DBMS.</td></tr>
+<tr><td colspan="2" width="737"><img border="0"
+src="images/help_map.jpg" width="740" height="445"
+alt="DBMA First Screen" /></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><a
+id="user_account_window" name="user_account_window"></a>User
+Account Window</td></tr>
+<tr><td colspan="2" width="737"><b>This is the core of DBMA, our Mail
+User Account Window</b><br />This is why we do what we do in the mail side of IT. There are an
+estimated 750 million email accounts in the world in the early
+2000s, and you are taking responsibility for mail delivery to and
+from many of them. In a nutshell, our job is to deliver their
+mail to their storage location. We are the new postmasters and
+these email account owners are our real customers. We'll treat
+them well.<br /><br /><b>The User Account Window</b> (illustration below) is where you
+will spend most of your time so this is also where your DbMail
+Administrator (DBMA) is most feature rich.<br /><br />From this Window you will most often jump to the Modify User
+Account Window.<br /><br />Or you may have a user who is a magnet for viruses and
+unparsebale messages so you may spend time seaching for problem
+mail or tracking delivery issues, all of which are done from the
+User Account Window.<br /><br />You can select and open user mailboxes for troubleshooting jammed
+mail, undelating mail accidentally deleted, tracking virus and
+spam issues, searching all mailboxes; adding or updating ACLs if
+your system uses that feature; creating an auto notification;
+sending the account owner a report of the changes accomplished in
+a mail message; doing what you do.<br /><br /><br /><b>Mail box icons open to a Mail search, delete or undelete
+tool</b>.<br />Mail search is available from any users mail box and the search
+will be conducted within that mail box. Look for the mailbox icon
+beside the mailbox name you seek and click it to open the
+contents list.<br /><br /><b>'Delete mail'</b> sets the status flag to 003 so it is wiped
+out on the next maintenance pass. (Don't delete mail without
+cause nor permission.) All flags are visible in any mail box so
+an erroneously marked (for delete) can be spotted quickly.
+Individual mail can be undeleted or deleted; all mail in any mail
+box can be deleted or undeleted.<br /><br /><b><a id="auto_create_user" name="auto_create_user"></a>The
+"Modify" User Account Window</b> allows you to edit the User
+Name; change the Password; change the Encryption Type ( plain,
+md5sum, md5 or crypt); Change Passwords; Change Mailbox Quota
+Size; and Add an Email Aliases.<br /><br /><b>If Auto Create User for New Alias</b> in your configuration is
+set to "1", DBMA will generate the username for any alias you
+create which does not have an account. This specialized feature
+is intended for systems where the MTA relies on using the
+first_part of the email address to verify user exists and not the
+alias. The user created will have an unknown encrypted password.
+Mail will go to whatever account you have entered the alias for.
+An example of this useage would be in the Administrator's account
+where all admin mail will eventually go. By quickly typing a
+dozen or so pseudo-account aliases, like abuse, daemon, dns, noc,
+webmaster, privacy etceteras, you have created non-priviledged
+inaccessable accounts for each pseudo-account with all their mail
+going to the Administrator. It is also a precursor method for
+systems requiring some form of key-pair Authenticated Sender ID.
+The default is "0", off.<br /><br />Here's an example of how it works, if configured "On". If you are
+in the Modify User Account Window for "Rick" and you add an alias
+for "ricky@domain.com" AND there is no such user as "ricky", DBMA
+will automatically create the user with a NO ACCESS password only
+if this option is set to "1" in the Configuration Window". Why?
+Again, if your MTA is configured to lookup local recipients in
+the dbmail_users.uderid table and not the dbmail_aliases.alias
+table, you should create a user for every alias. It is done both
+ways today in the email world.<br /><br /><b>Every 'human' user should have an account.</b>
+(Pseudo-accounts may be aliased in your MTAs aliases table or
+pointed to real human users with DbMail). The account may not
+even have mailboxes which receive mail, being aliased or
+forwarded to another account or system, but to manage users
+properly; maintain best practices; preserve privacy and security
+posture; every user should have an account whether they receive
+mail or not. This is how you keep track of employees coming and
+going; password terminations; maintain correct billing
+operations; manage mail quota's, track alias asignments, forwards
+and redirections, and so on. An email alias that would allow
+"Rick" to use his nickname "Ricky" is an example of an email
+address for which there may not be a corresponding user named
+"Ricky" It's Rick's account. If your MTA is doing username
+lookups on the first part of the email address however, you will
+need to create that account. When you create an email alias, you
+will be assigning it to an account with an associated action. It
+may then be forwarded to another server outside of your MTA
+domains. Know your system and how it works. 
+<p><i><b>'User Account Window' with all features turned on. If
+you are not using features, turn them off in the Configuration
+Window to reduce the clutter.</b></i></p></td></tr>
+<tr><td colspan="2" width="737"><a id="uaw" name="uaw"><img
+border="0" src="images/help_map8.jpg" alt="User Account Window"
+width="739" height="591" /></a></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><a
+id="auto_replies" name="auto_replies"></a>Auto Replies</td></tr>
+<tr><td colspan="2" width="737"><b>Only use Auto Reply in DBMail V
+2.2.x or greater</b> on a public-service production machine. In
+all this is a DoS vulnerability and can easily get away from its
+manager. DBMail V 2.2.x using LibSieve sets stop and start limits
+which is very good and provides a lot of protection. Set the stop
+date realistically and not ten years down the road. In any case
+it can cause you a lot of annoyance and even bring your system
+down. Be wary.<br /><b>Auto Reply is a thing of the past.</b> The world is more tuned
+to 'Hot Spots', PDA, e-phones, e-watches and text messaging. Auto
+replies make people crazy like the old, tacky, tape-recorded
+answering machines you can barely understand. Get a loop going
+with one of your pseudo-users aliased to an account you now have
+on Auto-Raply vacation and your email world will grow darker. You
+can have text messaging installed in your teeth pretty soon so
+you'll never miss a single message.<br /><b>For those who must have AutoReply:</b> 
+<ol>
+<li>Open a User Account Window for the mail user wanting an
+auto-reply.</li>
+<li>Check what if any aliases it may have.</li>
+<li>If it has institutional or pseudo-accounts aliased to it,
+move those aliases to point back to their own mailboxes. (For
+example, if webmaster was aliased to "Harry", delete that alias
+in "Harry"'s account and then open webmaster's account which
+heretofore had no email addresses or aliases and create the alias
+for "webmaster" in "webmaster's account".)</li>
+<li>Once all the aliases except 'mailuser @ yourdomain.tld' are
+removed, go to the DBMA Main Screen and select "List all
+Forwards".</li>
+<li>Delete the forwards for this account.</li>
+<li>This is somewhat redundant but you should do it anyway.
+Double check everything by selecting "all Aliases in this Group"
+for this user's group number. The only way something would appear
+there for this user is if it is old, stale, junk pointing to the
+user's ID number; some alias was once misspelled and ever since
+has been overlooked. Those can come back to haunt you.</li>
+<li>Now open a User Account Window for the user and complete the
+auto reply form. First select and remove the instructional text,
+typing in the message, then set the start date / stop date (DBMA
+automatically sets both dates to the current moment); and now
+press the "AutoReply" button.</li>
+<li>The User Account Window will return showing the new setting.
+Check that it is what you intended.</li>
+<li>To run a test: click the "Modify 'user' Account" button and
+when the Modify User Account Window opens, click on "Send 'user'
+A Message". A new window will open with preformatted text which
+you will alter to have <u>your address</u> as the from address
+and text to explain what you have just done. Press "Send" and a
+new window will open saying "OK.. message sent etc": You need to
+remember to turn off this Auto Reply at some date and time so put
+that information in the subject line. Send it again, this time to
+yourself.</li>
+<li>Now check your mail box for both an Auto Reply message and
+the one you sent to yourself. Send another message from your MUA
+to the account and make sure you get an Auto Reply.</li></ol>
+<table border="1" width="738">
+<tr><td bgcolor="#FFFFC4" colspan="5" width="737"><a id="user_map"
+name="user_map"></a>User Maps</td></tr>
+<tr><td width="85"></td>
+<td width="157">myname</td>
+<td width="160">inet:10.0.0.2:143</td>
+<td width="157"></td>
+<td width="157">myname</td></tr>
+<tr><td width="737" colspan="5"><i><b>In the illustrated case above
+for "myname"</b> where a user "myname" is given the<br />"allow" sockaddr of "inet:10.0.0.2:143 -- myname's account access
+is set as IMAP and the dbmail clienthandlers will know to use the
+imap socket:inet:10.0.0.2:143 for "myname" logins.</i><br /><br /><b>User Mapping</b><br />This feature is available in DBMail Version 2.2 and later.<br /><br />User mapping has a diverse range of applications including IP,
+domain and username maps.<br /><br />Usermapping in this case works on the basis of establishing a
+per-user sockaddr (example: inet:10.0.0.1:143) and passing it to
+the dbmail clienthandlers.<br /><br />DbMailAdministrator allows you to configure user mapping in any
+manner and for any purpose you choose from the User's Account
+Window. Below are are just a few examples of how you might do
+this.<br /><br />DBMA allows any ASCII character to be entered so any
+configuration you can make work can be implemented with this
+tool.<br /><br />It is strongly suggested you be very specific about entering
+sockets and be wary of routed solutions where an outside IP is
+NAT'd to a LAN IP. In that case the socket on the LAN mail host
+is its LAN address, not the routed address and your socket would
+be something like inet:172.16.1.1:143 where routable IP
+xxx.xxx.xxx.xxx translated is 172.16.1.1<br /><br /><br /><b>If myname is the account name</b> (dbmail_users.userid) and
+you want the user to be able to login uniquely as
+myname@mynametrucking.com you would change the first
+(dbmail_usermap.login) name to myname@mynametrucking.com which
+tells dbmail clienthandlers " When myname@mynametrucking.com logs
+in, use dbmail_users.userid=myname and socket
+inet:10.0.0.2:143.<br /><br /><b>LOCK User Account</b><br /> In the case where a user has been temporarily banned from using
+the system for fetching or managing their mail, select "LOCK" and
+press the "User Maps" button and they are locked out.<br /><br /><b>CLEAR User Maps</b><br /> If you have made a mistake or wish to reverse an account lock
+you can clear the usermap settings to a one to one mapping
+(default) by selecting "CLEAR" and pressing "User Maps".<br /><br /><b>Example</b> where there are multiple users wishing to have the
+same local name and where mail is delivered to mailboxes on the
+basis of an alias lookup. In this case it is fairly clear what
+the admin is doing. All of these "John"'s are on the same server,
+but different domains. User Mapping is helping this system do
+virtual domain mail in some of it's potentially trickiest
+parts.</td></tr>
+<tr><td width="85"></td>
+<td width="157"><b>Login</b></td>
+<td width="160"><b>Socket Deny</b></td>
+<td width="157"><b>Socket Deny</b></td>
+<td width="157"><b>Account Name</b></td></tr>
+<tr><td width="85"></td>
+<td width="157">john@thetrucker.tld</td>
+<td width="160">inet:172.20.21.16:143</td>
+<td width="157"></td>
+<td width="157">johnanderson</td></tr>
+<tr><td width="85"></td>
+<td width="157">john@thedancer.tld</td>
+<td width="160">inet:172.20.21.16:110</td>
+<td width="157"></td>
+<td width="157">johnfrustaglio</td></tr>
+<tr><td width="85"></td>
+<td width="157">john@theplumber.tld</td>
+<td width="160">inet:172.20.21.16:110</td>
+<td width="157"></td>
+<td width="157">john_reynolds</td></tr>
+<tr><td width="85"></td>
+<td width="157">john@thedoctor.tld</td>
+<td width="160">inet:172.20.21.16:143</td>
+<td width="157"></td>
+<td width="157">john_petrowalla</td></tr>
+<tr><td width="737" colspan="5"><img border="0" alt="User Map Tool" src="images/help_usermap.jpg" width="679" height="58" /></td></tr>
+<tr><td style="font-family: Century; font-size: 10pt; background-color: #E1E6F2" width="85">col names:</td>
+<td style="font-family: Century; font-size: 10pt; font-weight: bold; background-color: #E1E6F2" width="157">login</td>
+<td style="font-family: Century; font-size: 10pt; font-weight: bold; background-color: #E1E6F2" width="160">sock_allow</td>
+<td style="font-family: Century; font-size: 10pt; font-weight: bold; background-color: #E1E6F2" width="157">sock_deny</td>
+<td style="font-family: Century; font-size: 10pt; font-weight: bold; background-color: #E1E6F2" width="157">userid</td></tr>
+<tr><td width="85"></td>
+<td width="157">ANY</td>
+<td width="160">inet:10.0.0.2:143</td>
+<td width="157"></td>
+<td width="157">%s@domain.tld</td></tr>
+<tr><td width="737" colspan="5" style="color:#939393">1:
+Maps logins on single IP to an expanded form forcing
+first_part@domain logins even if first_part only is the stored
+username</td></tr>
+<tr><td width="85"></td>
+<td width="157">ANY</td>
+<td width="160"></td>
+<td width="157">inet:223.223.223.1:110</td>
+<td width="157">%s</td></tr>
+<tr><td style="color:#939393" colspan="5" width="737">2:
+No users on IP 223.223.223.1 will be allowed access on port 110
+(POP3)</td></tr>
+<tr><td width="85"></td>
+<td width="157">ANY</td>
+<td width="160"></td>
+<td width="157">inet:223.223.223.29:143</td>
+<td width="157">%s@domain.tld</td></tr>
+<tr><td style="color:#939393" colspan="5" width="737">3:
+No users <b>on</b> IP 223.223.223.20 <b>at</b> domain.tld will be
+allowed access on port 143 (IMAP)</td></tr>
+<tr><td width="85"></td>
+<td width="157">UserA</td>
+<td width="160"></td>
+<td width="157"></td>
+<td width="157">UserA</td></tr>
+<tr><td width="737" colspan="5" style="color:#939393">4:
+For UserA above this provides one to one mapping regardless of IP
+address and port. "CLEAR" usermap results in this.</td></tr>
+<tr><td width="85"></td>
+<td width="157">UserB</td>
+<td width="160">inet:127.0.0.1:143</td>
+<td width="157">inet:10.1.1.1:110</td>
+<td width="157">UserB</td></tr>
+<tr><td width="737" colspan="5" style="color:#939393">5:
+UserB above will be able to logon to the specified IP address on
+port 143 (IMAP) but will be denied access on port 110 (POP3)</td></tr>
+<tr><td width="85"></td>
+<td width="157">UserC</td>
+<td width="160"></td>
+<td width="157">inet:0.0.0.0:0</td>
+<td width="157">UserC</td></tr>
+<tr><td width="737" colspan="5" style="color:#939393">6:
+UserC above is denied all access. Selecting "LOCK" and pressing
+"User Maps" automatically sets these parameters for you.</td></tr></table>
+<p><br /></p></td></tr>
+<tr><td>
+<hr
+style="background-color:#E7FAE8; color:#D6CFDE;height:20px" /></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2"><a
+id="use_DBMA_MTA_Domains" name="use_DBMA_MTA_Domains"></a> 
+<h3>DBMA MTA Admin</h3></td></tr>
+<tr><td>
+DBMA will continue to expand in the area of MTA Admin. Currently most MTA
+configurations can be managed by DBMA including blacklist/whitelist, access, helo_checks, transport, virtual domains and destinations.<br /><br />
+</td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2">
+<h2>DBMA MTA Domains and per-domain Transport Management</h2></td></tr>
+<tr><td colspan="2"><b>DBMA will store your domains (and 'transport')
+in the database within a table named DBMA_MTA</b> if you select
+"1" (YES) in the Configuration Window's, Options section.<br /><br /><b>It is a blazing fast, simple way to manage virtual mail
+domains.</b> Add a new alias with a unique domain and the MTA
+knows about it instantly. DBMA auto-extracts domains from email
+aliases and allows you to manually enter others.<br /><br /><b>The default configuration setting</b> for this feature is "0"
+(NO). You must set this to "1" (Yes) to enable the feature and
+use the "Create DBMA_MTA Tables" button to create the necesary
+database schema. Then you must create one or two MTA
+configuration files (see below) (depending on whether you use
+both domains and transports or just MTA Domains). This applies
+for both MySQL and PostgreSQL; for any version of DbMail; and can
+be used for any MTA capable of connecting to an SQL DBMS. The
+table contains a domain name and a transport.<br /><br /><b>DBMA sorts through your system's email aliases</b> and
+extracts the domain names. It sorts and filters, strips and
+compares and when a new domain is added to the system, it writes
+the new data into the database. DBMA does not write domains to
+the database unless there has been a change. You may manually add
+or delete domains from the 'DBMA MTA Admin :: Domains and
+Transports' window.<br /><br /><b>DBMA "My Domains" panel</b> (Main) displays the current status
+of domains DBMA has found and stored in the MTA database table.
+Compare them and watch out for any spelling or typo errors which
+may have crept in.<br /><br /><b>What is this for?</b> Your Mail Transfer Agent (i.e.: <a
+href="http://www.postfix.org/">Postfix</a>) can be configured to
+use this table as the list of domains that the machine considers
+itself the final destination for. Why is that a good thing?
+Because from then on, anytime a domain is added to your server
+via DBMA, all that is required of you is to enter the alias
+within the DBMA User Account Window, or Add User tool and your
+MTA immediately has the new domain and does not need to be
+restarted (which has a huge performance penalty); things happen
+faster, easier . Everything else after turning the feature on and
+reconfiguring your MTA to use your DBMA is automatic (apart from
+making the obvious DNS changes) while you have full
+administrative override from the configuration window.<br /><br /><b>Note. If MTA Domains is turned on in DBMA BUT IF YOU HAVE NOT
+YET CONFIGURED YOUR MTA, it has ZERO EFFECT.</b><br /><br /> 
+<table style="border-style:solid;background:#f0f0f0;width:100%">
+<tr><td width="100%">
+<h3>Do These 7 Steps Starting From "Configurations" Once
+Connected to the Database</h3>
+<p><b>1. Change</b> the Option Value to<input class="back"
+onmouseover="this.className='front';"
+onmouseout="this.className='back';" size="3" value="1"
+name="use_DBMA_mydestinations" /><font color="#008000">Use DBMA
+MTA Domains 1=YES, 0=NO</font></p>
+<p><b>2. Press</b> <input type="submit"
+title="check your configuration" value="Commit DBMA Options"
+name="submit"
+style=" line-height:150%;border-style:solid;background-color:#FFd9d9; color:#6C0000; font-family:arial, sans-serif; font-size:11px; font-weight:normal" /></p>
+<p><b>3. Press</b> <input
+style="FONT-WEIGHT: normal; line-height:150%;FONT-SIZE: 11px; COLOR: #6c0000; BORDER-TOP-STYLE: solid; FONT-FAMILY: arial, sans-serif; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BACKGROUND-COLOR: #ffd9d9; BORDER-BOTTOM-STYLE: solid"
+ type="submit" value="Create DBMA_MTA Table" /> and DBMA will
+create the table within which your domains will be stored.</p>
+<p><b>4.</b> <b>A message should appear</b>: DBMA has
+succcessfully created database tables and inserted your MTA
+domains plus default DBMail LMTPD transports. If this is an
+update, the DBMA_MTA table has been dropped and re-created with
+default settings. You may add transport configurations or edit
+the DBMail LMTPD defaults on a per domain basis if you desire.
+Select the "MTA" icon which should now appear at the top right
+(if "Use MTA" is set to "1") and check your stored MTA domains
+before switching over your MTA. Configuration settings must have
+"Use MTA..." set to "1" and your MTA must be configured
+accordingly. DBMA has also created or checked the existance of
+the DBMA_MTA_ACCESS (black / white lists) table. If this an
+update of your MTA Tables, DBMA did not alter your MTA ACCESS
+table which likely contains an accumulation of data. If this is
+the first time you have used this tool, you will need to migrate
+(using the DBMA 'migrate' tool) into your Access table, or enter
+from a keyboard, the data you wish the MTA to act upon. Click the
+"MTA" icon at the top right and then select 'Go To MTA
+Access'.</p>
+<p><b>5.</b> <b>From the Main Menu</b>, you should now be looking
+at the list of domains stored in your database in the "My
+domains" panel of the DBMA Main window.</p>
+<p><b>6.</b> <b>DBMA will automatically add a domain to the
+DBMA_MTA.mydestination row</b> for every alias you will or have
+already created.</p>
+<p><b>You must remember to add an alias for the FQDN</b> of the
+host (to PREVENT LOOPS) and any other name the host goes by. As
+well, the postmaster@ the domain literal: the IP address of the
+mail host (i.e.: postmaster@xxx.xxx.xxx.xxx) is a requirement of
+all mail servers.</p>
+<p><b>Once DBMA MTA Admin is initiated,</b> the Configurations
+Window will always have a section for adding and deleting
+domains. You can link the "DBMA MTA Admin" from the "MTA" icon at
+the top right of the "Main" DBMA menu.</p>
+<p><b>Manual additions:</b> This is a good place to add
+$myhostname if it is not already among your postmaster or
+pseudo-account aliases. (IT SHOULD BE: Postmaster must accept
+mail at the domain literal, and at each host name by which the
+server can be accessed.) (IP addresses as domains look like this
+for Postfix: "[127.0.0.1]")</p>
+<p>Obviously if you are trying to delete a domain, and it is
+still in among your aliases, it will return right back again.
+(Keep your setup clean.) If you add a domain, it will stay there
+in the database until you delete it. If you delete a domain</p>
+<p><b>7</b>. <b>Finally you must configure your MTA to use
+xxSQL</b> data for 'deliver to' domains and/or transports.
+Examples are set out below. Try to use multiple RDBM servers
+(primary plus mirror, whatever you like) to avoid a Single Point
+of Failure (SPOF).</p></td></tr></table>
+<div align="left">
+<table>
+<tr><td style="text-align:left"><span style="text-align:left"><br /><br /><b>Completed the above configuration?</b><br /> <i>Congratulations</i>, sort of.... Nothing here works unless
+your MTA is compiled --with-XXsql and configured to use MySQL or
+PostgreSQL data. The MTA must be told to use DBMA_MTA for
+destination and/or virtual domains and per-domain transports or
+whatever you wish to use. It will need to know the database type;
+table and field names; user name and password; and so on...<br /><br /> <b>Below are some configuration pointers</b> which will be
+helpful for a range of MTA choices. Postfix is the most popular
+MTA with DBMail so the focus is on Postfix however even within
+Postfix there are numerous configuration approaches and many ways
+you can use the "DBMA MTA Admin" GUI and data. The same is true
+of all MTAs.<br /><br /> <b>Note about MTA Syntax:</b> The domains stored in the
+'DBMA_MTA' table are those extracted by DBMA from your aliases
+plus any you enter manually. If your mail transfer agent is
+configured to use this 'DBMA MTA Admin' feature, these are the
+domains for which your MTA accepts mail. The syntax of wildcards,
+IPs or domain literals is identical to what you would use in your
+MTA config file. Please check your MTA documentation if you are
+in doubt. Consult with your System Administrator for DNS MX
+records and other related DNS/SPF/RBL/DomainKey issues?<br /><br /> <b>Add or Delete Domains:</b><br /><br /> Should a domain continually reappear even though you wish that
+domain removed, that is your warning that a user still has an
+alias using the deprecated domain and apparently is expecting
+mail at that address. Remove or update the old
+alias.</span><br /><br /><b>Mailbox Transport:</b><br /><br />Each DBMA_MTA destination domain has a transport configuration
+attached to it. A default is already created to use dbmail-lmtpd
+on port 24. The DbMail lmtpd is an awesome transport; use it if
+possible. Change it at your discretion to enable the use of
+anti-spam, anti-virus, mail-policy, or DbMail delivery tool
+(SMTP) (and a million other possibilities). You do this by
+editing the item in DBMA MTA Admin :: Domains and Transports.
+Type what you want and press edit.<br /><br /><b>Re-Create MTA_Domains</b><br /><br />You can completely rebuild MTA Domains. For wholesale changes you
+can recreate the table as often as needed by pressing the "Create
+DBMA_MTA Tables" button. This will reconstruct the MTA domains
+list from all the aliases stored on the system and reset to
+lmtp:24 all transport settings. Remember to re-enter any domain
+literals or wildcards your MTA needs.
+<br /><br /><b>The default 'transport' is:</b><br /><br />
+<pre>dbmail-lmtp:127.0.0.1:24</pre>
+<br /><b>Setting Up Transport</b><br />Certainly you can use the MTA Domains feature for your MTA
+without using xxSQL-based Transports. If you are only using the
+DBMail LMTP daemon (dbmail-lmtp:127.0.0.1:24), it makes sense to
+leave this single line in your main configuration file and only
+use the DBMA_MTA.mydestination column for your domains.
+<pre>
+in main.cf:
+=========
+mailbox_transport = mysql:/etc/postfix/transport.cf
+transport.cf
+===========
+user=dbmail
+password=dbmail
+dbname=dbmail
+hosts=127.0.0.1
+table=DBMA_MTA
+select_field=transport
+where_field=mydestination</pre>
+<br /><br /><b>Checking this in Postfix</b> we'll use the 'Postmap'
+command. From the command line type the following substituting a
+domain you know to be in the database.
+<pre>
+The command line:
+% postmap -q localhost mysql:/etc/postfix/transport.cf
+will return:
+% dbmail-lmtp:127.0.0.1:24</pre>
+<br /><br /><b>Postix's 'master.cf'</b> needs a little configuring. If you
+don't have something like the following in master.cf, you should.
+Please check the documentation for your MTA type and version to
+fully understand its configuration needs for using XXsql configs.
+It is also possible to set up some fairly fancy to do
+multi-domain hosting with 'virtual transport domains' and
+'virtual mailbox maps' using the DBMA_MTA tools. We'll get you
+started on the basics.
+<pre>
+master.cf
+========
+dbmail-lmtp unix    -   -       n       -       -       lmtp
+dbmail-smtp unix    -   n       n       -       -       pipe
+     flags=  user=dbmail:dbmail
+     argv=/usr/local/sbin/dbmail-smtp -d ${recipient}</pre>
+<p><b>Examples of 'literals' and '$wildcard' domains to be
+entered manually:</b><br />(You wouldn't necesarily use them all.)</p>
+<pre>
+$mydomain
+mail.$mydomain
+$myhostname
+[127.0.0.1]
+[192.168.100.20] # Example LAN address if applies
+[216.239.57.107] # Example WAN address if applies</pre>
+<br /><br /><b>mydestination in Postfix:</b>
+<p><b>main.cf</b><br />---------<br />mydestination = mysql:/etc/postfix/mydestination.cf</p>
+<br /><br /><b>You can also do this in main.cf</b> such that all
+'housekeeping' destinations are in the main config and all
+virtual domains are auto-generated by DBMA MTA Admin. You won't
+need to add any manual destinations in 'DBMA MTA Admin'. Check
+your Version's documentation for syntax
+<pre>
+mydestination = mycriticaldomain.com [127.0.0.1] [localhost] [131.107.1.71],
+ mysql:/etc/postfix/mydestination.cf</pre>
+<p><b>mydestination.cf Postfix Pre-Version 2.2</b><br />----------------<br />user = dbmail<br />password = dbmail<br />dbname = dbmail<br />hosts = 127.0.0.1 192.168.1.1 # Add your replicating mirror DBMS
+to avoid Single Point Of Failure<br />table = DBMA_MTA<br />select_field = mydestination<br />where_field = mydestination</p>
+<p><b>mydestination.cf Postfix Version 2.2 and newer</b><br />----------------<br />user = dbmail<br />password = dbmail<br />dbname = dbmail<br />hosts = 127.0.0.1 192.168.1.1 # Add your replicating mirror DBMS
+to avoid single point of failure<br />query = SELECT mydestination FROM DBMA_MTA WHERE mydestination
+like '%s'<br /></p>
+<br /><br /><b>Hopefully it may help you to configure Sendmail, Exim and
+other MTA's knowing the Table Schema added to the dbmail
+database:</b>
+<p>CREATE TABLE DBMA_MTA (<br />mydestination varchar(35) NOT NULL default '',<br />transport varchar(128) NOT NULL default '',<br />UNIQUE KEY mydestination (mydestination)<br />) TYPE=MyISAM;<br /></p>
+<pre>
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| mydestination | varchar(35)  |      | PRI |         |       |
+| transport     | varchar(128) |      |     |         |       |
++---------------+--------------+------+-----+---------+-------+</pre>
+<p>The advantage in handling this from the database is that you
+do not need to reload postfix when a domain is added or removed.
+Postfix, and likely other MTAs lose performance in such a case.
+Also you will have a single action capability of adding domains
+just by creating an alias. As an Administrator, anything that
+puts management and control of events more firmly in your grasp,
+is a move forward.</p></td></tr></table>
+
+<hr style="background-color:#E7FAE8; color:#D6CFDE;height:20px" /></td></tr>
+<tr><td width="737" bgcolor="#FFFFC4" colspan="2">
+<a id="DBMA_MTA_ACCESS" name="use_DBMA_MTA_Domains"></a><h2>DBMA MTA ACCESS
+- A Powerful 'Whitelist / Blacklist Tool'</h2></td></tr>
+
+<tr><td><b>For fine-grained tuning or as a complete replacement</b>
+for your MTA's access lists, this tool will replace optional MTA
+config flat files like access, sender_access, client_access,
+helo_access etceteras. Your MTA must be compiled *--with-XXsql*
+and configured to use MySQL or PostgreSQL. If you already use MTA
+Domains for your destination addresses and or mail transport, the
+appropriate tables for this feature exist. With this tool, you
+create the 'sender' / 'action' directive for the MTA.
+<br /><br /><b>The DBMA_MTA_Access table</b> contains two fields of
+importance: a.) 'sender' and b.) 'action' directive. 
+<p><b>The 'sender' field</b> in any case would contain the domain
+or IP address requiring action.</p>
+<p><b>The 'action'</b> directive could be one of at least three
+directives: a.) REJECT, b.) OK, c.) reject_unverified_sender with
+the option of using any text string your MTA understands (i.e.:
+error code plus message) in the latter.</p>
+<p><b>In simple terms</b> this is your global
+white-list/black-list resource. How you use it is is a matter of
+your preference. The following examples for Postfix may make this
+decision clear for you right away as you compare what follows to
+your current configuration:</p>
+<pre>
+in Postfix's main.cf
+===================
+smtpd_recipient_restrictions =
+.../
+check_client_access mysql:/etc/postfix/DBMA_MTA_Access.cf,
+check_sender_access mysql:/etc/postfix/DBMA_MTA_Access.cf,
+\...</pre>
+<br /><b>where DBMA_MTA_Access.cf looks like:</b> 
+<pre>
+DBMA_MTA_Access.cf
+================
+user=dbmail
+password=dbmail
+dbname=dbmail
+hosts=127.0.0.1
+table=DBMA_MTA_ACCESS
+select_field=action
+where_field=sender</pre>
+<p><b>Checking this is easy with Postfix.</b> From the command
+line type the following substituting a "sender" domain you know
+to be in the database, or enter one first using DBMA MTA
+Admin.</p>
+<pre>
+The command line:
+% postmap -q evilhackers.com mysql:/etc/postfix/DBMA_MTA_Access.cf
+will return:
+% REJECT</pre>
+<b>Sendmail</b> and other MTAs have a catchall access file where
+Mail relay access is controlled. The Default is to reject mail
+unless the destination is local, or listed in
+/etc/mail/local-host-names but you can control that further with
+the 'access' file. This is another case where DBMA_MTA_ACESSS can
+be a replacement.<br /><b>Enter the 'sender'</b> domain and type the 'action' directive
+in the 'other' text box and you will be able to create in effect
+what follows:<br /><pre>
+FREE.STEALTH.MAILER@            550 We don't accept mail from spammers
+another.source.of.spam          REJECT                      
+okay.cyberspammer.com           OK                          
+128.32                          RELAY                                </pre>
+<br /><b>The database table</b> for DBMA_MTA_Access may eventually
+contain hundreds if not thousands (hopefully not!) of domains you
+may wish denied access or specifically whitelisted. The Unique
+key for 'sender', the domain or IP needing an action makes this
+method most desireable over flat files contained within your MTA
+configuration namespace. If you enter a domain or IP already
+contained within the database, DBMA will determine that fact and
+update the action for you. For that reason you do not need to
+'pull' a list of senders and actions every time you administer
+this tool. The fact you are opening the GUI would indicate that
+the sender is not already on your reject list and needs
+attention. Nevertheless you can select the option to view all
+rows within the database and in some cases you could go and pour
+yourself a coffee and wait for the page to load if you have
+blacklisted whole countries by individual IPs :o) on one of those
+'bad-email-days'.<br /><br /><b>The DBMA_MTA_Access</b> database table looks like this in
+MysQL, a little different in PgSQL: 
+<pre>
+CREATE TABLE  DBMA_MTA_Access  (
+myid  int(5) NOT NULL auto_increment,
+sender  varchar(128) NOT NULL default '',
+action  varchar(25) NOT NULL default 'REJECT',
+PRIMARY KEY  (myid),
+UNIQUE KEY  sender  (sender)
+) TYPE=MyISAM COMMENT='MTA acces table' AUTO_INCREMENT=1 ;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| myid   | int(5)       |      | PRI | NULL    | auto_increment |
+| sender | varchar(128) |      | UNI |         |                |
+| action | varchar(25)  |      |     | REJECT  |                |
++--------+--------------+------+-----+---------+----------------+</pre></td></tr>
+<tr><td>
+<hr style="background-color:#E7FAE8; color:#D6CFDE;height:20px" /></td></tr></table></center></div></center>
+</body></html>

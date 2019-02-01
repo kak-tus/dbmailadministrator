@@ -1,0 +1,83 @@
+/* CSS DbMailAdministrator (DBMA) V3.2.x Copyright 2004-2016 ** Trouble? Contact: micheal@dbma.ca */ 
+.c18 {color:#800080;background:#D0F4D2;float:right}
+.caution { background-color:#FF2D2D}
+.clear {background-color: #D6CFDE; color: #5204A5}
+.clearl {float:left;color:#800080;background:#D0F4D2;font-family:arial, verdana, sans-serif; font-size:11px; font-weight:normal}
+.csr { cursor:auto }
+.dl { background-color: #F8F8FF }
+.dm {background-color: #FFFFFF; color: #D20000; font-family: sans-serif; font-weight:600; font-size: 80% }
+.grl {float:left;background-color:#FFFFFF; color:#006200; font-family:arial, verdana, sans-serif; font-size:11px; font-weight:normal}
+.hide { display: none }
+.hl { background-color:#ffffc4 }
+.letsgo {color:#800080;background:#D0F4D2}
+.notseen {color:#800080;background:#ffffc4}
+.nowarn { background-color:white;color:#C10000 }
+.un { color:#800080; background:#D0F4D2; font-family: sans-serif; font-weight:600; font-size: 80% }
+.undm { background-color: #FFFFFF; color: #006600; font-family: sans-serif; font-weight:600; font-size: 80% }
+.warn { background-color:#C10000;color:white }
+.warndm { background-color:#C10000;color:white;font-family: sans-serif; font-weight:600; font-size: 80% }
+a { text-decoration:none;background: transparent }
+a:active { text-decoration:underline;background: transparent }
+a:visited { text-decoration:none;color:blue;background: transparent }
+a:hover { color:black;text-decoration:underline;background: transparent }
+a img { color: white; }
+a:link img, a:visited img { border-style: none }
+body { text-align:center; padding: 1px 1px 0px 33px; margin: 0; color: black; background: #F8F8FF; background-position: top left; background-attachment: fixed; background-repeat: no-repeat; background-image: url(images/dbma-side.jpg); }
+div { text-align:center }
+form { margin-bottom: 0px ; margin-top: 0 } 
+h1 { font: 140% sans-serif }
+h1, h2, h3 { color: #005A9C; background: #F8F8FF }
+h1, h2, h3, h4, h5, h6 { text-align: left }
+h2 { font: 130% sans-serif }
+h3 { font: 120% sans-serif;font-weight:bold }
+h4 { font: bold 100% sans-serif }
+h5 { font: italic 100% sans-serif }
+h6 { font: small-caps 100% sans-serif }
+h6 { text-align:right;float:right;font-family:sans-serif; }
+h7 { font: 120% sans-serif;font-weight:bold }
+hr.c9{background-color:#D6CFDE; color:#D6CFDE;height:20px}
+img { border-style:none;vertical-align:middle;text-align:left }
+img.q { width:13px;height:11px;border-style:none;vertical-align:middle;text-align:left }
+input.c15 { border-style:solid;background-color:#FFd9d9; color:#6C0000; font-family:arial, verdana, sans-serif; font-size:13px; font-weight:normal }
+input.c16 { background-color:#FFFFFF; color:#006200; font-family:arial, verdana, sans-serif; font-size:13px; font-weight:normal }
+input.c17 { float:right;background-color:#FFFFFF; color:#006200; font-family:arial, verdana, sans-serif; font-size:13px; font-weight:normal }
+input.c7 { background-color: #D6CFDE; color: #5204A5 }
+input.c11 { background-color: #ffffff; color: #5204A5 }
+input.front { background-color: #ffffc4; color: #5204A5 }
+input.back { background-color: #ffffff; color: #5204A5 }
+input.back2 { background-color: #ffffff; color: #5204A5 }
+input.ohoh { background-color: #FE5F5F; color: #5204A5 }
+input.sm2 {background-color:#ffffc4;color:#000090;font-size:9px}
+input.sm1 {background-color:#f5f3f8;color:#000090;font-size:9px}
+p { text-align:left }
+pre.stats{color:#005B00;line-height:115%;font-family:sans-serif;font-size:11px}
+select.alias {margin-left:5px;background-color:#f5f3f8; color:#000090;font-family:sans-serif;border-style:solid;border-color:#d6cfde;scrollbar-arrow-color:#000090;scrollbar-face-color:#d6cfde;scrollbar-shadow-color:#BDB6CE; scrollbar-track-color:#f5f3f8}
+select.back { background-color: #ffffc4; color: #5204A5 }
+select.front { background-color: #f5f3f8; color: #5204A5 }
+span.er {font-family:sans-serif; color:#000000;font-size:11px;font-weight:600}
+span.gr { color:#005B00;font-weight:675;font-size:11px }
+span.rd { color:red;font-weight:675;font-size:11px }
+span.out { color:#000090;font-size:11px }
+span.stats{color:#005B00;line-height:115%;font-family:sans-serif;font-size:13px}
+table { text-align:left;border-style:none;width:738px; font-family:sans-serif;font-size:95%;background-color:#F8F8FF; color:#000090 }
+table.c5 { font-size: 80%; text-align: Center; margin-left: 5px }
+td { border-style:none;line-height:120%; text-align:left;vertical-align:top}
+td.ad { background-color:#f5f3f8;color:#000090;vertical-align:middle }
+td.c1 { text-align: left; width:738px; background-color: #D6CFDE }
+td.c1 { width:738px;text-align: left }
+td.c10 { width:100%;text-align:left }
+td.c12 { text-align: right;width:100% }
+td.c14 { font-size: 10px; font-family: Arial, sans-serif; width:250px }
+td.c15 { font-size: 80% }
+td.c16 { border-style:none; text-align:center;vertical-align:top}
+td.c2 { text-align: left }
+td.c2 { width:33% }
+td.c6 { width:100%;text-align:left;vertical-align:top; }
+td.c8 { text-align: left; background-color: #D6CFE7 }
+td.c8 { width:450px }
+td.dd { background-color:#D6CFDE;color:#000090;vertical-align:middle }
+textarea.alias{font-size:11px;margin-left:5px;background-color:#f5f3f8; color:#000090;line-height:160%;font-family:arial,sans-serif;border-style:solid;border-color:#d6cfde;scrollbar-arrow-color:#000090;scrollbar-face-color:#d6cfde;scrollbar-shadow-color:#BDB6CE; scrollbar-track-color:#f5f3f8}
+textarea.list{margin-left:5px;color:#000090;line-height:125%;font-family:sans-serif;border-style:solid;border-color:#d6cfde;scrollbar-arrow-color:#000090;scrollbar-face-color:#d6cfde;scrollbar-shadow-color:#BDB6CE; scrollbar-track-color:#f5f3f8}
+textarea.stats{margin-left:5px;background-color:#f5f3f8;color:#005B00;line-height:105%;font-family:arial, sans-serif;font-size:11px;border-style:none;scrollbar-arrow-color:#000090;scrollbar-face-color:#f5f3f8;scrollbar-shadow-color:#f5f3f8; scrollbar-track-color:#f5f3f8}
+textarea.statsover{margin-left:5px;background-color:#ffffc5;color:#005B00;line-height:105%;font-family:arial, sans-serif;font-size:11px;border-style:none;scrollbar-arrow-color:#000090;scrollbar-face-color:#f5f3f8;scrollbar-shadow-color:#f5f3f8; scrollbar-track-color:#f5f3f8}
+input:focus {background: #ffffc4} 
