@@ -3627,13 +3627,13 @@ AND $dbmail_messages_table.physmessage_id = ?"
             if (!$var)
             {
                 $dbh->do(
-                    "delete from $dbmail_messages_table where id = ?",
+                    "delete from $dbmail_messages_table where physmessage_id = ?",
                     undef, $messageID
                 );
                 $dbh->do("delete from $dbmail_physmessage_table where id = ?",
                          undef, $messageID);
                 $dbh->do(
-                    "delete from $dbmail_messageblks_table where id = ?",
+                    "delete from $dbmail_messageblks_table where physmessage_id = ?",
                     undef, $messageID
                 );
             }
