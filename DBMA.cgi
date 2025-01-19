@@ -27,7 +27,7 @@ BEGIN { push @INC, "./" }
         groups, configuration tools and all global functions.
         When DBMA has connected to the database and functions to your satisfaction, only then
    	change $RESTRICTGroupIDName to Group number it will be limited to. (See README.)
-  	Customize apearance a little by changing "My Mail User Group" to anything you like. 
+  	Customize apearance a little by changing "My Mail User Group" to anything you like.
 =cut
 
 $RESTRICTGroupID = 'any';
@@ -770,7 +770,7 @@ sub make_form
     	usericonsmall.src="images/usericon-small.jpg"
     	var notify=new Image()
     	notify.src="images/notify.gif"
-					      }	
+					      }
 //]]>
 </script>
 DBMA
@@ -828,7 +828,7 @@ sub make_shortform
     	usericonsmall.src="images/usericon-small.jpg"
     	var notify=new Image()
     	notify.src="images/notify.gif"
-					      }	
+					      }
 
 //]]>
 </script>
@@ -1365,7 +1365,7 @@ sub Create_User_Account_MODIFY_Window ($)
         $username =~ s/__public__/\#Public/;
         my $messagebody = "Dear $username:\n
 Here is the updated information for your email account.
-Your account name is $username 
+Your account name is $username
 Your mailbox capacity is $mailboxsize bytes.
 Your password is everything between the brackets: ($password)\n\n
 Yours truly,\n$admin_address";
@@ -1413,7 +1413,7 @@ if ($sqltype =~ /pgsql/)
 {
         $forwards =
           $dbh->prepare(
-            "SELECT alias_idnr, alias, userid, deliver_to 
+            "SELECT alias_idnr, alias, userid, deliver_to
 FROM $dbmail_aliases_table
 LEFT JOIN $dbmail_users_table ON CAST($dbmail_users_table.user_idnr AS text) = $dbmail_aliases_table.deliver_to
 WHERE LOWER(alias)
@@ -1498,7 +1498,7 @@ sub get_mail_list
 {
     &meta;
     $sth = $dbh->prepare(
-        "SELECT message_idnr, $dbmail_physmessage_table.internal_date, $dbmail_messages_table.physmessage_id, unique_id, rfcsize, messagesize, seen_flag, answered_flag, deleted_flag, status 
+        "SELECT message_idnr, $dbmail_physmessage_table.internal_date, $dbmail_messages_table.physmessage_id, unique_id, rfcsize, messagesize, seen_flag, answered_flag, deleted_flag, status
 FROM $dbmail_messages_table
 LEFT JOIN $dbmail_physmessage_table ON $dbmail_messages_table.physmessage_id = $dbmail_physmessage_table.id
 WHERE $dbmail_messages_table.mailbox_idnr = '$mailbox_idnr'
@@ -1809,7 +1809,7 @@ ORDER BY id desc LIMIT 1"
 	<textarea cols=\"70\" rows=\"11\" style=\"border-style:solid;border-color:#F8F8FF;width:738px;font-size:11px;font-family:arial,verdana,san-serif;scrollbar-arrow-color:green;scrollbar-face-color:#f5f3f8;scrollbar-shadow-color:#BDB6CE; scrollbar-track-color:#F8F8FF\">\n$messageblk\n</textarea></td>\n</tr>\n";
             }
             $sth = $dbh->prepare(
-                "SELECT message_idnr, $dbmail_physmessage_table.internal_date, $dbmail_messages_table.physmessage_id, unique_id, rfcsize, messagesize, seen_flag, answered_flag, deleted_flag, status 
+                "SELECT message_idnr, $dbmail_physmessage_table.internal_date, $dbmail_messages_table.physmessage_id, unique_id, rfcsize, messagesize, seen_flag, answered_flag, deleted_flag, status
 FROM $dbmail_messages_table
 LEFT JOIN $dbmail_physmessage_table ON $dbmail_messages_table.physmessage_id = $dbmail_physmessage_table.id
 WHERE $dbmail_messages_table.physmessage_id = '$physmessage_id' LIMIT 1"
@@ -2370,7 +2370,7 @@ sub List_Global_Aliases
 if ($sqltype =~ /pgsql/)
 {
     $sth = $dbh->prepare("
-SELECT userid, alias_idnr, alias, deliver_to, $dbmail_aliases_table.client_idnr, $cmailsize last_login 
+SELECT userid, alias_idnr, alias, deliver_to, $dbmail_aliases_table.client_idnr, $cmailsize last_login
 FROM $dbmail_aliases_table
 JOIN $dbmail_users_table
 ON $dbmail_aliases_table.deliver_to = CAST($dbmail_users_table.user_idnr AS text)
@@ -2380,7 +2380,7 @@ ORDER by alias $LIMIT"
 if ($sqltype =~ /mysql/)
 {
     $sth = $dbh->prepare("
-SELECT userid, alias_idnr, alias, deliver_to, $dbmail_aliases_table.client_idnr, $cmailsize last_login 
+SELECT userid, alias_idnr, alias, deliver_to, $dbmail_aliases_table.client_idnr, $cmailsize last_login
 FROM $dbmail_aliases_table
 JOIN $dbmail_users_table
 ON $dbmail_aliases_table.deliver_to=$dbmail_users_table.user_idnr
@@ -2734,7 +2734,7 @@ DBMA
         $sth->finish() if ($sth);
         print <<"DBMA";
 	</table></center></div>
-	
+
 DBMA
         end_HTML;
     }
@@ -2760,7 +2760,7 @@ DBMA
         $sth->finish() if ($sth);
         print <<"DBMA";
 	</table></center></div>
-	
+
 DBMA
         end_HTML;
     }
@@ -3617,8 +3617,8 @@ SET $dbmail_messages_table.deleted_flag = '1', status = '002' WHERE $dbmail_mail
         {
             my $sth1 = $dbh->prepare("
 SELECT COUNT(*) FROM $dbmail_messages_table, $dbmail_users_table, $dbmail_mailboxes_table
-WHERE $dbmail_messages_table.mailbox_idnr=$dbmail_mailboxes_table.mailbox_idnr 
-AND $dbmail_users_table.user_idnr = $dbmail_mailboxes_table.owner_idnr 
+WHERE $dbmail_messages_table.mailbox_idnr=$dbmail_mailboxes_table.mailbox_idnr
+AND $dbmail_users_table.user_idnr = $dbmail_mailboxes_table.owner_idnr
 AND $dbmail_messages_table.physmessage_id = ?"
             );
             $sth1->execute($messageID);
@@ -5271,14 +5271,14 @@ sub mymailform
     	else if (mailfrom.length < 2)
     	alert('To who? A username is fine if your MTA will pass it to DBMail. A full address is better.');
     	else if (mailfrom.length < 3)
-    	alert('Who is the message from?');	
+    	alert('Who is the message from?');
     	else if (message.length < 2)
-    	alert('Your message is blank. If you wanted that, just enter three characters to avoid this nag.');	
+    	alert('Your message is blank. If you wanted that, just enter three characters to avoid this nag.');
     	else	document.mail1.submit();
     	}
 // -->
 </script>
-</head><body>  
+</head><body>
 	<div align="center"><form name="mail1" method="post" action="$mythisscript"><center><table>
 	<tr><td class="c1" style="width:738px" colspan="2" >Location of the MTA for your DBMail is configured as <b> $SMTP_ServerName </b>. Is that correct?</td></tr>
 	<tr><td colspan="2" style="width:738px"><b><a href="$mythisscript">DBMail Administrator (DBMA)</a></b></td></tr>
@@ -5329,9 +5329,9 @@ sub send_mail
     	else if (mailfrom.length < 2)
     	alert('To who? A username is fine if your MTA will pass it to DBMail. A full address is better.');
     	else if (mailfrom.length < 3)
-    	alert('Who is the message from?');	
+    	alert('Who is the message from?');
     	else if (message.length < 2)
-    	alert('Your message is blank. If you wanted that, just enter three characters to avoid this nag.');	
+    	alert('Your message is blank. If you wanted that, just enter three characters to avoid this nag.');
     	else	document.mail1.submit();
     	}
 // -->
@@ -5484,7 +5484,7 @@ DBMA
     }
     print $firstalias;
     print <<"DBMA";
-    	
+
 	<input title="Create" onmouseover="this.className='clear';" onmouseout="this.className='letsgo';" class="letsgo"  type="submit" value="Add New User" name="submit" /></td></tr>
 	<tr><td colspan="3"><hr style="background-color:#D6CFDE; color:#D6CFDE;height:20px" /></td></tr>
 DBMA
@@ -5555,7 +5555,7 @@ DBMA
 	<div><center><form action="$mythisscript" method="post">
 	<table class="c5" cellspacing="0" cellpadding="0" width="738px" border="0">
 	<tr><td colspan="3"><h1><br />DBMA: Add Domain Alias for Each User in an Entire Group</h1></td></tr>
-	<tr><td colspan="3">Note: This tool assumes you are adding a domain on which you wish all users in a group to 
+	<tr><td colspan="3">Note: This tool assumes you are adding a domain on which you wish all users in a group to
 	receive mail. If any user already has an alias for the domain you enter, a new alias will be created and they will
 	receive an additional copy of each message addressed to that alias.
 	A listing of group aliases will appear after this function completes.
@@ -6236,7 +6236,7 @@ sub Groups_and_Domains
         $write_secs = (stat($DBMA_TIMESTAMP))[9];
         open(TIMESTAMP, ">$DBMA_TIMESTAMP")
           or die(
-            "Please check permissions. chmod 777 $path_determined 
+            "Please check permissions. chmod 777 $path_determined
 Can't create DBMA_TIMESTAMP file"
                 );
         print TIMESTAMP "$date\n";
@@ -6275,7 +6275,7 @@ Can't create DBMA_DATA.DB file?"
         $value = $count + 0;
 ## - Start building My Domains panel
         print "	<td style=\"flush:right\"><small>My Domains:</small><br />
-	<textarea onmouseover=\"this.className=\'statsover\';self.status=\'Total $value Domains\';return true\" onmouseout=\"this.className=\'stats\';self.status=\'DBMA\';return true\" title=\"$sqlhost has aliases on $value domains\" 
+	<textarea onmouseover=\"this.className=\'statsover\';self.status=\'Total $value Domains\';return true\" onmouseout=\"this.className=\'stats\';self.status=\'DBMA\';return true\" title=\"$sqlhost has aliases on $value domains\"
 	class=\"stats\" rows=\"16\" cols=\"28\">\n";
         print "Alias Domains:($value)\n";
         foreach $line (sort @data)
@@ -6361,7 +6361,7 @@ Can't create DBMA_DATA.DB file?"
         unless ($sth->execute()) { print $DBI::errstr; }
         $numrows = $sth->rows;
         print "	<td style=\"flush:right\"><small>My Groups:</small><br />
-	<textarea onmouseover=\"this.className=\'statsover\';self.status=\'Total $numrows User Groups\';return true\" onmouseout=\"this.className=\'stats\';self.status=\'DBMA\';return true\" title=\"$sqlhost has $numrows Groups incl Group 0 for system use\" 
+	<textarea onmouseover=\"this.className=\'statsover\';self.status=\'Total $numrows User Groups\';return true\" onmouseout=\"this.className=\'stats\';self.status=\'DBMA\';return true\" title=\"$sqlhost has $numrows Groups incl Group 0 for system use\"
 	class=\"stats\" rows=\"16\" cols=\"28\">\n";
         print "Total $numrows Groups\n(";
 
@@ -6393,7 +6393,7 @@ Can't create DBMA_DATA.DB file?"
                 $str9 .= "\(Group $GroupID\)\|$alias\n";
                 open(DATA, "> $DBMA_GROUP_DATA")
                   or die(
-                    "Please check permissions. chmod 777 $path_determined 
+                    "Please check permissions. chmod 777 $path_determined
 Can't create DBMA_GROUP_DATA.DB file?"
                         );
                 print DATA "$str9\n";
@@ -6424,7 +6424,7 @@ Can't create DBMA_GROUP_DATA.DB file?"
 
             open(PARSE, "$DBMA_GROUP_DATA")
               or die(
-                "Please check permissions. chmod 777 $path_determined 
+                "Please check permissions. chmod 777 $path_determined
  Can't open DBMA_GROUP_DATA.DB file?"
                     );
             my @parse = <PARSE>;
@@ -6478,7 +6478,7 @@ WHERE client_idnr = '$stripped_group'"
 
             open(PARSE, "$DBMA_GROUP_DATA")
               or die(
-                "Please check permissions. chmod 777 $path_determined 
+                "Please check permissions. chmod 777 $path_determined
  Can't open DBMA_GROUP_DATA.DB file?"
                     );
             my @parse = <PARSE>;
@@ -6561,7 +6561,7 @@ DBMA
         }
         open(STATS, "> $DBMA_STATS")
           or die(
-            "Please check permissions. chmod 777 $path_determined 
+            "Please check permissions. chmod 777 $path_determined
 Can't create DBMA_STATS file"
                 );
         print STATS "$str3";
@@ -6770,7 +6770,7 @@ DBMA
 	<tr><td class="c14"><input type="text" $mouseover value="$DBMAcode" name="DBMAcode" size="12" />Database Password</td><td>Database login password</td></tr>
 	<tr><td class="c14"><input type="text" $mouseover value="$sqldb" name="sqldb" size="12" />Name of Database</td><td>The name of your DBMail database</td></tr>
 	<tr><td class="c14"><input type="text" $mouseover value="$sqlhost" name="sqlhost" size="19" />Host Name</td><td>IP address or resolveable host name of database server</td></tr>
-	<tr><td class="c14"><input type="text" $mouseover value="$sql_odd_port" name="sql_odd_port" size="5" /> Port? Blank for default.</td><td>Leave port number blank if standard. Change for non-standard or proxy.</td></tr></table></form></center></div>	
+	<tr><td class="c14"><input type="text" $mouseover value="$sql_odd_port" name="sql_odd_port" size="5" /> Port? Blank for default.</td><td>Leave port number blank if standard. Change for non-standard or proxy.</td></tr></table></form></center></div>
 	<div class="c6"><center><form method="post" action="$mythisscript"><table border="0" width="738px" style="font-family: Arial, sans-serif; font-size: 10pt; color: #000080; background-color: $colortellsastory">
 	<tr><td class="c14"><h3>Preset Options</h3></td><td><input type="hidden" name="RQT" value="30" /> <input type="submit" title="check your OPTIONS configuration before submitting" value="Commit DBMA OPTIONS" name="submit" style="float:right;border-style:solid;background-color:#FFd9d9; color:#6C0000; font-family:arial, sans-serif; font-size:11px; font-weight:normal" /></td></tr>
 	<tr><td class="c14"><input type="text" $mouseover $changecase value="$SMTP_ServerName" name="SMTP_ServerName" size="15" />SMTP Server</td><td>Your DBMail MTA SMTP IP or resolveable host name.</td></tr>
@@ -6916,7 +6916,7 @@ sub create_myDBMA_CONFIG
     $sqlhost          = $FORM{'sqlhost'};
     $sql_odd_port     = $FORM{'sql_odd_port'};
     open(CONFIG, "> $myDBMA_CONFIG")
-      || die "DBMA Please check permissions. chmod 777 $path_determined 
+      || die "DBMA Please check permissions. chmod 777 $path_determined
 Can't create $myDBMA_CONFIG\n";
     print CONFIG
       "$DBMailOldVersion|$DBMail22Version|$sqltype|$sqluser|$DBMAcode|$sqldb|$sqlhost|$sql_odd_port\n";
@@ -7185,7 +7185,7 @@ sub add_ACL_user
     {
         $sth->finish() if ($sth);
         $sth = $dbh->prepare(
-            "INSERT INTO $dbmail_acl_table 
+            "INSERT INTO $dbmail_acl_table
 VALUES (
 '$userID',
 '$mailbox_idnr',
@@ -7241,7 +7241,7 @@ sub update_ACL_user ()
     }
     &prepare_input($userID);
     $sth = $dbh->prepare(
-        "UPDATE $dbmail_acl_table 
+        "UPDATE $dbmail_acl_table
 SET lookup_flag='$lookup_flag',
 read_flag='$read_flag',
 seen_flag='$seen_flag',
@@ -7516,10 +7516,10 @@ insert_flag,
 post_flag,
 create_flag,
 delete_flag,
-administer_flag 
-FROM $dbmail_acl_table 
+administer_flag
+FROM $dbmail_acl_table
 JOIN $dbmail_users_table ON $dbmail_users_table.user_idnr = $dbmail_acl_table.user_id
-JOIN $dbmail_mailboxes_table on $dbmail_mailboxes_table.mailbox_idnr = $dbmail_acl_table.mailbox_id  
+JOIN $dbmail_mailboxes_table on $dbmail_mailboxes_table.mailbox_idnr = $dbmail_acl_table.mailbox_id
 ORDER BY $dbmail_users_table.userid");
         $sth->execute();
         while (
@@ -7585,9 +7585,9 @@ sub fetch_shared_folders ($)
 sub fetch_usr_acl_folders ($)
 {
     $sth = $dbh->prepare(
-        "SELECT userid, mailbox_id, name FROM $dbmail_acl_table 
-JOIN $dbmail_mailboxes_table ON $dbmail_acl_table.mailbox_id = $dbmail_mailboxes_table.mailbox_idnr 
-JOIN $dbmail_users_table ON $dbmail_mailboxes_table.owner_idnr = $dbmail_users_table.user_idnr 
+        "SELECT userid, mailbox_id, name FROM $dbmail_acl_table
+JOIN $dbmail_mailboxes_table ON $dbmail_acl_table.mailbox_id = $dbmail_mailboxes_table.mailbox_idnr
+JOIN $dbmail_users_table ON $dbmail_mailboxes_table.owner_idnr = $dbmail_users_table.user_idnr
 WHERE user_id ='$userID'"
                         );
     unless ($sth->execute)
@@ -7612,8 +7612,8 @@ sub fetch_all_usr_acl_folders
 {
     ($user_mailboxes, $username, $mailbox_idnr, $mailbox_name) = "";
     $sth = $dbh->prepare(
-        "SELECT userid, mailbox_id, name FROM $dbmail_acl_table 
-JOIN $dbmail_mailboxes_table ON $dbmail_acl_table.mailbox_id = $dbmail_mailboxes_table.mailbox_idnr 
+        "SELECT userid, mailbox_id, name FROM $dbmail_acl_table
+JOIN $dbmail_mailboxes_table ON $dbmail_acl_table.mailbox_id = $dbmail_mailboxes_table.mailbox_idnr
 JOIN $dbmail_users_table ON $dbmail_mailboxes_table.owner_idnr = $dbmail_users_table.user_idnr
 GROUP BY $dbmail_users_table.userid, $dbmail_acl_table.mailbox_id, $dbmail_mailboxes_table.mailbox_idnr, $dbmail_mailboxes_table.name"
                         );
@@ -7767,7 +7767,7 @@ sub create_DBMA_MTA_Table
 
         open(TIMESTAMP, "> $DBMA_TIMESTAMP")
           or die(
-            "Please check permissions. chmod 777 $path_determined 
+            "Please check permissions. chmod 777 $path_determined
 Can't create DBMA_TIMESTAMP file"
                 );
         print TIMESTAMP "$date";
@@ -8151,7 +8151,7 @@ sub update_MTA_data
         $str7 .= "$alias\n";
         open(DOMAINDATA, "> $DBMA_DATA")
           or die(
-            "Please check permissions. chmod 777 $path_determined 
+            "Please check permissions. chmod 777 $path_determined
 Can't create DBMA_DATA.DB file?"
                 );
         print DOMAINDATA "$str7";
@@ -8324,7 +8324,7 @@ DBMA
 	</tr></table></center></div>
 	<div><form action="$mythisscript" method="post"><center><table style="font-size:11px;font-family:arial,sans-serif;width:738px;background-color: #E7FAE8">
 	<tr><td colspan="4"><h4>Action</h4></td><td colspan="2"><h4>Sender</h4></td></tr>
-	<tr><td><input type="radio" name="action" value="REJECT" /><small>Reject</small></td>	
+	<tr><td><input type="radio" name="action" value="REJECT" /><small>Reject</small></td>
 	<td colspan="2"><input type="text" style="font-face=arial,sans-serif;font-size:9px;background-color:#E7FAE8" name="action" size="20" />Other
 	<input type="reset" onmouseover="this.className='letsgo';" onmouseout="this.className='c7';" class="c7" value="Clear" /></td>
 	<td colspan="3"> <input type="text" $mouseover name="sender" value="$_sender_" size="35" />Host or IP</td></tr>
@@ -8334,7 +8334,7 @@ DBMA
 	<input type="submit" onmouseover="this.className='letsgo';" onmouseout="this.className='c7';" class="c7" value="Add / Update" name="dbma_mta_access" /></td></tr>
 	<tr><td colspan="6"><hr style="background-color:#D6CFDE; color:#D6CFDE;height:20px" /></td></tr>
 	</table></center></form></div>
-	<div><center><table style="font-size:10px;font-family:arial,sans-serif;width:738px;background-color: #E7FAE8">		
+	<div><center><table style="font-size:10px;font-family:arial,sans-serif;width:738px;background-color: #E7FAE8">
 	<tr><td colspan="3"><form action="$mythisscript" method="post">Search for:
         <input type ="text" $mouseover size="25" name ="access_search" value="$access_search" />
 	<input type="hidden" name ="RQT" value="61" />
@@ -8565,7 +8565,7 @@ sub MTA_Access_Migrate ($)
 	<div><center><table style="width:738px;background-color: #E7FAE8">
 	<tr><td><span style="color:#005A9C;font-size:110%;font-weight:600">MTA</span>
 	<span style="color: #005A9C; font-size: 110%; font-weight: 600">Access Migrate</span><br />
-	<span class="stats">This tool enables the migration of text-based mail access files into the DBMA_MTA_ACCESS database table. The format of the file should be</span> 
+	<span class="stats">This tool enables the migration of text-based mail access files into the DBMA_MTA_ACCESS database table. The format of the file should be</span>
 	<p><span class="stats">"sender" -whitespace- "action" (no quotes in file).</span></p>
 	<ul><li><span class="stats">The file must be Readable by</span>
 DBMA
@@ -8575,7 +8575,7 @@ DBMA
 	<li><span class="stats">You must type an absolute path to the file.</span></li>
 	<li><span class="stats">example: '/etc/postfix/sender_access' </span></li></ul></td></tr></table></center></div>
 	<div><center><table style="font-size:14px;font-family:arial,sans-serif;width:738px;background-color: #E7FAE8">
-	<tr><td style="background-color: #FFFFC4"><form method="post" action="$mythisscript"><input type="text" name="filename" value="$filename" size="50" /><input onmouseover="this.className='letsgo';" onmouseout="this.className='c7';" 
+	<tr><td style="background-color: #FFFFC4"><form method="post" action="$mythisscript"><input type="text" name="filename" value="$filename" size="50" /><input onmouseover="this.className='letsgo';" onmouseout="this.className='c7';"
 	class="c7" title="DBMA MTA Access" type="submit" value="Migrate File To Database" /><input type="hidden"name="RQT" value="64" />
 	<input type="reset" onmouseover="this.className='letsgo';" onmouseout="this.className='c7';" class="c7" value="Clear" name="clear" /></form></td></tr>
 	<tr><td style="background-color: #FFFFC4">Results:
@@ -8611,8 +8611,8 @@ sub header
 <style type="text/css">
 /*<![CDATA[*/
 td.c0 a:hover{display: block; margin 0;color:black;text-decoration:underline;background: lime}
-td.c0 a{display:block;margin 0}	
-td.ad {color:#000090;vertical-align:middle;height:15px;border-radius:4px}	
+td.c0 a{display:block;margin 0}
+td.ad {color:#000090;vertical-align:middle;height:15px;border-radius:4px}
 td{border-style:none;margin-top:0px;text-align:left;vertical-align:top;font-size:11px}
 td{margin-top:1px;text-align:left;vertical-align:top}
 /*]]>*/
@@ -8788,17 +8788,17 @@ sub restrict_group_help
 	<tr><td style="width:737px" colspan="2">This is the primary tool for listing users in the RestrictGroup configuration. Enter the group number to list all users in that group. This function appears throughout the various GUI windows in all versions.</td></tr>
 	<tr><td style="width:455px"><b>List $RESTRICTGroupIDName Aliases</b></td><td style="width:278px"></td></tr>
 	<tr><td width="737" colspan="2">Enter the group number to list all aliases in that group (hard-coded in the Restrict Group configuration. This function appears throughout the various GUI windows.</td></tr>
-	<tr><td style="width:737px;background:#ffffc4" colspan="2">Users</td></tr> 
-	<tr><td style="width:455px"><b>Add User</b></td><td style="width:278px"></td></tr> 
+	<tr><td style="width:737px;background:#ffffc4" colspan="2">Users</td></tr>
+	<tr><td style="width:455px"><b>Add User</b></td><td style="width:278px"></td></tr>
 	<tr><td style="width:737px" colspan="2">Open a user interface for adding users.&nbsp;This function has a number of administratively-set default options which can be configured by your Administrator or service provider. Default presets include auto-generate password, auto-generate alias, group, and password encryption method. FEATURE NOTE: When auto-create alias has been set to &quot;1&quot; in the 'Configuration Options', the 'Add User' interface recycles after typing the user name and pressing &quot;Add New User&quot;.
-	In this manner even a large group of users can be populated into the database in minutes. Otherwise, the Add User function causes a proof-reading and modification window to open with the new data set out.</td></tr> 
-	<tr><td style="width:455px"><b>Email A User</b></td><td style="width:278px"></td></tr> 
-	<tr><td style="width:737px" colspan="2">Send an email to any user. Be careful not to send the user an encrypted password. It won't do them any good. This feature allows a notice to be sent to the user when a mail quota has been reset, a password changed, or any administrative function you may wish to advise the user about.</td></tr> 
-	<tr><td style="width:737px;background:#ffffc4" colspan="2">Aliases</td></tr> 
-	<tr><td style="width:733px" colspan="2"><b>Add Aliases</b><b><br /></b>Opens a user interface to add an alias for a user. This can also be performed from the Modify User Account Window  or from the Group List. The best place to do this is the User Account Window.</td></tr> 
+	In this manner even a large group of users can be populated into the database in minutes. Otherwise, the Add User function causes a proof-reading and modification window to open with the new data set out.</td></tr>
+	<tr><td style="width:455px"><b>Email A User</b></td><td style="width:278px"></td></tr>
+	<tr><td style="width:737px" colspan="2">Send an email to any user. Be careful not to send the user an encrypted password. It won't do them any good. This feature allows a notice to be sent to the user when a mail quota has been reset, a password changed, or any administrative function you may wish to advise the user about.</td></tr>
+	<tr><td style="width:737px;background:#ffffc4" colspan="2">Aliases</td></tr>
+	<tr><td style="width:733px" colspan="2"><b>Add Aliases</b><b><br /></b>Opens a user interface to add an alias for a user. This can also be performed from the Modify User Account Window  or from the Group List. The best place to do this is the User Account Window.</td></tr>
 	<tr><td style="width:737px;background:#ffffc4" colspan="2">Forwards</td></tr>
-	<tr><td width="733" colspan="2"><b>Add Forward</b><b><br /></b>Open user interface to add a mail forward. Type the email address to be forwarded and the address to which it should be sent.</td></tr> 
-	<tr><td style="width:737px;background:#ffffc4" colspan="2">Mail Notifications</td></tr> 
+	<tr><td width="733" colspan="2"><b>Add Forward</b><b><br /></b>Open user interface to add a mail forward. Type the email address to be forwarded and the address to which it should be sent.</td></tr>
+	<tr><td style="width:737px;background:#ffffc4" colspan="2">Mail Notifications</td></tr>
 	<tr><td style="width:733px" colspan="2"><b>Add Auto Notify</b><b><br /></b>Open user interface to add a mail notification for a user.</td></tr></table></center></div>
 DBMA
 }
